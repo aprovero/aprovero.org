@@ -25,13 +25,13 @@ const formattedDate = new Date(entry.data.date).toLocaleDateString('en-US', {
   description={entry.data.summary}
   articleDate={entry.data.date}
 >
-  <main class="max-w-3xl mx-auto px-5 sm:px-8 py-10 sm:py-16 space-y-10">
+  <main class="max-w-6xl mx-auto px-6 sm:px-10 py-12 sm:py-20 space-y-12">
     
     <!-- Navigation Back Link -->
-    <nav class="font-mono text-xs">
+    <nav class="font-mono text-xs sm:text-sm">
       <a
         href="/notes"
-        class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1 transition-colors"
+        class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1.5 transition-colors"
       >
         <span>←</span>
         <span>Back to Notes</span>
@@ -39,27 +39,23 @@ const formattedDate = new Date(entry.data.date).toLocaleDateString('en-US', {
     </nav>
 
     <!-- Header Section -->
-    <header class="space-y-4 border-b border-border-light dark:border-border-dark pb-8">
-      <div class="flex flex-wrap items-center gap-2">
+    <header class="space-y-5 border-b border-border-light/80 dark:border-border-dark/80 pb-10 max-w-[720px]">
+      <div class="flex flex-wrap items-center gap-2 font-mono text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted">
         {entry.data.draft && (
-          <span class="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
-            DRAFT
+          <span class="text-amber-600 dark:text-amber-400 font-medium mr-1">
+            [DRAFT]
           </span>
         )}
-        <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
-          {formattedDate}
-        </span>
-        <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">·</span>
-        <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
-          {entry.data.readTime}
-        </span>
+        <span>{formattedDate}</span>
+        <span class="opacity-30">·</span>
+        <span>{entry.data.readTime}</span>
       </div>
 
-      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-ink-light dark:text-ink-dark leading-[1.2]">
+      <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-ink-light dark:text-ink-dark leading-[1.18]">
         {entry.data.title}
       </h1>
 
-      <p class="text-lg text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed">
+      <p class="text-lg sm:text-xl text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed">
         {entry.data.summary}
       </p>
 
@@ -71,15 +67,15 @@ const formattedDate = new Date(entry.data.date).toLocaleDateString('en-US', {
     </header>
 
     <!-- Narrative Prose Body -->
-    <article class="prose-editorial max-w-none">
+    <article class="prose-editorial">
       <Content />
     </article>
 
     <!-- Footer navigation -->
-    <div class="pt-8 border-t border-border-light dark:border-border-dark flex items-center justify-between font-mono text-xs">
+    <div class="pt-10 border-t border-border-light/80 dark:border-border-dark/80 flex items-center justify-between font-mono text-xs sm:text-sm max-w-[720px]">
       <a
         href="/notes"
-        class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1"
+        class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1.5"
       >
         <span>←</span>
         <span>All notes</span>
@@ -87,7 +83,7 @@ const formattedDate = new Date(entry.data.date).toLocaleDateString('en-US', {
 
       <a
         href="#top"
-        class="text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark inline-flex items-center gap-1"
+        class="text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark inline-flex items-center gap-1.5"
       >
         <span>Back to top</span>
         <span>↑</span>

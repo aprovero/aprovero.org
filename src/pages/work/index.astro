@@ -11,34 +11,34 @@ const sortedWork = allWork.sort((a, b) => a.data.order - b.data.order);
   title="Selected Work | Andres Provero"
   description="Engineering case studies across utility-scale Solar PV, BESS, power conversion systems, and commissioning in Latin America."
 >
-  <main class="max-w-4xl mx-auto px-5 sm:px-8 py-10 sm:py-16 space-y-12">
+  <main class="max-w-6xl mx-auto px-6 sm:px-10 py-12 sm:py-20 space-y-16">
     
     <!-- Page Header -->
-    <div class="space-y-4 border-b border-border-light dark:border-border-dark pb-8">
-      <div class="font-mono text-xs text-accent-dark dark:text-accent tracking-wider uppercase font-medium">
+    <header class="space-y-5 border-b border-border-light/80 dark:border-border-dark/80 pb-10">
+      <div class="font-mono text-xs sm:text-sm text-accent-dark dark:text-accent tracking-wider uppercase font-medium">
         ENGINEERING CASE STUDIES
       </div>
-      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+      <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
         Selected Engineering Work
       </h1>
-      <p class="text-base sm:text-lg text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed max-w-2xl">
+      <p class="text-lg sm:text-xl text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed max-w-3xl">
         A selection of utility-scale energy infrastructure projects where I led or executed commissioning, inverter parameterization, site acceptance testing (SAT), and field operations.
       </p>
 
       <!-- Confidentiality Banner -->
-      <div class="p-4 rounded-md border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card text-xs text-ink-light-muted dark:text-ink-dark-muted font-mono leading-relaxed space-y-1">
-        <div class="text-ink-light dark:text-ink-dark font-medium flex items-center gap-1.5">
+      <div class="p-5 rounded-md border border-border-light/80 dark:border-border-dark/80 bg-surface-light-card/60 dark:bg-surface-dark-card/40 text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted font-mono leading-relaxed space-y-1.5 max-w-3xl">
+        <div class="text-ink-light dark:text-ink-dark font-medium flex items-center gap-2">
           <span class="inline-block w-1.5 h-1.5 rounded-full bg-accent"></span>
-          <span>Confidentiality & Integrity Notice</span>
+          <span>Confidentiality &amp; Integrity Notice</span>
         </div>
         <p>
-          These case studies highlight engineering methodology, site constraints, and root cause analyses. Certain equipment-specific settings, internal escalation files, single-line details, and commercial thresholds are intentionally omitted to safeguard client and OEM proprietary data.
+          These case studies highlight engineering methodology, site constraints, and field execution. Specific equipment settings, internal manufacturer escalations, single-line details, and commercial thresholds are intentionally omitted to safeguard client and OEM proprietary data.
         </p>
       </div>
-    </div>
+    </header>
 
     <!-- Case Studies List -->
-    <div class="divide-y divide-border-light dark:divide-border-dark">
+    <div class="divide-y divide-border-light/80 dark:border-border-dark/80">
       {
         sortedWork.map((project) => (
           <ProjectRow
@@ -57,8 +57,8 @@ const sortedWork = allWork.sort((a, b) => a.data.order - b.data.order);
     </div>
 
     <!-- Back to top / home link -->
-    <div class="pt-6 font-mono text-xs">
-      <a href="/" class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1">
+    <div class="pt-6 font-mono text-xs sm:text-sm">
+      <a href="/" class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1.5">
         <span>←</span>
         <span>Back to homepage</span>
       </a>

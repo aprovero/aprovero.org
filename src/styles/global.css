@@ -13,53 +13,60 @@
   html {
     scroll-behavior: smooth;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-size: 16px;
+  }
+
+  @media (min-width: 640px) {
+    html {
+      font-size: 17px;
+    }
   }
 
   body {
     @apply bg-surface-light text-ink-light font-sans antialiased transition-colors duration-200 selection:bg-accent/20 selection:text-ink-light;
+    line-height: 1.7;
   }
 
   html.dark body {
     @apply bg-surface-dark text-ink-dark selection:bg-accent/25 selection:text-ink-dark;
   }
 
-  /* Monospace accents */
   code, kbd, samp, pre {
     @apply font-mono;
   }
 }
 
-/* Editorial prose styling for markdown content */
+/* Restrained Editorial Typography */
 .prose-editorial {
-  @apply text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed text-[1.03rem];
+  @apply text-ink-light-secondary dark:text-ink-dark-secondary leading-[1.85] text-[1.08rem] max-w-[720px];
 }
 
 .prose-editorial p {
-  @apply my-5 leading-[1.8];
+  @apply my-6 leading-[1.85];
 }
 
 .prose-editorial h2 {
-  @apply text-ink-light dark:text-ink-dark text-2xl font-semibold tracking-tight mt-12 mb-4 pb-2 border-b border-border-light dark:border-border-dark;
+  @apply text-ink-light dark:text-ink-dark text-2xl sm:text-3xl font-bold tracking-tight mt-14 mb-5 pb-3 border-b border-border-light/80 dark:border-border-dark/80;
 }
 
 .prose-editorial h3 {
-  @apply text-ink-light dark:text-ink-dark text-xl font-semibold tracking-tight mt-8 mb-3;
+  @apply text-ink-light dark:text-ink-dark text-xl sm:text-2xl font-semibold tracking-tight mt-10 mb-4;
 }
 
 .prose-editorial ul {
-  @apply my-4 list-disc pl-6 space-y-2;
+  @apply my-5 list-disc pl-6 space-y-2.5;
 }
 
 .prose-editorial ol {
-  @apply my-4 list-decimal pl-6 space-y-2;
+  @apply my-5 list-decimal pl-6 space-y-2.5;
 }
 
 .prose-editorial li {
-  @apply leading-relaxed;
+  @apply leading-[1.8];
 }
 
 .prose-editorial blockquote {
-  @apply my-6 border-l-2 border-accent pl-5 italic text-ink-light dark:text-ink-dark bg-surface-light-muted/50 dark:bg-surface-dark-card/50 py-3 pr-4 rounded-r;
+  @apply my-8 border-l-2 border-accent pl-6 italic text-ink-light dark:text-ink-dark py-2 pr-4;
 }
 
 .prose-editorial strong {
@@ -67,11 +74,11 @@
 }
 
 .prose-editorial pre {
-  @apply my-6 p-4 rounded-md bg-surface-dark-card border border-border-dark overflow-x-auto text-sm text-[#c9d1d9] font-mono leading-normal;
+  @apply my-8 p-5 rounded bg-surface-dark-card border border-border-dark overflow-x-auto text-[0.88rem] text-[#c9d1d9] font-mono leading-relaxed;
 }
 
 .prose-editorial code:not(pre code) {
-  @apply px-1.5 py-0.5 rounded text-xs font-mono bg-surface-light-muted dark:bg-surface-dark-muted text-ink-light dark:text-ink-dark border border-border-light dark:border-border-dark;
+  @apply px-1.5 py-0.5 rounded text-[0.82rem] font-mono bg-surface-light-muted dark:bg-surface-dark-muted text-ink-light dark:text-ink-dark;
 }
 
 .prose-editorial a {

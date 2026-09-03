@@ -1,43 +1,38 @@
----
+﻿---
 title: "Moon Palace BESS"
-subtitle: "Utility-scale battery energy storage system and power conversion integration"
-clientOrOwner: "Private Commercial / Infrastructure"
-location: "Quintana Roo, Mexico"
+subtitle: "Utility-scale battery energy storage system and power conversion commissioning"
+clientOrOwner: "Commercial & Critical Infrastructure"
+location: "Mexico"
 capacity: "12.5 MW / 24 MWh BESS"
 systemType: "BESS"
 year: "2022–2023"
-role: "BESS Technical & Commissioning Lead"
-summary: "Integration, commissioning, and safety validation of a 12.5 MW / 24 MWh battery energy storage facility with power conversion systems (PCS) and energy management controls."
+role: "Field Service Engineer (BESS & Power Electronics)"
+summary: "Commissioning, safety validation, and power conversion system (PCS) integration for a 12.5 MW / 24 MWh battery energy storage facility."
 keyMetrics:
   - "12.5 MW PCS power rating"
-  - "24 MWh lithium iron phosphate (LFP) capacity"
-  - "BMS, EMS & PCS integration"
-  - "NFPA 855 / safety compliance"
-confidentialityNotice: "Cell-level telemetry, commercial dispatch strategies, and proprietary vendor control logic are omitted."
+  - "24 MWh battery energy storage"
+  - "NFPA 70E / safety protocols"
+confidentialityNotice: "Cell-level telemetry, commercial dispatch strategies, and proprietary vendor control logic are intentionally omitted."
 featured: true
 order: 4
 ---
 
 ## Overview
 
-Moon Palace BESS is an advanced battery energy storage system designed to provide peak shaving, power quality stabilization, and backup capability for a major critical infrastructure site in the Mexican Caribbean.
+Moon Palace BESS is a 12.5 MW / 24 MWh battery energy storage system in Mexico, engineered to deliver power quality stabilization, peak demand support, and reliable backup capability.
 
-Battery storage introduces an entirely different set of operational imperatives compared to pure solar PV. With multi-megawatt electrochemical storage, commissioning is governed by stringent safety architectures, battery management system (BMS) cell balancing, thermal management control loops, and tight coordination with power conversion systems (PCS).
+Battery energy storage introduces rigorous safety imperatives beyond conventional solar PV. Commissioning high-voltage electrochemical storage demands strict DC safety protocols, battery management system (BMS) communication validation, and seamless coordination with bidirectional power conversion systems (PCS).
 
-## Engineering Scope & Architecture
+## Technical Scope
 
-- **Power Conversion System (PCS)**: Bidirectional inverter commissioning capable of instantaneous four-quadrant active and reactive power dispatch.
-- **Battery Management System (BMS)**: Validating rack and container-level BMS communications, balancing algorithms, state-of-charge (SoC) calibration, and multi-tiered fault interlocks.
-- **Thermal Management**: Commissioning liquid cooling chillers, HVAC units, and fire suppression systems (clean agent & aerosol) integrated with dry contact safety shutdowns.
-- **Energy Management System (EMS) Integration**: Tuning response latency for frequency regulation and peak demand shaving commands.
+- **Power Conversion Systems (PCS)**: Commissioning bidirectional inverter blocks capable of rapid four-quadrant active and reactive power dispatch.
+- **BMS & Safety Interlocks**: Validating rack communication links, insulation monitoring, emergency-stop loops, and thermal trip interlocks.
+- **Safety Governance**: Executing Lockout/Tagout (LOTO), electrical safety protocols (NFPA 70E), and dry-contact fire suppression system verification.
+- **Integration & SAT**: Site acceptance testing alongside owners, EPCs, and system integrators from initial cold checks through commercial operation.
 
-## Safety & Field Reality
+## Field Lessons
 
-Working with high-voltage DC battery racks demands rigorous safety governance. NFPA 70E, NFPA 855 guidelines, Lockout/Tagout (LOTO) protocols, and multi-level insulation monitoring are not bureaucratic formalities; they are the boundary between safe operation and catastrophic thermal runaway.
+- **DC Safety Requires Absolute Discipline**: DC arcs do not self-extinguish at current zero-crossings. Switchgear, DC contactors, and disconnect procedures require disciplined, verified execution every time.
+- **Communication Integrity is a Safety Boundary**: Communication bus shielding, proper termination resistance, and clean frame delivery between the BMS and PCS are fundamental to system stability.
 
-During testing, ensuring that auxiliary emergency stops cleanly de-energized both DC contactors and AC breakers under full load without transient overvoltages was a primary verification benchmark.
-
-## Takeaways
-
-1. **DC systems require absolute discipline**: Unlike AC systems where current passes through zero 120 times a second, DC arcs do not self-extinguish. Switchgear, contactors, and disconnect switches must be verified under strict visual and measurement protocols.
-2. **The BMS is only as good as its communication reliability**: A single dropped Modbus or CAN frame cannot be ignored. Communication bus termination resistance, cable shielding, and baud rate stability are vital.
+> *Note: Cell-level telemetry, commercial dispatch thresholds, and proprietary vendor control algorithms are intentionally omitted.*

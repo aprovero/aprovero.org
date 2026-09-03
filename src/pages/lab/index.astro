@@ -18,15 +18,15 @@ const labWithRendered = await Promise.all(
   title="The Lab | Andres Provero"
   description="Homelab infrastructure, hardware prototyping, automation, and electronics experiments by Andres Provero in Mexico City."
 >
-  <main class="max-w-4xl mx-auto px-5 sm:px-8 py-10 sm:py-16 space-y-16">
+  <main class="max-w-6xl mx-auto px-6 sm:px-10 py-12 sm:py-20 space-y-16 sm:space-y-20">
     
     <!-- Header & Manifesto -->
-    <header class="space-y-5 border-b border-border-light dark:border-border-dark pb-8">
-      <div class="flex items-center gap-2 font-mono text-xs text-accent-dark dark:text-accent tracking-wider uppercase font-medium">
+    <header class="space-y-5 border-b border-border-light/80 dark:border-border-dark/80 pb-10">
+      <div class="flex items-center gap-2 font-mono text-xs sm:text-sm text-accent-dark dark:text-accent tracking-wider uppercase font-medium">
         <span>SELF-HOSTED COMPUTE · HARDWARE · EXPERIMENTAL WORK</span>
       </div>
 
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+      <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
         The Lab
       </h1>
 
@@ -34,35 +34,35 @@ const labWithRendered = await Promise.all(
         <StatusBadge />
       </div>
 
-      <div class="space-y-4 text-ink-light-secondary dark:text-ink-dark-secondary text-[1.02rem] leading-relaxed pt-2 max-w-3xl">
+      <div class="space-y-4 text-ink-light-secondary dark:text-ink-dark-secondary text-[1.05rem] leading-[1.8] pt-2 max-w-3xl">
         <p class="font-medium text-ink-light dark:text-ink-dark">
           This site is served from infrastructure I operate myself.
         </p>
         <p>
           My homelab is where I experiment with servers, networking, self-hosting, monitoring, automation, electronics, software, AI, and things that were probably easier not to build.
         </p>
-        <p class="text-sm text-ink-light-muted dark:text-ink-dark-muted">
+        <p class="text-sm sm:text-base text-ink-light-muted dark:text-ink-dark-muted">
           Commercial clouds optimize for rapid delivery by hiding complexity behind managed abstractions. Running bare metal, routing isolated networks, and designing circuit protection forces you to confront the physical limits of hardware—thermal dissipation, electrical isolation, and the unyielding reality of failure modes.
         </p>
       </div>
     </header>
 
-    <!-- Sanitized System Architecture Diagram -->
-    <section class="space-y-5">
-      <div class="flex items-baseline justify-between border-b border-border-light dark:border-border-dark pb-3">
-        <h2 class="text-lg sm:text-xl font-bold font-mono tracking-tight text-ink-light dark:text-ink-dark">
+    <!-- Sanitized System Architecture Diagram (Technical character for /lab) -->
+    <section class="space-y-5 max-w-4xl">
+      <div class="flex items-baseline justify-between border-b border-border-light/80 dark:border-border-dark/80 pb-3">
+        <h2 class="text-base sm:text-lg font-bold font-mono tracking-tight text-ink-light dark:text-ink-dark">
           [ ARCHITECTURE: SANITIZED TOPOLOGY ]
         </h2>
         <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
-          No Inbound Ports
+          Egress-Only Tunnel
         </span>
       </div>
 
-      <div class="p-4 sm:p-6 rounded-lg bg-surface-dark-card border border-border-dark font-mono text-xs sm:text-sm text-slate-300 overflow-x-auto leading-relaxed">
+      <div class="p-5 sm:p-6 rounded bg-surface-dark-card border border-border-dark font-mono text-xs sm:text-sm text-slate-300 overflow-x-auto leading-relaxed">
         <pre class="text-[#c9d1d9]"><code>+-------------------------------------------------------------+
 |                     EXTERNAL TRAFFIC                        |
 |   https://aprovero.org  --&gt;  Cloudflare Edge / CDN          |
-|   - Strict WAF inspection &amp; DDoS mitigation                 |
+|   - WAF rules &amp; DDoS mitigation                             |
 |   - Automatic TLS certificate lifecycle                     |
 +------------------------------+------------------------------+
                                |
@@ -84,11 +84,11 @@ const labWithRendered = await Promise.all(
 |   - Memory footprint: &lt; 15 MB                               |
 +-------------------------------------------------------------+
                                |
-                               | (Metrics Scraping)
+                               | (Telemetry Scraping)
                                v
 +-------------------------------------------------------------+
-|                TELEMETRY &amp; RESILIENCE                       |
-|   - Prometheus time-series node metrics                     |
+|                MONITORING &amp; RESILIENCE                      |
+|   - Prometheus time-series metric collection                |
 |   - Grafana telemetry dashboards (thermals, memory, UPS)    |
 |   - ZFS storage pools with hourly encrypted off-site sync   |
 +-------------------------------------------------------------+</code></pre>
@@ -100,12 +100,12 @@ const labWithRendered = await Promise.all(
     </section>
 
     <!-- Lab Projects Deep-Dive -->
-    <section class="space-y-12">
-      <div class="border-b border-border-light dark:border-border-dark pb-4">
-        <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+    <section class="space-y-12 max-w-4xl">
+      <div class="border-b border-border-light/80 dark:border-border-dark/80 pb-4">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
           Projects &amp; Experiments
         </h2>
-        <p class="text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted mt-1 font-mono">
+        <p class="text-sm sm:text-base text-ink-light-muted dark:text-ink-dark-muted mt-1 font-mono">
           Hardware prototyping, embedded electronics, and software tools built to solve specific problems.
         </p>
       </div>
@@ -113,35 +113,31 @@ const labWithRendered = await Promise.all(
       <div class="space-y-16">
         {
           labWithRendered.map((project) => (
-            <article id={project.slug} class="scroll-mt-24 space-y-6 p-6 sm:p-8 rounded-lg border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card transition-colors">
-              <header class="space-y-3 border-b border-border-light/70 dark:border-border-dark/70 pb-4">
-                <div class="flex flex-wrap items-center justify-between gap-2">
-                  <span class="font-mono text-xs uppercase px-2 py-0.5 rounded bg-surface-light-muted dark:bg-surface-dark-muted text-accent-dark dark:text-accent font-medium">
-                    {project.data.category}
-                  </span>
-                  <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
-                    STATUS: <span class="text-ink-light dark:text-ink-dark font-medium">{project.data.status}</span>
-                  </span>
+            <article id={project.slug} class="scroll-mt-24 space-y-6 pt-6 border-t border-border-light/80 dark:border-border-dark/80 first:border-t-0 first:pt-0">
+              <header class="space-y-3">
+                <div class="flex flex-wrap items-center justify-between gap-2 font-mono text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted">
+                  <span class="text-accent-dark dark:text-accent font-medium">[{project.data.category}]</span>
+                  <span>STATUS: {project.data.status}</span>
                 </div>
 
-                <h3 class="text-xl sm:text-2xl font-bold text-ink-light dark:text-ink-dark">
+                <h3 class="text-2xl sm:text-3xl font-bold text-ink-light dark:text-ink-dark">
                   {project.data.title}
                 </h3>
 
-                <p class="text-sm sm:text-base text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed">
+                <p class="text-[1.05rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed">
                   {project.data.summary}
                 </p>
 
-                <div class="flex flex-wrap gap-1.5 pt-2">
+                <div class="flex flex-wrap gap-2 pt-1 font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
                   {project.data.technologies.map((tech) => (
-                    <span class="text-[0.72rem] font-mono px-2 py-0.5 rounded bg-surface-light-muted dark:bg-surface-dark-muted text-ink-light-secondary dark:text-ink-dark-secondary">
+                    <span class="bg-surface-light-muted dark:bg-surface-dark-muted px-2 py-0.5 rounded">
                       {tech}
                     </span>
                   ))}
                 </div>
               </header>
 
-              <div class="prose-editorial max-w-none text-[0.95rem]">
+              <div class="prose-editorial">
                 <project.Content />
               </div>
             </article>
@@ -151,12 +147,12 @@ const labWithRendered = await Promise.all(
     </section>
 
     <!-- Footer navigation -->
-    <div class="pt-8 border-t border-border-light dark:border-border-dark flex items-center justify-between font-mono text-xs">
-      <a href="/" class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1">
+    <div class="pt-10 border-t border-border-light/80 dark:border-border-dark/80 flex items-center justify-between font-mono text-xs sm:text-sm">
+      <a href="/" class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1.5">
         <span>←</span>
         <span>Back to homepage</span>
       </a>
-      <a href="#top" class="text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark inline-flex items-center gap-1">
+      <a href="#top" class="text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark inline-flex items-center gap-1.5">
         <span>Back to top</span>
         <span>↑</span>
       </a>

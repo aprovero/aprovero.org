@@ -1,41 +1,38 @@
----
+﻿---
 title: "Los Cuervos Solar PV"
-subtitle: "Utility-scale inverter block integration and high-voltage grid validation"
+subtitle: "Inverter station commissioning and grid code acceptance"
 clientOrOwner: "Utility-Scale Solar Project"
-location: "Aguascalientes, Mexico"
+location: "Mexico"
 capacity: "234 MW PV"
 systemType: "Solar PV"
-year: "2021–2022"
+year: "2021"
 role: "Field Service & Commissioning Engineer"
-summary: "Energization, inverter parameterization, and plant-controller SCADA integration across 234 MW of utility solar generation in central Mexico."
+summary: "Commissioning, parameterization, and technical acceptance testing across 234 MW of central inverter stations in central Mexico."
 keyMetrics:
-  - "234 MW peak capacity"
-  - "Multi-megawatt central inverter stations"
-  - "Plant controller & SCADA coordination"
-confidentialityNotice: "Specific grid interconnection studies, proprietary firmware builds, and commercial contract thresholds are omitted."
+  - "234 MW PV peak capacity"
+  - "Utility-scale central inverters"
+  - "Site Acceptance Testing (SAT)"
+confidentialityNotice: "Proprietary utility studies, site access records, and commercial contract details are intentionally omitted."
 featured: true
 order: 2
 ---
 
 ## Overview
 
-Located in the semi-arid highlands of Aguascalientes, Mexico, Los Cuervos is a 234 MW utility-scale solar generation plant. The site features extensive high-voltage infrastructure and central inverter stations delivering power into Mexico's National Interconnected System (SIN).
+Los Cuervos is a 234 MW utility-scale solar facility in Mexico. The plant integrates multi-megawatt central inverter stations delivering power into the national grid.
 
-I was responsible for inverter commissioning, executing protection settings according to utility study requirements, resolving integration anomalies between the Power Plant Controller (PPC) and inverter stations, and validating unit availability during critical operational phases.
+As Field Service & Commissioning Engineer, I led on-site inverter commissioning, parameter validation, and technical support during site acceptance testing alongside EPC contractors and utility inspectors.
 
-## Engineering Scope
+## Technical Scope
 
-- **Inverter Parameterization**: Configuring grid-following parameters, voltage ride-through (LVRT/HVRT), frequency ride-through (LFRT/HFRT), and reactive power control curves according to the Mexican Grid Code (*Código de Red*).
-- **Communication Architecture**: Commissioning optical fiber ring topologies connecting central inverter stations with SCADA and the PPC via Modbus TCP.
-- **Site Acceptance Testing (SAT)**: Conducting synchronized power curtailment tests, reactive power injection during nighttime (Q at night), and step-response verification under grid operator observation.
-
-## Challenges & Root Cause Analysis
-
-Semi-arid environments present high dust concentration and wide diurnal temperature swings. During initial energization, thermal expansion cycles combined with dust accumulation on external sensor arrays generated sporadic tracking errors and communication jitter.
-
-By systematically logging communication frame errors and analyzing waveform captures during fault events, we traced the issue to transient ground noise coupling into the RS-485 / fiber transceivers under rapid solar ramping. Applying targeted shielding grounds and adjusting transceiver communication timing eliminated the sporadic dropouts.
+- **Commissioning & SAT**: Step-by-step verification from cold mechanical and electrical checks through hot energization.
+- **Protection & Parameter Settings**: Parameterizing inverter control units for voltage ride-through, frequency response, and grid-code compliance.
+- **SCADA & Control Interface**: Testing communication loops and operational command handling between inverter stations and site plant controllers.
+- **Operational Handover**: Validating performance ratio (PR) and uptime criteria for final technical acceptance.
 
 ## Field Lessons
 
-- **Validate communication margins before power-up**: Network noise floors change drastically between idle inverter state and 100% switching frequency under full IGBT modulation. Testing communication links under load is essential.
-- **Documentation discipline across subcontractors**: Subcontractors working in parallel must adhere strictly to unified torque marking and label schematics to avoid post-energization investigations.
+- **Validate Communication Under Electrical Load**: Communication interfaces that test cleanly in standby must always be re-verified when power electronics are switching under load.
+- **Standardized Field Checklists**: Systematic pre-energization verification avoids repeated downtime cycles during critical utility inspection windows.
+
+> *Note: Detailed single-line schematics and proprietary firmware settings are intentionally omitted.*

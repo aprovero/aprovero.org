@@ -1,35 +1,38 @@
----
+﻿---
 title: "Tastiota Solar PV"
-subtitle: "Desert utility-scale solar commissioning and thermal performance validation"
-clientOrOwner: "Renewable Energy Project"
-location: "Sonora, Mexico"
+subtitle: "Desert utility-scale solar commissioning and operational acceptance"
+clientOrOwner: "Utility-Scale Solar Project"
+location: "Mexico"
 capacity: "120 MW PV"
 systemType: "Solar PV"
 year: "2021"
 role: "Commissioning & Technical Field Engineer"
-summary: "Commissioning, thermal stress testing, and commercial readiness validation for 120 MW of solar capacity in the Sonoran desert."
+summary: "Field commissioning, protection parameter verification, and technical support for 120 MW of utility-scale solar capacity operating in high-ambient desert conditions."
 keyMetrics:
   - "120 MW capacity"
-  - "Desert extreme ambient profile"
-  - "Grid code parameterization & acceptance"
-confidentialityNotice: "Customer proprietary operational limits and utility dispatch records are omitted."
+  - "High-ambient operating environment"
+  - "Commissioning & SAT"
+confidentialityNotice: "Proprietary dispatch records, internal manufacturer punch lists, and customer logs are intentionally omitted."
 featured: true
 order: 3
 ---
 
 ## Overview
 
-Tastiota is a 120 MW utility-scale photovoltaic facility operating in the Sonoran desert. The desert environment imposes extreme operating conditions: ambient temperatures frequently exceed 45°C, solar irradiance peaks near theoretical maximums, and fine airborne sand tests mechanical enclosures and ventilation filtration daily.
+Tastiota is a 120 MW utility-scale solar generation plant in Mexico. Operating in high-ambient desert conditions, the site demands strict adherence to thermal limits, dust filtration, and robust electrical protection.
 
-My assignment covered on-site technical commissioning, parameter validation, protection coordination, and resolving thermal derating constraints under severe solar noon conditions.
+My role encompassed technical commissioning, inverter parameterization, site acceptance testing, and operator training to ensure operational readiness.
 
-## Technical Focus
+## Scope & Execution
 
-- **Inverter Station Thermal Profiling**: Monitoring internal cabinet temperatures, heat sink delta-T, and liquid-cooling loop pressures under maximum solar insolation.
-- **Protection Settings & Acceptance**: Calibrating overvoltage, undervoltage, islanding detection, and harmonic distortion compliance according to national grid codes.
-- **Commercial Energization**: Coordinating sequence-of-events with site operators, utility inspectors, and EPC leads to clear punch-list items for commercial operation approval.
+- **Pre-Energization QA**: Visual audits, torque checking, insulation resistance tests, and verification of auxiliary systems.
+- **Inverter Parameterization**: Protection curves, grid synchronization settings, and utility compliance parameters.
+- **Thermal & Operational Monitoring**: Evaluating cooling airflow, filter hygiene, and inverter operating temperatures during initial power ramp-ups.
+- **Technical Handover**: Conducting Level 1 troubleshooting training for site technicians to build on-site operational independence.
 
 ## Field Lessons
 
-- **Filtration maintenance is electrical reliability**: In desert installations, air filter hygiene directly dictates IGBT junction temperatures. A neglected filter is a forced derating event waiting to happen.
-- **Pragmatic troubleshooting beats theoretical guessing**: When an inverter faults under high ambient load, looking at thermal camera profiles and raw event registers always uncovers root causes faster than adjusting software thresholds.
+- **Thermal Management Dictates Uptime**: In desert climates, intake filter cleanliness and heat-exchanger performance directly dictate power availability and prevent derating.
+- **Direct Measurement Beats Assumptions**: Relying on calibrated field measurements rather than theoretical assumptions is essential when diagnosing transient errors during energization.
+
+> *Note: Proprietary operational thresholds and utility interconnection details are omitted.*

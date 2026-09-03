@@ -13,27 +13,23 @@ const sortedNotes = allNotes.sort(
   title="Notes & Writing | Andres Provero"
   description="Technical notes, commissioning observations, and homelab architecture write-ups by Andres Provero."
 >
-  <main class="max-w-4xl mx-auto px-5 sm:px-8 py-10 sm:py-16 space-y-12">
+  <main class="max-w-6xl mx-auto px-6 sm:px-10 py-12 sm:py-20 space-y-16">
     
     <!-- Page Header -->
-    <div class="space-y-4 border-b border-border-light dark:border-border-dark pb-8">
-      <div class="font-mono text-xs text-accent-dark dark:text-accent tracking-wider uppercase font-medium">
-        WRITING & OBSERVATIONS
+    <header class="space-y-4 border-b border-border-light/80 dark:border-border-dark/80 pb-10">
+      <div class="font-mono text-xs sm:text-sm text-accent-dark dark:text-accent tracking-wider uppercase font-medium">
+        WRITING &amp; OBSERVATIONS
       </div>
-      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+      <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
         Notes &amp; Writing
       </h1>
-      <p class="text-base sm:text-lg text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed max-w-2xl">
-        Things worth documenting. Observations on utility-scale engineering, field realities, hardware prototyping, and systems built to last.
+      <p class="text-lg sm:text-xl text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed max-w-3xl">
+        Things worth documenting: observations on utility-scale engineering, field realities, hardware prototyping, and systems built to last.
       </p>
-
-      <div class="p-4 rounded-md border border-amber-500/20 bg-amber-500/5 text-xs text-amber-700 dark:text-amber-300 font-mono leading-relaxed">
-        <strong>Notice:</strong> Initial notes are marked as <code>[DRAFT]</code> while in active preparation.
-      </div>
-    </div>
+    </header>
 
     <!-- Notes List -->
-    <div class="divide-y divide-border-light dark:divide-border-dark">
+    <div class="divide-y divide-border-light/80 dark:border-border-dark/80">
       {
         sortedNotes.map((note) => (
           <NoteRow
@@ -50,8 +46,8 @@ const sortedNotes = allNotes.sort(
     </div>
 
     <!-- Back to top / home link -->
-    <div class="pt-6 font-mono text-xs">
-      <a href="/" class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1">
+    <div class="pt-6 font-mono text-xs sm:text-sm">
+      <a href="/" class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1.5">
         <span>←</span>
         <span>Back to homepage</span>
       </a>

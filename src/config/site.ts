@@ -1,4 +1,4 @@
-export interface NavItem {
+﻿export interface NavItem {
   label: string;
   href: string;
 }
@@ -28,11 +28,10 @@ export interface SiteConfig {
     github: SocialLink;
     email: SocialLink;
   };
-  homelabStatus: {
-    status: string;
-    hosted: string;
+  homelabMetadata: {
+    hosting: string;
     location: string;
-    type: string;
+    domain: string;
   };
 }
 
@@ -75,10 +74,9 @@ export const siteConfig: SiteConfig = {
       username: "andres@aprovero.org",
     },
   },
-  homelabStatus: {
-    status: "operational",
-    hosted: "homelab",
+  homelabMetadata: {
+    hosting: "Self-hosted",
     location: "Mexico City",
-    type: "self-hosted",
+    domain: "aprovero.org",
   },
 };

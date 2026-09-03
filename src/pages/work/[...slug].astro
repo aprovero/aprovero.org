@@ -18,13 +18,13 @@ const { Content } = await entry.render();
   title={`${entry.data.title} — Case Study | Andres Provero`}
   description={entry.data.summary}
 >
-  <main class="max-w-4xl mx-auto px-5 sm:px-8 py-10 sm:py-16 space-y-10">
+  <main class="max-w-6xl mx-auto px-6 sm:px-10 py-12 sm:py-20 space-y-12">
     
     <!-- Navigation Back Link -->
-    <nav class="font-mono text-xs">
+    <nav class="font-mono text-xs sm:text-sm">
       <a
         href="/work"
-        class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1 transition-colors"
+        class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1.5 transition-colors"
       >
         <span>←</span>
         <span>Back to Selected Work</span>
@@ -32,60 +32,54 @@ const { Content } = await entry.render();
     </nav>
 
     <!-- Header Section -->
-    <header class="space-y-4 border-b border-border-light dark:border-border-dark pb-8">
-      <div class="flex flex-wrap items-center gap-2">
-        <span class="font-mono text-xs uppercase px-2 py-0.5 rounded bg-surface-light-muted dark:bg-surface-dark-card border border-border-light dark:border-border-dark text-accent-dark dark:text-accent font-medium">
-          {entry.data.systemType}
-        </span>
-        <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
-          {entry.data.year}
-        </span>
+    <header class="space-y-6 border-b border-border-light/80 dark:border-border-dark/80 pb-10">
+      <div class="font-mono text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted flex items-center gap-2">
+        <span class="text-accent-dark dark:text-accent font-medium">{entry.data.systemType}</span>
+        <span class="opacity-30">·</span>
+        <span>{entry.data.year}</span>
+        <span class="opacity-30">·</span>
+        <span>{entry.data.capacity}</span>
       </div>
 
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-ink-light dark:text-ink-dark leading-[1.15]">
+      <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-ink-light dark:text-ink-dark leading-[1.15]">
         {entry.data.title}
       </h1>
 
-      <p class="text-lg text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed max-w-3xl">
+      <p class="text-lg sm:text-xl text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed max-w-3xl">
         {entry.data.subtitle}
       </p>
 
-      <!-- Technical Specifications Bar -->
-      <div class="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-lg bg-surface-light-card dark:bg-surface-dark-card border border-border-light dark:border-border-dark font-mono text-xs">
+      <!-- Editorial Metadata Row (Publication style, not dashboard grid) -->
+      <div class="pt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-sm font-mono text-ink-light-muted dark:text-ink-dark-muted border-t border-border-light/60 dark:border-border-dark/60 pt-4">
         <div>
-          <span class="text-ink-light-muted dark:text-ink-dark-muted block text-[0.7rem]">CAPACITY</span>
-          <span class="font-semibold text-ink-light dark:text-ink-dark text-sm">{entry.data.capacity}</span>
+          <span class="text-ink-light dark:text-ink-dark font-medium">Capacity:</span> {entry.data.capacity}
         </div>
+        <span class="opacity-25 hidden sm:inline">/</span>
         <div>
-          <span class="text-ink-light-muted dark:text-ink-dark-muted block text-[0.7rem]">LOCATION</span>
-          <span class="text-ink-light dark:text-ink-dark">{entry.data.location}</span>
+          <span class="text-ink-light dark:text-ink-dark font-medium">Location:</span> {entry.data.location}
         </div>
+        <span class="opacity-25 hidden sm:inline">/</span>
         <div>
-          <span class="text-ink-light-muted dark:text-ink-dark-muted block text-[0.7rem]">ROLE</span>
-          <span class="text-ink-light dark:text-ink-dark">{entry.data.role}</span>
-        </div>
-        <div>
-          <span class="text-ink-light-muted dark:text-ink-dark-muted block text-[0.7rem]">STAKEHOLDER</span>
-          <span class="text-ink-light dark:text-ink-dark">{entry.data.clientOrOwner}</span>
+          <span class="text-ink-light dark:text-ink-dark font-medium">Role:</span> {entry.data.role}
         </div>
       </div>
 
       <!-- Confidentiality notice box -->
-      <div class="text-xs font-mono text-ink-light-muted dark:text-ink-dark-muted border-l-2 border-accent pl-3 py-1">
+      <div class="text-xs sm:text-sm font-mono text-ink-light-muted dark:text-ink-dark-muted border-l-2 border-accent/60 pl-3 py-1">
         <span class="text-ink-light dark:text-ink-dark font-medium">Confidentiality Note:</span> {entry.data.confidentialityNotice}
       </div>
     </header>
 
     <!-- Narrative Prose Body -->
-    <article class="prose-editorial max-w-none">
+    <article class="prose-editorial">
       <Content />
     </article>
 
     <!-- Footer navigation -->
-    <div class="pt-8 border-t border-border-light dark:border-border-dark flex items-center justify-between font-mono text-xs">
+    <div class="pt-10 border-t border-border-light/80 dark:border-border-dark/80 flex items-center justify-between font-mono text-xs sm:text-sm">
       <a
         href="/work"
-        class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1"
+        class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1.5"
       >
         <span>←</span>
         <span>All projects</span>
@@ -93,7 +87,7 @@ const { Content } = await entry.render();
 
       <a
         href="#top"
-        class="text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark inline-flex items-center gap-1"
+        class="text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark inline-flex items-center gap-1.5"
       >
         <span>Back to top</span>
         <span>↑</span>

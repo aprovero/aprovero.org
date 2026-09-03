@@ -2,7 +2,6 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import CareerTimeline from '@/components/CareerTimeline.astro';
 import ProjectRow from '@/components/ProjectRow.astro';
-import LabCard from '@/components/LabCard.astro';
 import NoteRow from '@/components/NoteRow.astro';
 import StatusBadge from '@/components/StatusBadge.astro';
 import { siteConfig } from '@/config/site';
@@ -12,9 +11,6 @@ const allWork = await getCollection('work');
 const sortedWork = allWork.sort((a, b) => a.data.order - b.data.order);
 const featuredWork = sortedWork.filter((item) => item.data.featured).slice(0, 4);
 
-const allLab = await getCollection('lab');
-const sortedLab = allLab.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
-
 const allNotes = await getCollection('notes');
 const sortedNotes = allNotes.sort(
   (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
@@ -22,43 +18,43 @@ const sortedNotes = allNotes.sort(
 ---
 
 <BaseLayout>
-  <main class="max-w-4xl mx-auto px-5 sm:px-8 py-10 sm:py-16 space-y-20 sm:space-y-28">
+  <main class="max-w-6xl mx-auto px-6 sm:px-10 py-12 sm:py-20 space-y-28 sm:space-y-36">
 
     <!-- HERO SECTION -->
-    <section class="space-y-8 pt-4 sm:pt-8" aria-labelledby="hero-heading">
-      <!-- Metadata Kicker -->
-      <div class="flex items-center gap-2 font-mono text-xs text-accent-dark dark:text-accent tracking-wider uppercase font-medium">
+    <section class="space-y-8 pt-4 sm:pt-6" aria-labelledby="hero-heading">
+      <!-- Eyebrow Metadata -->
+      <div class="flex items-center gap-2 font-mono text-xs sm:text-sm text-accent-dark dark:text-accent tracking-wider uppercase font-medium">
         <span class="inline-block w-2 h-2 rounded-full bg-accent"></span>
         <span>ENERGY INFRASTRUCTURE · TECHNICAL OPERATIONS · MEXICO CITY</span>
       </div>
 
       <!-- Main Statement & Editorial Layout with Portrait -->
-      <div class="grid grid-cols-1 md:grid-cols-[1fr_220px] gap-8 sm:gap-12 items-start">
-        <div class="space-y-5">
-          <h1 id="hero-heading" class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-ink-light dark:text-ink-dark leading-[1.15]">
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_280px] lg:grid-cols-[1fr_310px] gap-10 lg:gap-16 items-start">
+        <div class="space-y-6">
+          <h1 id="hero-heading" class="text-3xl sm:text-5xl lg:text-[3.25rem] font-bold tracking-tight text-ink-light dark:text-ink-dark leading-[1.14]">
             Engineering that survives contact with the field.
           </h1>
 
-          <p class="text-base sm:text-lg text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed max-w-2xl font-normal">
+          <p class="text-lg sm:text-xl text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed max-w-2xl font-normal">
             {siteConfig.intro}
           </p>
 
-          <p class="text-sm sm:text-base text-ink-light-muted dark:text-ink-dark-muted leading-relaxed max-w-2xl">
+          <p class="text-base sm:text-lg text-ink-light-muted dark:text-ink-dark-muted leading-relaxed max-w-2xl">
             {siteConfig.secondaryIntro}
           </p>
 
           <!-- Restrained Text Links -->
-          <div class="pt-3 flex flex-wrap items-center gap-6 text-sm font-mono">
+          <div class="pt-4 flex flex-wrap items-center gap-7 text-sm sm:text-base font-mono">
             <a
               href="#work"
-              class="text-ink-light dark:text-ink-dark hover:text-accent-dark dark:hover:text-accent font-medium inline-flex items-center gap-1 transition-colors"
+              class="text-ink-light dark:text-ink-dark hover:text-accent-dark dark:hover:text-accent font-medium inline-flex items-center gap-1.5 transition-colors"
             >
               <span>Selected work</span>
               <span class="text-accent-dark dark:text-accent">↓</span>
             </a>
             <a
               href="#lab"
-              class="text-ink-light dark:text-ink-dark hover:text-accent-dark dark:hover:text-accent font-medium inline-flex items-center gap-1 transition-colors"
+              class="text-ink-light dark:text-ink-dark hover:text-accent-dark dark:hover:text-accent font-medium inline-flex items-center gap-1.5 transition-colors"
             >
               <span>The lab</span>
               <span class="text-accent-dark dark:text-accent">↓</span>
@@ -76,35 +72,25 @@ const sortedNotes = allNotes.sort(
         </div>
 
         <!-- Editorial Portrait Frame -->
-        <div class="order-first md:order-last">
-          <div class="relative max-w-[200px] sm:max-w-[220px] mx-auto md:mx-0 group">
-            <img
-              src="/brand/portrait-placeholder.svg"
-              alt="Andres Provero — Portrait"
-              width="220"
-              height="264"
-              class="w-full h-auto rounded border border-border-light dark:border-border-dark shadow-sm"
-            />
-            <div class="mt-2 text-center md:text-left">
-              <span class="font-mono text-[0.68rem] text-ink-light-muted dark:text-ink-dark-muted block">
-                Andres Provero
-              </span>
-              <span class="font-mono text-[0.64rem] text-accent-dark dark:text-accent block">
-                CDMX · UTC−6
-              </span>
-            </div>
-          </div>
+        <div class="order-first md:order-last w-full max-w-[260px] md:max-w-none mx-auto md:mx-0">
+          <img
+            src="/brand/portrait-placeholder.svg"
+            alt="Andres Provero"
+            width="310"
+            height="388"
+            class="w-full h-auto rounded-md border border-border-light dark:border-border-dark shadow-sm"
+          />
         </div>
       </div>
     </section>
 
     <!-- CAREER STORY SECTION -->
-    <section id="story" class="space-y-8" aria-labelledby="story-heading">
-      <div class="border-b border-border-light dark:border-border-dark pb-4 flex items-baseline justify-between">
-        <h2 id="story-heading" class="text-xl sm:text-2xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+    <section id="story" class="space-y-10" aria-labelledby="story-heading">
+      <div class="border-b border-border-light/80 dark:border-border-dark/80 pb-5 flex items-baseline justify-between">
+        <h2 id="story-heading" class="text-2xl sm:text-3xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
           Career Story
         </h2>
-        <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+        <span class="font-mono text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted">
           15+ years in the field
         </span>
       </div>
@@ -113,25 +99,25 @@ const sortedNotes = allNotes.sort(
     </section>
 
     <!-- SELECTED WORK SECTION -->
-    <section id="work" class="space-y-6" aria-labelledby="work-heading">
-      <div class="border-b border-border-light dark:border-border-dark pb-4 flex items-baseline justify-between">
+    <section id="work" class="space-y-8" aria-labelledby="work-heading">
+      <div class="border-b border-border-light/80 dark:border-border-dark/80 pb-5 flex items-baseline justify-between">
         <div>
-          <h2 id="work-heading" class="text-xl sm:text-2xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+          <h2 id="work-heading" class="text-2xl sm:text-3xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
             Selected Work
           </h2>
-          <p class="text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted mt-1">
-            Real infrastructure delivered across solar PV, energy storage, and power conversion.
+          <p class="text-sm sm:text-base text-ink-light-muted dark:text-ink-dark-muted mt-1.5">
+            Real infrastructure delivered across solar PV, battery storage, and power conversion.
           </p>
         </div>
         <a
           href="/work"
-          class="font-mono text-xs text-accent-dark dark:text-accent hover:underline shrink-0"
+          class="font-mono text-xs sm:text-sm text-accent-dark dark:text-accent hover:underline shrink-0"
         >
           View all →
         </a>
       </div>
 
-      <div class="divide-y divide-border-light dark:divide-border-dark">
+      <div class="divide-y divide-border-light/80 dark:border-border-dark/80">
         {
           featuredWork.map((project) => (
             <ProjectRow
@@ -150,37 +136,37 @@ const sortedNotes = allNotes.sort(
       </div>
 
       <!-- Confidentiality notice banner -->
-      <div class="p-4 rounded border border-border-light/70 dark:border-border-dark/70 bg-surface-light-card dark:bg-surface-dark-card/50 text-xs text-ink-light-muted dark:text-ink-dark-muted font-mono leading-relaxed">
-        <strong class="text-ink-light dark:text-ink-dark">Field Confidentiality Note:</strong> Specific customer telemetry, proprietary settings, internal manufacturer escalations, and commercial dispatch parameters are deliberately omitted from public documentation.
+      <div class="p-5 rounded-md border border-border-light/80 dark:border-border-dark/80 bg-surface-light-card/60 dark:bg-surface-dark-card/40 text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted font-mono leading-relaxed">
+        <strong class="text-ink-light dark:text-ink-dark">Field Confidentiality Note:</strong> Specific customer telemetry, proprietary equipment settings, internal manufacturer investigations, and commercial dispatch parameters are deliberately omitted from public documentation.
       </div>
     </section>
 
-    <!-- THE LAB SECTION -->
-    <section id="lab" class="space-y-8" aria-labelledby="lab-heading">
-      <div class="border-b border-border-light dark:border-border-dark pb-4 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+    <!-- THE LAB SECTION (Editorial layout instead of 2x2 card grid) -->
+    <section id="lab" class="space-y-10" aria-labelledby="lab-heading">
+      <div class="border-b border-border-light/80 dark:border-border-dark/80 pb-5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
         <div>
-          <h2 id="lab-heading" class="text-xl sm:text-2xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+          <h2 id="lab-heading" class="text-2xl sm:text-3xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
             The Lab
           </h2>
-          <p class="text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted mt-1">
+          <p class="text-sm sm:text-base text-ink-light-muted dark:text-ink-dark-muted mt-1.5">
             Self-hosted infrastructure, hardware prototyping, automation, and electronics.
           </p>
         </div>
         <a
           href="/lab"
-          class="font-mono text-xs text-accent-dark dark:text-accent hover:underline shrink-0"
+          class="font-mono text-xs sm:text-sm text-accent-dark dark:text-accent hover:underline shrink-0"
         >
           Explore lab →
         </a>
       </div>
 
-      <!-- Lab Status Badge & Intro -->
-      <div class="space-y-4">
+      <!-- Lab Introduction & Static Metadata -->
+      <div class="space-y-4 max-w-3xl">
         <StatusBadge />
 
-        <div class="text-[0.98rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed space-y-3">
-          <p>
-            <strong class="text-ink-light dark:text-ink-dark">This site is served from infrastructure I operate myself.</strong>
+        <div class="text-[1.05rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-[1.8] space-y-3">
+          <p class="font-medium text-ink-light dark:text-ink-dark">
+            This site is served from infrastructure I operate myself.
           </p>
           <p>
             My homelab is where I experiment with servers, networking, self-hosting, monitoring, automation, electronics, software, AI, and things that were probably easier not to build. It keeps my engineering intuition grounded in bare metal, circuit isolation, and physical failure modes.
@@ -188,44 +174,119 @@ const sortedNotes = allNotes.sort(
         </div>
       </div>
 
-      <!-- Lab Projects Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {
-          sortedLab.map((project) => (
-            <LabCard
-              title={project.data.title}
-              category={project.data.category}
-              status={project.data.status}
-              summary={project.data.summary}
-              technologies={project.data.technologies}
-              highlights={project.data.highlights}
-              slug={project.slug}
-            />
-          ))
-        }
+      <!-- Editorial Project Layout (No generic card grid) -->
+      <div class="space-y-8 pt-2">
+        
+        <!-- Featured Project: Homelab Infrastructure -->
+        <article class="p-6 sm:p-8 rounded-lg border border-border-light/80 dark:border-border-dark/80 bg-surface-light-card/40 dark:bg-surface-dark-card/40 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+            <div class="font-mono text-xs text-accent-dark dark:text-accent font-medium uppercase tracking-wider">
+              FEATURED INFRASTRUCTURE
+            </div>
+            <div class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+              Proxmox VE · Docker · Alpine Linux · Reverse Proxy · ZFS
+            </div>
+          </div>
+
+          <h3 class="text-xl sm:text-2xl font-bold text-ink-light dark:text-ink-dark">
+            <a href="/lab#homelab-infrastructure" class="hover:text-accent-dark dark:hover:text-accent transition-colors inline-flex items-center gap-2">
+              <span>Homelab &amp; Self-Hosted Infrastructure</span>
+              <span class="text-accent-dark dark:text-accent text-base">→</span>
+            </a>
+          </h3>
+
+          <p class="text-[1.02rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-[1.8] max-w-3xl">
+            Operating my own compute in Mexico City forces me to think through the entire stack: bare-metal thermal dissipation, UPS runtime, container lifecycles, and automated off-site backups. The production container serving this site runs unprivileged Nginx on Alpine Linux with an encrypted egress tunnel, eliminating open inbound router ports.
+          </p>
+
+          <div class="pt-2 font-mono text-xs sm:text-sm">
+            <a href="/lab#homelab-infrastructure" class="text-accent-dark dark:text-accent hover:underline font-medium">
+              Read infrastructure architecture →
+            </a>
+          </div>
+        </article>
+
+        <!-- Secondary Lab Projects: Editorial Rows -->
+        <div class="divide-y divide-border-light/70 dark:border-border-dark/70">
+          
+          <!-- Lab 2: Smart Fan Controller -->
+          <article class="py-6 group">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-2">
+              <h4 class="text-lg sm:text-xl font-semibold text-ink-light dark:text-ink-dark">
+                <a href="/lab#smart-fan-controller" class="hover:text-accent-dark dark:hover:text-accent transition-colors inline-flex items-center gap-1.5">
+                  <span>Smart Fan Controller</span>
+                  <span class="text-accent-dark dark:text-accent opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all text-xs">→</span>
+                </a>
+              </h4>
+              <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+                ESP32 · Optocoupled Relays · Galvanic Isolation · FreeRTOS
+              </span>
+            </div>
+            <p class="text-[0.98rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed max-w-3xl">
+              Retrofitting a conventional 110V 3-speed pedestal fan with Wi-Fi control using an ESP32 while maintaining physical isolation between mains voltage and 3.3V logic, with fail-safe manual override.
+            </p>
+          </article>
+
+          <!-- Lab 3: AI Tools & Experiments -->
+          <article class="py-6 group">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-2">
+              <h4 class="text-lg sm:text-xl font-semibold text-ink-light dark:text-ink-dark">
+                <a href="/lab#ai-tools-agents" class="hover:text-accent-dark dark:hover:text-accent transition-colors inline-flex items-center gap-1.5">
+                  <span>AI Tools &amp; Engineering Experiments</span>
+                  <span class="text-accent-dark dark:text-accent opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all text-xs">→</span>
+                </a>
+              </h4>
+              <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+                Local Inference · Document Grounding · Python · Tool Loops
+              </span>
+            </div>
+            <p class="text-[0.98rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed max-w-3xl">
+              Practical experiments with local LLM inference, agentic tool-use loops, and technical knowledge retrieval to index multi-hundred-page equipment manuals and inverter register maps without cloud leakage.
+            </p>
+          </article>
+
+          <!-- Lab 4: Field Engineering Tools -->
+          <article class="py-6 group">
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-2">
+              <h4 class="text-lg sm:text-xl font-semibold text-ink-light dark:text-ink-dark">
+                <a href="/lab#engineering-tools" class="hover:text-accent-dark dark:hover:text-accent transition-colors inline-flex items-center gap-1.5">
+                  <span>Field Engineering Tools</span>
+                  <span class="text-accent-dark dark:text-accent opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all text-xs">→</span>
+                </a>
+              </h4>
+              <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+                Offline PWA · Modbus Maps · Electrical Calculations
+              </span>
+            </div>
+            <p class="text-[0.98rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed max-w-3xl">
+              Lightweight offline-first progressive web apps, calculators, and automation scripts built to eliminate friction and calculate deratings on site in remote substations without cellular service.
+            </p>
+          </article>
+
+        </div>
       </div>
     </section>
 
     <!-- NOTES SECTION -->
-    <section id="notes" class="space-y-6" aria-labelledby="notes-heading">
-      <div class="border-b border-border-light dark:border-border-dark pb-4 flex items-baseline justify-between">
+    <section id="notes" class="space-y-8" aria-labelledby="notes-heading">
+      <div class="border-b border-border-light/80 dark:border-border-dark/80 pb-5 flex items-baseline justify-between">
         <div>
-          <h2 id="notes-heading" class="text-xl sm:text-2xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
-            Notes & Writing
+          <h2 id="notes-heading" class="text-2xl sm:text-3xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+            Notes &amp; Writing
           </h2>
-          <p class="text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted mt-1">
+          <p class="text-sm sm:text-base text-ink-light-muted dark:text-ink-dark-muted mt-1.5">
             Things worth documenting: field observations, homelab architecture, and engineering principles.
           </p>
         </div>
         <a
           href="/notes"
-          class="font-mono text-xs text-accent-dark dark:text-accent hover:underline shrink-0"
+          class="font-mono text-xs sm:text-sm text-accent-dark dark:text-accent hover:underline shrink-0"
         >
           All notes →
         </a>
       </div>
 
-      <div class="divide-y divide-border-light dark:divide-border-dark">
+      <div class="divide-y divide-border-light/80 dark:border-border-dark/80">
         {
           sortedNotes.map((note) => (
             <NoteRow
@@ -243,22 +304,22 @@ const sortedNotes = allNotes.sort(
     </section>
 
     <!-- CONTACT SECTION -->
-    <section id="contact" class="space-y-6 pt-4" aria-labelledby="contact-heading">
-      <div class="border-b border-border-light dark:border-border-dark pb-4">
-        <h2 id="contact-heading" class="text-xl sm:text-2xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+    <section id="contact" class="space-y-8 pt-4" aria-labelledby="contact-heading">
+      <div class="border-b border-border-light/80 dark:border-border-dark/80 pb-5">
+        <h2 id="contact-heading" class="text-2xl sm:text-3xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
           Contact
         </h2>
       </div>
 
-      <div class="space-y-4 max-w-2xl">
-        <p class="text-ink-light-secondary dark:text-ink-dark-secondary text-[0.98rem] leading-relaxed">
+      <div class="space-y-6 max-w-2xl">
+        <p class="text-ink-light-secondary dark:text-ink-dark-secondary text-[1.05rem] leading-[1.8]">
           If you want to talk about engineering, energy infrastructure, technical operations, technology, or something interesting enough to build, feel free to reach out.
         </p>
 
-        <div class="pt-2 flex flex-col sm:flex-row sm:items-center gap-4 text-sm font-mono">
+        <div class="pt-2 flex flex-col sm:flex-row sm:items-center gap-5 text-sm sm:text-base font-mono">
           <a
             href={siteConfig.socials.email.href}
-            class="px-4 py-2 rounded-md bg-accent text-surface-dark font-medium hover:bg-accent-hover transition-colors inline-flex items-center justify-center gap-2 w-fit"
+            class="px-5 py-2.5 rounded-md bg-accent text-surface-dark font-medium hover:bg-accent-hover transition-colors inline-flex items-center justify-center gap-2 w-fit"
           >
             <span>{siteConfig.email}</span>
             <span>✉</span>
@@ -268,7 +329,7 @@ const sortedNotes = allNotes.sort(
             href={siteConfig.socials.linkedin.href}
             target="_blank"
             rel="noopener noreferrer"
-            class="px-4 py-2 rounded-md border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card hover:border-accent/40 text-ink-light dark:text-ink-dark transition-colors inline-flex items-center justify-center gap-2 w-fit"
+            class="px-5 py-2.5 rounded-md border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card hover:border-accent/40 text-ink-light dark:text-ink-dark transition-colors inline-flex items-center justify-center gap-2 w-fit"
           >
             <span>LinkedIn Profile</span>
             <span>↗</span>
@@ -278,7 +339,7 @@ const sortedNotes = allNotes.sort(
             href={siteConfig.socials.github.href}
             target="_blank"
             rel="noopener noreferrer"
-            class="px-4 py-2 rounded-md border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card hover:border-accent/40 text-ink-light dark:text-ink-dark transition-colors inline-flex items-center justify-center gap-2 w-fit"
+            class="px-5 py-2.5 rounded-md border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card hover:border-accent/40 text-ink-light dark:text-ink-dark transition-colors inline-flex items-center justify-center gap-2 w-fit"
           >
             <span>GitHub</span>
             <span>↗</span>

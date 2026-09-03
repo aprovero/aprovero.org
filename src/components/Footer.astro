@@ -4,29 +4,29 @@ import { siteConfig } from '@/config/site';
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="w-full border-t border-border-light dark:border-border-dark mt-20 sm:mt-28 py-10 transition-colors">
-  <div class="max-w-4xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 text-xs text-ink-light-muted dark:text-ink-dark-muted font-mono">
+<footer class="w-full border-t border-border-light dark:border-border-dark mt-28 sm:mt-36 py-12 transition-colors">
+  <div class="max-w-6xl mx-auto px-6 sm:px-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 text-[0.82rem] text-ink-light-muted dark:text-ink-dark-muted font-mono">
     
-    <div class="space-y-1">
+    <div class="space-y-1.5">
       <div class="flex items-center gap-2">
         <span class="inline-block w-1.5 h-1.5 rounded-full bg-accent"></span>
-        <span class="text-ink-light dark:text-ink-dark font-sans font-medium">{siteConfig.name}</span>
-        <span>© {currentYear}</span>
+        <span class="text-ink-light dark:text-ink-dark font-sans font-medium text-[0.92rem]">{siteConfig.name}</span>
+        <span class="text-ink-light-muted dark:text-ink-dark-muted">© {currentYear}</span>
       </div>
-      <p class="text-[0.72rem] text-ink-light-muted dark:text-ink-dark-muted">
-        {siteConfig.location} · {siteConfig.timezone} · Self-hosted in homelab.
+      <p class="text-[0.78rem] text-ink-light-muted dark:text-ink-dark-muted">
+        {siteConfig.location} · {siteConfig.timezone} · Self-hosted.
       </p>
     </div>
 
     <!-- Direct Links -->
-    <div class="flex flex-wrap items-center gap-4 text-xs">
+    <div class="flex flex-wrap items-center gap-5 text-[0.82rem]">
       <a
         href={siteConfig.socials.email.href}
         class="hover:text-accent-dark dark:hover:text-accent transition-colors"
       >
         {siteConfig.email}
       </a>
-      <span class="opacity-30">/</span>
+      <span class="opacity-25">/</span>
       <a
         href={siteConfig.socials.linkedin.href}
         target="_blank"
@@ -35,7 +35,7 @@ const currentYear = new Date().getFullYear();
       >
         LinkedIn ↗
       </a>
-      <span class="opacity-30">/</span>
+      <span class="opacity-25">/</span>
       <a
         href={siteConfig.socials.github.href}
         target="_blank"
@@ -44,7 +44,7 @@ const currentYear = new Date().getFullYear();
       >
         GitHub ↗
       </a>
-      <span class="opacity-30">/</span>
+      <span class="opacity-25">/</span>
       <a
         href="/rss.xml"
         class="hover:text-accent-dark dark:hover:text-accent transition-colors"

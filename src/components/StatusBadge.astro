@@ -1,43 +1,13 @@
 ﻿---
 import { siteConfig } from '@/config/site';
 
-const { homelabStatus } = siteConfig;
+const { homelabMetadata } = siteConfig;
 ---
 
-<div class="inline-flex flex-wrap items-center gap-x-4 gap-y-1.5 px-3 py-1.5 rounded-md border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card font-mono text-[0.72rem] text-ink-light-secondary dark:text-ink-dark-secondary">
-  <div class="flex items-center gap-1.5 font-medium text-ink-light dark:text-ink-dark">
-    <span class="relative flex h-2 w-2">
-      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-      <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
-    </span>
-    <span>aprovero.org</span>
-  </div>
-
-  <span class="hidden sm:inline text-border-light dark:text-border-dark">|</span>
-
-  <div class="flex items-center gap-1">
-    <span class="text-ink-light-muted dark:text-ink-dark-muted">STATUS</span>
-    <span class="text-accent-dark dark:text-accent font-medium uppercase">{homelabStatus.status}</span>
-  </div>
-
-  <span class="hidden sm:inline text-border-light dark:text-border-dark">|</span>
-
-  <div class="flex items-center gap-1">
-    <span class="text-ink-light-muted dark:text-ink-dark-muted">HOSTED</span>
-    <span class="text-ink-light dark:text-ink-dark">{homelabStatus.hosted}</span>
-  </div>
-
-  <span class="hidden md:inline text-border-light dark:text-border-dark">|</span>
-
-  <div class="hidden md:flex items-center gap-1">
-    <span class="text-ink-light-muted dark:text-ink-dark-muted">LOCATION</span>
-    <span>{homelabStatus.location}</span>
-  </div>
-
-  <span class="hidden lg:inline text-border-light dark:text-border-dark">|</span>
-
-  <div class="hidden lg:flex items-center gap-1">
-    <span class="text-ink-light-muted dark:text-ink-dark-muted">TYPE</span>
-    <span>{homelabStatus.type}</span>
-  </div>
+<div class="inline-flex flex-wrap items-center gap-x-3 gap-y-1 py-1 font-mono text-[0.8rem] text-ink-light-muted dark:text-ink-dark-muted">
+  <span class="text-ink-light dark:text-ink-dark font-medium">{homelabMetadata.domain}</span>
+  <span class="opacity-30">·</span>
+  <span>{homelabMetadata.hosting}</span>
+  <span class="opacity-30">·</span>
+  <span>{homelabMetadata.location}</span>
 </div>

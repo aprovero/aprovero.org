@@ -1,0 +1,17 @@
+﻿services:
+  aprovero-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: aprovero-org
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    # Security hardening
+    read_only: false
+    security_opt:
+      - no-new-privileges:true
