@@ -1,0 +1,61 @@
+﻿---
+interface Props {
+  title: string;
+  category: string;
+  status: string;
+  summary: string;
+  technologies: string[];
+  highlights?: string[];
+  slug: string;
+}
+
+const { title, category, status, summary, technologies, highlights, slug } = Astro.props;
+
+const statusColorMap: Record<string, string> = {
+  Operational: "text-emerald-500 bg-emerald-500/10 border-emerald-500/20",
+  "Active Development": "text-amber-500 bg-amber-500/10 border-amber-500/20",
+  Prototype: "text-blue-500 bg-blue-500/10 border-blue-500/20",
+  Documented: "text-zinc-400 bg-zinc-500/10 border-zinc-500/20",
+};
+
+const badgeClass = statusColorMap[status] || "text-zinc-400 bg-zinc-500/10 border-zinc-500/20";
+---
+
+<article class="p-5 sm:p-6 rounded-lg border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card hover:border-accent/40 dark:hover:border-accent/40 transition-colors">
+  <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+    <div class="flex items-center gap-2">
+      <span class="font-mono text-[0.72rem] uppercase tracking-wider text-accent-dark dark:text-accent font-medium">
+        [{category}]
+      </span>
+      <span class={`font-mono text-[0.7rem] px-2 py-0.5 rounded border ${badgeClass}`}>
+        {status}
+      </span>
+    </div>
+  </div>
+
+  <h3 class="text-base sm:text-lg font-semibold text-ink-light dark:text-ink-dark mb-2">
+    <a href={`/lab#${slug}`} class="hover:text-accent-dark dark:hover:text-accent transition-colors">
+      {title}
+    </a>
+  </h3>
+
+  <p class="text-sm text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed mb-4">
+    {summary}
+  </p>
+
+  {highlights && highlights.length > 0 && (
+    <ul class="mb-4 space-y-1 text-xs text-ink-light-muted dark:text-ink-dark-muted font-mono list-disc pl-4">
+      {highlights.map((h) => (
+        <li>{h}</li>
+      ))}
+    </ul>
+  )}
+
+  <div class="flex flex-wrap gap-1.5 pt-2 border-t border-border-light/60 dark:border-border-dark/60">
+    {technologies.map((tech) => (
+      <span class="text-[0.7rem] font-mono px-2 py-0.5 rounded bg-surface-light-muted dark:bg-surface-dark-muted text-ink-light-secondary dark:text-ink-dark-secondary">
+        {tech}
+      </span>
+    ))}
+  </div>
+</article>

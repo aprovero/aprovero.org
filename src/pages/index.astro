@@ -1,0 +1,291 @@
+﻿---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CareerTimeline from '@/components/CareerTimeline.astro';
+import ProjectRow from '@/components/ProjectRow.astro';
+import LabCard from '@/components/LabCard.astro';
+import NoteRow from '@/components/NoteRow.astro';
+import StatusBadge from '@/components/StatusBadge.astro';
+import { siteConfig } from '@/config/site';
+import { getCollection } from 'astro:content';
+
+const allWork = await getCollection('work');
+const sortedWork = allWork.sort((a, b) => a.data.order - b.data.order);
+const featuredWork = sortedWork.filter((item) => item.data.featured).slice(0, 4);
+
+const allLab = await getCollection('lab');
+const sortedLab = allLab.sort((a, b) => a.data.order - b.data.order).slice(0, 4);
+
+const allNotes = await getCollection('notes');
+const sortedNotes = allNotes.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<BaseLayout>
+  <main class="max-w-4xl mx-auto px-5 sm:px-8 py-10 sm:py-16 space-y-20 sm:space-y-28">
+
+    <!-- HERO SECTION -->
+    <section class="space-y-8 pt-4 sm:pt-8" aria-labelledby="hero-heading">
+      <!-- Metadata Kicker -->
+      <div class="flex items-center gap-2 font-mono text-xs text-accent-dark dark:text-accent tracking-wider uppercase font-medium">
+        <span class="inline-block w-2 h-2 rounded-full bg-accent"></span>
+        <span>ENERGY INFRASTRUCTURE · TECHNICAL OPERATIONS · MEXICO CITY</span>
+      </div>
+
+      <!-- Main Statement & Editorial Layout with Portrait -->
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_220px] gap-8 sm:gap-12 items-start">
+        <div class="space-y-5">
+          <h1 id="hero-heading" class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-ink-light dark:text-ink-dark leading-[1.15]">
+            Engineering that survives contact with the field.
+          </h1>
+
+          <p class="text-base sm:text-lg text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed max-w-2xl font-normal">
+            {siteConfig.intro}
+          </p>
+
+          <p class="text-sm sm:text-base text-ink-light-muted dark:text-ink-dark-muted leading-relaxed max-w-2xl">
+            {siteConfig.secondaryIntro}
+          </p>
+
+          <!-- Restrained Text Links -->
+          <div class="pt-3 flex flex-wrap items-center gap-6 text-sm font-mono">
+            <a
+              href="#work"
+              class="text-ink-light dark:text-ink-dark hover:text-accent-dark dark:hover:text-accent font-medium inline-flex items-center gap-1 transition-colors"
+            >
+              <span>Selected work</span>
+              <span class="text-accent-dark dark:text-accent">↓</span>
+            </a>
+            <a
+              href="#lab"
+              class="text-ink-light dark:text-ink-dark hover:text-accent-dark dark:hover:text-accent font-medium inline-flex items-center gap-1 transition-colors"
+            >
+              <span>The lab</span>
+              <span class="text-accent-dark dark:text-accent">↓</span>
+            </a>
+            <a
+              href={siteConfig.socials.linkedin.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark inline-flex items-center gap-1 transition-colors"
+            >
+              <span>LinkedIn</span>
+              <span>↗</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Editorial Portrait Frame -->
+        <div class="order-first md:order-last">
+          <div class="relative max-w-[200px] sm:max-w-[220px] mx-auto md:mx-0 group">
+            <img
+              src="/brand/portrait-placeholder.svg"
+              alt="Andres Provero — Portrait"
+              width="220"
+              height="264"
+              class="w-full h-auto rounded border border-border-light dark:border-border-dark shadow-sm"
+            />
+            <div class="mt-2 text-center md:text-left">
+              <span class="font-mono text-[0.68rem] text-ink-light-muted dark:text-ink-dark-muted block">
+                Andres Provero
+              </span>
+              <span class="font-mono text-[0.64rem] text-accent-dark dark:text-accent block">
+                CDMX · UTC−6
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAREER STORY SECTION -->
+    <section id="story" class="space-y-8" aria-labelledby="story-heading">
+      <div class="border-b border-border-light dark:border-border-dark pb-4 flex items-baseline justify-between">
+        <h2 id="story-heading" class="text-xl sm:text-2xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+          Career Story
+        </h2>
+        <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+          15+ years in the field
+        </span>
+      </div>
+
+      <CareerTimeline />
+    </section>
+
+    <!-- SELECTED WORK SECTION -->
+    <section id="work" class="space-y-6" aria-labelledby="work-heading">
+      <div class="border-b border-border-light dark:border-border-dark pb-4 flex items-baseline justify-between">
+        <div>
+          <h2 id="work-heading" class="text-xl sm:text-2xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+            Selected Work
+          </h2>
+          <p class="text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted mt-1">
+            Real infrastructure delivered across solar PV, energy storage, and power conversion.
+          </p>
+        </div>
+        <a
+          href="/work"
+          class="font-mono text-xs text-accent-dark dark:text-accent hover:underline shrink-0"
+        >
+          View all →
+        </a>
+      </div>
+
+      <div class="divide-y divide-border-light dark:divide-border-dark">
+        {
+          featuredWork.map((project) => (
+            <ProjectRow
+              title={project.data.title}
+              subtitle={project.data.subtitle}
+              location={project.data.location}
+              capacity={project.data.capacity}
+              systemType={project.data.systemType}
+              year={project.data.year}
+              role={project.data.role}
+              summary={project.data.summary}
+              slug={project.slug}
+            />
+          ))
+        }
+      </div>
+
+      <!-- Confidentiality notice banner -->
+      <div class="p-4 rounded border border-border-light/70 dark:border-border-dark/70 bg-surface-light-card dark:bg-surface-dark-card/50 text-xs text-ink-light-muted dark:text-ink-dark-muted font-mono leading-relaxed">
+        <strong class="text-ink-light dark:text-ink-dark">Field Confidentiality Note:</strong> Specific customer telemetry, proprietary settings, internal manufacturer escalations, and commercial dispatch parameters are deliberately omitted from public documentation.
+      </div>
+    </section>
+
+    <!-- THE LAB SECTION -->
+    <section id="lab" class="space-y-8" aria-labelledby="lab-heading">
+      <div class="border-b border-border-light dark:border-border-dark pb-4 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+        <div>
+          <h2 id="lab-heading" class="text-xl sm:text-2xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+            The Lab
+          </h2>
+          <p class="text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted mt-1">
+            Self-hosted infrastructure, hardware prototyping, automation, and electronics.
+          </p>
+        </div>
+        <a
+          href="/lab"
+          class="font-mono text-xs text-accent-dark dark:text-accent hover:underline shrink-0"
+        >
+          Explore lab →
+        </a>
+      </div>
+
+      <!-- Lab Status Badge & Intro -->
+      <div class="space-y-4">
+        <StatusBadge />
+
+        <div class="text-[0.98rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed space-y-3">
+          <p>
+            <strong class="text-ink-light dark:text-ink-dark">This site is served from infrastructure I operate myself.</strong>
+          </p>
+          <p>
+            My homelab is where I experiment with servers, networking, self-hosting, monitoring, automation, electronics, software, AI, and things that were probably easier not to build. It keeps my engineering intuition grounded in bare metal, circuit isolation, and physical failure modes.
+          </p>
+        </div>
+      </div>
+
+      <!-- Lab Projects Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {
+          sortedLab.map((project) => (
+            <LabCard
+              title={project.data.title}
+              category={project.data.category}
+              status={project.data.status}
+              summary={project.data.summary}
+              technologies={project.data.technologies}
+              highlights={project.data.highlights}
+              slug={project.slug}
+            />
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- NOTES SECTION -->
+    <section id="notes" class="space-y-6" aria-labelledby="notes-heading">
+      <div class="border-b border-border-light dark:border-border-dark pb-4 flex items-baseline justify-between">
+        <div>
+          <h2 id="notes-heading" class="text-xl sm:text-2xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+            Notes & Writing
+          </h2>
+          <p class="text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted mt-1">
+            Things worth documenting: field observations, homelab architecture, and engineering principles.
+          </p>
+        </div>
+        <a
+          href="/notes"
+          class="font-mono text-xs text-accent-dark dark:text-accent hover:underline shrink-0"
+        >
+          All notes →
+        </a>
+      </div>
+
+      <div class="divide-y divide-border-light dark:divide-border-dark">
+        {
+          sortedNotes.map((note) => (
+            <NoteRow
+              title={note.data.title}
+              date={note.data.date}
+              summary={note.data.summary}
+              tags={note.data.tags}
+              draft={note.data.draft}
+              readTime={note.data.readTime}
+              slug={note.slug}
+            />
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="space-y-6 pt-4" aria-labelledby="contact-heading">
+      <div class="border-b border-border-light dark:border-border-dark pb-4">
+        <h2 id="contact-heading" class="text-xl sm:text-2xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+          Contact
+        </h2>
+      </div>
+
+      <div class="space-y-4 max-w-2xl">
+        <p class="text-ink-light-secondary dark:text-ink-dark-secondary text-[0.98rem] leading-relaxed">
+          If you want to talk about engineering, energy infrastructure, technical operations, technology, or something interesting enough to build, feel free to reach out.
+        </p>
+
+        <div class="pt-2 flex flex-col sm:flex-row sm:items-center gap-4 text-sm font-mono">
+          <a
+            href={siteConfig.socials.email.href}
+            class="px-4 py-2 rounded-md bg-accent text-surface-dark font-medium hover:bg-accent-hover transition-colors inline-flex items-center justify-center gap-2 w-fit"
+          >
+            <span>{siteConfig.email}</span>
+            <span>✉</span>
+          </a>
+
+          <a
+            href={siteConfig.socials.linkedin.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-4 py-2 rounded-md border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card hover:border-accent/40 text-ink-light dark:text-ink-dark transition-colors inline-flex items-center justify-center gap-2 w-fit"
+          >
+            <span>LinkedIn Profile</span>
+            <span>↗</span>
+          </a>
+
+          <a
+            href={siteConfig.socials.github.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-4 py-2 rounded-md border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card hover:border-accent/40 text-ink-light dark:text-ink-dark transition-colors inline-flex items-center justify-center gap-2 w-fit"
+          >
+            <span>GitHub</span>
+            <span>↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>

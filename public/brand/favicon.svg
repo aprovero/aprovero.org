@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="14" fill="#0C0E12" />
+  <!-- Signature teal accent dot -->
+  <circle cx="23" cy="19" r="4.5" fill="#00D3A5" />
+  <!-- Lowercase letter 'a' -->
+  <text x="23" y="48" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="600" fill="#F4F4F6" text-anchor="middle">a</text>
+</svg>

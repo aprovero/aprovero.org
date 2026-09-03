@@ -1,0 +1,100 @@
+﻿---
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import { siteConfig } from '@/config/site';
+import '@/styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  articleDate?: string;
+}
+
+const {
+  title = siteConfig.title,
+  description = siteConfig.description,
+  ogImage = '/brand/logo.png',
+  articleDate,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, siteConfig.url);
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={siteConfig.name} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Favicon & Brand Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" type="image/png" href="/brand/logo-sq.png" />
+    <link rel="apple-touch-icon" href="/brand/logo-sq.png" />
+
+    <!-- RSS feed auto-discovery -->
+    <link rel="alternate" type="application/rss+xml" title="Andres Provero — Technical Notes" href="/rss.xml" />
+
+    <!-- Open Graph / Social Meta -->
+    <meta property="og:type" content={articleDate ? "article" : "website"} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, siteConfig.url)} />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, siteConfig.url)} />
+
+    <!-- Structured Data (Schema.org JSON-LD) -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": siteConfig.name,
+      "alternateName": siteConfig.formalName,
+      "jobTitle": siteConfig.descriptor,
+      "url": siteConfig.url,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Mexico City",
+        "addressCountry": "Mexico"
+      },
+      "sameAs": [
+        siteConfig.socials.linkedin.href,
+        siteConfig.socials.github.href
+      ]
+    })} />
+
+    <!-- Anti-FOUC Theme Script -->
+    <script is:inline>
+      (function () {
+        const stored = typeof localStorage !== 'undefined' ? localStorage.getItem('theme') : null;
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = stored || (prefersDark ? 'dark' : 'dark'); // default dark mode per creative direction
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      })();
+    </script>
+  </head>
+
+  <body class="min-h-screen flex flex-col bg-surface-light dark:bg-surface-dark text-ink-light dark:text-ink-dark selection:bg-accent/20">
+    <Header currentPath={Astro.url.pathname} />
+    
+    <div class="flex-1 w-full">
+      <slot />
+    </div>
+
+    <Footer />
+  </body>
+</html>

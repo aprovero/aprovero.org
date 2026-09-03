@@ -1,0 +1,78 @@
+{
+  "$ref": "#/definitions/work",
+  "definitions": {
+    "work": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "clientOrOwner": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "capacity": {
+          "type": "string"
+        },
+        "systemType": {
+          "type": "string",
+          "enum": [
+            "Solar PV",
+            "BESS",
+            "Hybrid",
+            "Substation",
+            "Embedded Systems"
+          ]
+        },
+        "year": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "keyMetrics": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "confidentialityNotice": {
+          "type": "string",
+          "default": "Certain system details, parameter values, internal investigations, and proprietary procedures are intentionally omitted to respect customer and manufacturer confidentiality."
+        },
+        "featured": {
+          "type": "boolean",
+          "default": false
+        },
+        "order": {
+          "type": "number",
+          "default": 99
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "subtitle",
+        "clientOrOwner",
+        "location",
+        "capacity",
+        "systemType",
+        "year",
+        "role",
+        "summary"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

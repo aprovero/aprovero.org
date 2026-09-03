@@ -1,0 +1,79 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-accent: #00D3A5;
+    --color-accent-hover: #00BA92;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  body {
+    @apply bg-surface-light text-ink-light font-sans antialiased transition-colors duration-200 selection:bg-accent/20 selection:text-ink-light;
+  }
+
+  html.dark body {
+    @apply bg-surface-dark text-ink-dark selection:bg-accent/25 selection:text-ink-dark;
+  }
+
+  /* Monospace accents */
+  code, kbd, samp, pre {
+    @apply font-mono;
+  }
+}
+
+/* Editorial prose styling for markdown content */
+.prose-editorial {
+  @apply text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed text-[1.03rem];
+}
+
+.prose-editorial p {
+  @apply my-5 leading-[1.8];
+}
+
+.prose-editorial h2 {
+  @apply text-ink-light dark:text-ink-dark text-2xl font-semibold tracking-tight mt-12 mb-4 pb-2 border-b border-border-light dark:border-border-dark;
+}
+
+.prose-editorial h3 {
+  @apply text-ink-light dark:text-ink-dark text-xl font-semibold tracking-tight mt-8 mb-3;
+}
+
+.prose-editorial ul {
+  @apply my-4 list-disc pl-6 space-y-2;
+}
+
+.prose-editorial ol {
+  @apply my-4 list-decimal pl-6 space-y-2;
+}
+
+.prose-editorial li {
+  @apply leading-relaxed;
+}
+
+.prose-editorial blockquote {
+  @apply my-6 border-l-2 border-accent pl-5 italic text-ink-light dark:text-ink-dark bg-surface-light-muted/50 dark:bg-surface-dark-card/50 py-3 pr-4 rounded-r;
+}
+
+.prose-editorial strong {
+  @apply font-semibold text-ink-light dark:text-ink-dark;
+}
+
+.prose-editorial pre {
+  @apply my-6 p-4 rounded-md bg-surface-dark-card border border-border-dark overflow-x-auto text-sm text-[#c9d1d9] font-mono leading-normal;
+}
+
+.prose-editorial code:not(pre code) {
+  @apply px-1.5 py-0.5 rounded text-xs font-mono bg-surface-light-muted dark:bg-surface-dark-muted text-ink-light dark:text-ink-dark border border-border-light dark:border-border-dark;
+}
+
+.prose-editorial a {
+  @apply text-accent-dark dark:text-accent underline underline-offset-4 hover:opacity-80 transition-opacity;
+}

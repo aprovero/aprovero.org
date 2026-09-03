@@ -1,0 +1,104 @@
+﻿---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const workEntries = await getCollection('work');
+  return workEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<BaseLayout
+  title={`${entry.data.title} — Case Study | Andres Provero`}
+  description={entry.data.summary}
+>
+  <main class="max-w-4xl mx-auto px-5 sm:px-8 py-10 sm:py-16 space-y-10">
+    
+    <!-- Navigation Back Link -->
+    <nav class="font-mono text-xs">
+      <a
+        href="/work"
+        class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1 transition-colors"
+      >
+        <span>←</span>
+        <span>Back to Selected Work</span>
+      </a>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="space-y-4 border-b border-border-light dark:border-border-dark pb-8">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="font-mono text-xs uppercase px-2 py-0.5 rounded bg-surface-light-muted dark:bg-surface-dark-card border border-border-light dark:border-border-dark text-accent-dark dark:text-accent font-medium">
+          {entry.data.systemType}
+        </span>
+        <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+          {entry.data.year}
+        </span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-ink-light dark:text-ink-dark leading-[1.15]">
+        {entry.data.title}
+      </h1>
+
+      <p class="text-lg text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed max-w-3xl">
+        {entry.data.subtitle}
+      </p>
+
+      <!-- Technical Specifications Bar -->
+      <div class="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-lg bg-surface-light-card dark:bg-surface-dark-card border border-border-light dark:border-border-dark font-mono text-xs">
+        <div>
+          <span class="text-ink-light-muted dark:text-ink-dark-muted block text-[0.7rem]">CAPACITY</span>
+          <span class="font-semibold text-ink-light dark:text-ink-dark text-sm">{entry.data.capacity}</span>
+        </div>
+        <div>
+          <span class="text-ink-light-muted dark:text-ink-dark-muted block text-[0.7rem]">LOCATION</span>
+          <span class="text-ink-light dark:text-ink-dark">{entry.data.location}</span>
+        </div>
+        <div>
+          <span class="text-ink-light-muted dark:text-ink-dark-muted block text-[0.7rem]">ROLE</span>
+          <span class="text-ink-light dark:text-ink-dark">{entry.data.role}</span>
+        </div>
+        <div>
+          <span class="text-ink-light-muted dark:text-ink-dark-muted block text-[0.7rem]">STAKEHOLDER</span>
+          <span class="text-ink-light dark:text-ink-dark">{entry.data.clientOrOwner}</span>
+        </div>
+      </div>
+
+      <!-- Confidentiality notice box -->
+      <div class="text-xs font-mono text-ink-light-muted dark:text-ink-dark-muted border-l-2 border-accent pl-3 py-1">
+        <span class="text-ink-light dark:text-ink-dark font-medium">Confidentiality Note:</span> {entry.data.confidentialityNotice}
+      </div>
+    </header>
+
+    <!-- Narrative Prose Body -->
+    <article class="prose-editorial max-w-none">
+      <Content />
+    </article>
+
+    <!-- Footer navigation -->
+    <div class="pt-8 border-t border-border-light dark:border-border-dark flex items-center justify-between font-mono text-xs">
+      <a
+        href="/work"
+        class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1"
+      >
+        <span>←</span>
+        <span>All projects</span>
+      </a>
+
+      <a
+        href="#top"
+        class="text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark inline-flex items-center gap-1"
+      >
+        <span>Back to top</span>
+        <span>↑</span>
+      </a>
+    </div>
+
+  </main>
+</BaseLayout>

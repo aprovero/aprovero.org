@@ -1,0 +1,64 @@
+﻿---
+interface Props {
+  title: string;
+  subtitle: string;
+  location: string;
+  capacity: string;
+  systemType: string;
+  year: string;
+  role: string;
+  summary: string;
+  slug: string;
+}
+
+const { title, subtitle, location, capacity, systemType, year, role, summary, slug } = Astro.props;
+---
+
+<article class="group py-6 border-b border-border-light dark:border-border-dark transition-colors">
+  <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 mb-2">
+    <div>
+      <h3 class="text-lg sm:text-xl font-semibold text-ink-light dark:text-ink-dark tracking-tight">
+        <a
+          href={`/work/${slug}`}
+          class="inline-flex items-center gap-1.5 hover:text-accent-dark dark:hover:text-accent transition-colors"
+        >
+          <span>{title}</span>
+          <span class="text-accent-dark dark:text-accent opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all text-sm">→</span>
+        </a>
+      </h3>
+      <p class="text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted font-normal mt-0.5">
+        {subtitle}
+      </p>
+    </div>
+
+    <!-- Metadata pill list -->
+    <div class="flex flex-wrap items-center gap-2 text-xs font-mono text-ink-light-muted dark:text-ink-dark-muted shrink-0">
+      <span class="px-2 py-0.5 rounded bg-surface-light-muted dark:bg-surface-dark-card border border-border-light dark:border-border-dark text-ink-light dark:text-ink-dark font-medium">
+        {systemType}
+      </span>
+      <span>·</span>
+      <span class="text-ink-light dark:text-ink-dark font-medium">{capacity}</span>
+      <span>·</span>
+      <span>{location}</span>
+      <span>·</span>
+      <span>{year}</span>
+    </div>
+  </div>
+
+  <p class="text-[0.93rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed mt-3 mb-3 max-w-3xl">
+    {summary}
+  </p>
+
+  <div class="flex items-center justify-between pt-1 text-xs font-mono">
+    <div class="text-ink-light-muted dark:text-ink-dark-muted">
+      <span class="text-ink-light dark:text-ink-dark font-medium">Role:</span> {role}
+    </div>
+    <a
+      href={`/work/${slug}`}
+      class="text-accent-dark dark:text-accent font-medium hover:underline inline-flex items-center gap-1"
+    >
+      <span>Read case study</span>
+      <span>→</span>
+    </a>
+  </div>
+</article>

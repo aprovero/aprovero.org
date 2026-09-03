@@ -1,0 +1,71 @@
+﻿---
+import ThemeToggle from './ThemeToggle.astro';
+import { siteConfig } from '@/config/site';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = Astro.url.pathname } = Astro.props;
+
+function isActive(href: string) {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+}
+---
+
+<header class="w-full border-b border-border-light/70 dark:border-border-dark/70 backdrop-blur-sm sticky top-0 z-40 bg-surface-light/90 dark:bg-surface-dark/90 transition-colors">
+  <div class="max-w-4xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+    <!-- Brand identity: APROVERO Logo -->
+    <a
+      href="/"
+      class="group inline-flex items-center gap-2 focus:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded py-1"
+      aria-label="Andres Provero — Home"
+    >
+      <img
+        src="/brand/logo-transparent-light.png"
+        alt="APROVERO"
+        width="130"
+        height="37"
+        class="h-6 sm:h-[1.65rem] w-auto block dark:hidden transition-opacity group-hover:opacity-85"
+      />
+      <img
+        src="/brand/logo-transparent-dark.png"
+        alt="APROVERO"
+        width="130"
+        height="37"
+        class="h-6 sm:h-[1.65rem] w-auto hidden dark:block transition-opacity group-hover:opacity-85"
+      />
+    </a>
+
+    <!-- Primary Navigation -->
+    <nav class="flex items-center gap-1 sm:gap-6 text-sm" aria-label="Primary Navigation">
+      {
+        siteConfig.nav.map((item) => {
+          const active = isActive(item.href);
+          return (
+            <a
+              href={item.href}
+              class:list={[
+                "px-2 sm:px-0 py-1 font-medium transition-colors rounded relative text-[0.88rem]",
+                active
+                  ? "text-ink-light dark:text-ink-dark"
+                  : "text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark",
+              ]}
+              aria-current={active ? "page" : undefined}
+            >
+              {item.label}
+              {active && (
+                <span class="hidden sm:block absolute -bottom-[18px] left-0 right-0 h-[2px] bg-accent rounded-full" />
+              )}
+            </a>
+          );
+        })
+      }
+
+      <div class="pl-2 border-l border-border-light dark:border-border-dark ml-1 sm:ml-0">
+        <ThemeToggle />
+      </div>
+    </nav>
+  </div>
+</header>

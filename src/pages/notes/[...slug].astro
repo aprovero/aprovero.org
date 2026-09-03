@@ -1,0 +1,98 @@
+﻿---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const noteEntries = await getCollection('notes');
+  return noteEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const formattedDate = new Date(entry.data.date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout
+  title={`${entry.data.title} | Andres Provero`}
+  description={entry.data.summary}
+  articleDate={entry.data.date}
+>
+  <main class="max-w-3xl mx-auto px-5 sm:px-8 py-10 sm:py-16 space-y-10">
+    
+    <!-- Navigation Back Link -->
+    <nav class="font-mono text-xs">
+      <a
+        href="/notes"
+        class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1 transition-colors"
+      >
+        <span>←</span>
+        <span>Back to Notes</span>
+      </a>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="space-y-4 border-b border-border-light dark:border-border-dark pb-8">
+      <div class="flex flex-wrap items-center gap-2">
+        {entry.data.draft && (
+          <span class="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+            DRAFT
+          </span>
+        )}
+        <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+          {formattedDate}
+        </span>
+        <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">·</span>
+        <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+          {entry.data.readTime}
+        </span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-ink-light dark:text-ink-dark leading-[1.2]">
+        {entry.data.title}
+      </h1>
+
+      <p class="text-lg text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed">
+        {entry.data.summary}
+      </p>
+
+      <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono text-ink-light-muted dark:text-ink-dark-muted">
+        {entry.data.tags.map((tag) => (
+          <span>#{tag}</span>
+        ))}
+      </div>
+    </header>
+
+    <!-- Narrative Prose Body -->
+    <article class="prose-editorial max-w-none">
+      <Content />
+    </article>
+
+    <!-- Footer navigation -->
+    <div class="pt-8 border-t border-border-light dark:border-border-dark flex items-center justify-between font-mono text-xs">
+      <a
+        href="/notes"
+        class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1"
+      >
+        <span>←</span>
+        <span>All notes</span>
+      </a>
+
+      <a
+        href="#top"
+        class="text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark inline-flex items-center gap-1"
+      >
+        <span>Back to top</span>
+        <span>↑</span>
+      </a>
+    </div>
+
+  </main>
+</BaseLayout>

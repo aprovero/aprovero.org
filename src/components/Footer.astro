@@ -1,0 +1,57 @@
+﻿---
+import { siteConfig } from '@/config/site';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="w-full border-t border-border-light dark:border-border-dark mt-20 sm:mt-28 py-10 transition-colors">
+  <div class="max-w-4xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 text-xs text-ink-light-muted dark:text-ink-dark-muted font-mono">
+    
+    <div class="space-y-1">
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-1.5 h-1.5 rounded-full bg-accent"></span>
+        <span class="text-ink-light dark:text-ink-dark font-sans font-medium">{siteConfig.name}</span>
+        <span>© {currentYear}</span>
+      </div>
+      <p class="text-[0.72rem] text-ink-light-muted dark:text-ink-dark-muted">
+        {siteConfig.location} · {siteConfig.timezone} · Self-hosted in homelab.
+      </p>
+    </div>
+
+    <!-- Direct Links -->
+    <div class="flex flex-wrap items-center gap-4 text-xs">
+      <a
+        href={siteConfig.socials.email.href}
+        class="hover:text-accent-dark dark:hover:text-accent transition-colors"
+      >
+        {siteConfig.email}
+      </a>
+      <span class="opacity-30">/</span>
+      <a
+        href={siteConfig.socials.linkedin.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:text-accent-dark dark:hover:text-accent transition-colors"
+      >
+        LinkedIn ↗
+      </a>
+      <span class="opacity-30">/</span>
+      <a
+        href={siteConfig.socials.github.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:text-accent-dark dark:hover:text-accent transition-colors"
+      >
+        GitHub ↗
+      </a>
+      <span class="opacity-30">/</span>
+      <a
+        href="/rss.xml"
+        class="hover:text-accent-dark dark:hover:text-accent transition-colors"
+      >
+        RSS
+      </a>
+    </div>
+
+  </div>
+</footer>

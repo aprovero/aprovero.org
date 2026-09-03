@@ -1,0 +1,32 @@
+﻿---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="404 — Not Found | Andres Provero"
+  description="The requested page could not be located on aprovero.org."
+>
+  <main class="max-w-2xl mx-auto px-5 sm:px-8 py-20 sm:py-32 text-center space-y-6">
+    <div class="font-mono text-sm text-accent-dark dark:text-accent font-semibold tracking-wider">
+      [ 404: ROUTE_NOT_FOUND ]
+    </div>
+    
+    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+      Page Not Found
+    </h1>
+
+    <p class="text-ink-light-secondary dark:text-ink-dark-secondary text-base leading-relaxed">
+      The requested URL does not exist or has been relocated within the site hierarchy.
+    </p>
+
+    <div class="pt-4 font-mono text-xs">
+      <a
+        href="/"
+        class="px-4 py-2 rounded-md bg-accent text-surface-dark font-medium hover:bg-accent-hover transition-colors inline-flex items-center gap-1.5"
+      >
+        <span>Return to Homepage</span>
+        <span>→</span>
+      </a>
+    </div>
+  </main>
+</BaseLayout>
