@@ -12,6 +12,8 @@ const currentYear = new Date().getFullYear();
         <span class="inline-block w-1.5 h-1.5 rounded-full bg-accent"></span>
         <span class="text-ink-light dark:text-ink-dark font-sans font-medium text-[0.92rem]">{siteConfig.name}</span>
         <span class="text-ink-light-muted dark:text-ink-dark-muted">© {currentYear}</span>
+        <span class="opacity-30">·</span>
+        <span class="text-[0.75rem] text-ink-light-secondary dark:text-ink-dark-secondary">v{siteConfig.version}</span>
       </div>
       <p class="text-[0.78rem] text-ink-light-muted dark:text-ink-dark-muted">
         {siteConfig.location} · {siteConfig.timezone} · {siteConfig.homelabMetadata.hosting}.

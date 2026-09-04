@@ -33,6 +33,7 @@ export interface SiteConfig {
     location: string;
     domain: string;
   };
+  version: string;
 }
 
 export const siteConfig: SiteConfig = {
@@ -79,4 +80,9 @@ export const siteConfig: SiteConfig = {
     location: "Mexico City",
     domain: "aprovero.org",
   },
+  // Semantic Versioning: [MAJOR].[MINOR].[PATCH]
+  // - [PATCH] (rightmost): tracks minor changes, tweaks, and fixes
+  // - [MINOR] (middle): tracks major feature additions and new sections
+  // - [MAJOR] (leftmost): tracks major redesigns or complete structural changes
+  version: "1.0.0",
 };

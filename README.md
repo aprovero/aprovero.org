@@ -279,6 +279,17 @@ When ready to connect a live inference engine:
 
 ---
 
+## Versioning Convention
+
+The site displays a 3-part version indicator in the footer (`MAJOR.MINOR.PATCH`):
+- **Rightmost number (PATCH / 3rd)**: Tracks minor changes, copy edits, styling tweaks, and bug fixes (e.g., `1.0.0` → `1.0.1`).
+- **Middle number (MINOR / 2nd)**: Tracks major content/feature changes, new sections, or significant additions (e.g., `1.0.1` → `1.1.0`).
+- **Leftmost number (MAJOR / 1st)**: Tracks really big changes, structural redesigns, or architectural overhauls (e.g., `1.1.0` → `2.0.0`).
+
+Update `version` in `src/config/site.ts` and `package.json` whenever publishing updates.
+
+---
+
 ## License
 
 Content and design &copy; 2026 Andres Provero. All rights reserved.
