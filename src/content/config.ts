@@ -8,7 +8,7 @@ const workCollection = defineCollection({
     clientOrOwner: z.string(),
     location: z.string(),
     capacity: z.string(),
-    systemType: z.enum(['Solar PV', 'BESS', 'Hybrid', 'Substation', 'Embedded Systems']),
+    systemType: z.enum(['Solar PV', 'BESS', 'Hybrid', 'Substation', 'Embedded Systems', 'Field Engineering ToolHub']),
     year: z.string(),
     role: z.string(),
     summary: z.string(),

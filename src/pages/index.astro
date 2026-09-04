@@ -166,10 +166,10 @@ const sortedNotes = allNotes.sort(
 
         <div class="text-[1.05rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-[1.8] space-y-3">
           <p class="font-medium text-ink-light dark:text-ink-dark">
-            This site is served from infrastructure I operate myself.
+            Learning systems by building and operating them.
           </p>
           <p>
-            My homelab is where I experiment with servers, networking, self-hosting, monitoring, automation, electronics, software, AI, and things that were probably easier not to build. It keeps my engineering intuition grounded in bare metal, circuit isolation, and physical failure modes.
+            My homelab is where I experiment with servers, Docker, networking, automation, and self-hosted services—giving older hardware a useful second life and proving use cases before investing in dedicated infrastructure.
           </p>
         </div>
       </div>
@@ -181,27 +181,27 @@ const sortedNotes = allNotes.sort(
         <article class="p-6 sm:p-8 rounded-lg border border-border-light/80 dark:border-border-dark/80 bg-surface-light-card/40 dark:bg-surface-dark-card/40 space-y-4">
           <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
             <div class="font-mono text-xs text-accent-dark dark:text-accent font-medium uppercase tracking-wider">
-              FEATURED INFRASTRUCTURE
+              HOMELAB PLATFORM
             </div>
             <div class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
-              Proxmox VE · Docker · Alpine Linux · Reverse Proxy · ZFS
+              ASUS VivoPC · Ubuntu Server · Docker · n8n · CasaOS
             </div>
           </div>
 
           <h3 class="text-xl sm:text-2xl font-bold text-ink-light dark:text-ink-dark">
-            <a href="/lab#homelab-infrastructure" class="hover:text-accent-dark dark:hover:text-accent transition-colors inline-flex items-center gap-2">
-              <span>Homelab &amp; Self-Hosted Infrastructure</span>
+            <a href="/lab" class="hover:text-accent-dark dark:hover:text-accent transition-colors inline-flex items-center gap-2">
+              <span>The Homelab: Reusing Hardware for Real Services</span>
               <span class="text-accent-dark dark:text-accent text-base">→</span>
             </a>
           </h3>
 
           <p class="text-[1.02rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-[1.8] max-w-3xl">
-            Operating my own compute in Mexico City forces me to think through the entire stack: bare-metal thermal dissipation, UPS runtime, container lifecycles, and automated off-site backups. The production container serving this site runs unprivileged Nginx on Alpine Linux with an encrypted egress tunnel, eliminating open inbound router ports.
+            What started as an unused 2013 ASUS VivoPC brought out of retirement to experiment with self-hosted n8n and automation has expanded into a 24/7 learning environment for Docker, Linux, and household services. The public website itself is served via Cloudflare Pages from GitHub, preserving clean separation between public web infrastructure and private experimentation.
           </p>
 
           <div class="pt-2 font-mono text-xs sm:text-sm">
-            <a href="/lab#homelab-infrastructure" class="text-accent-dark dark:text-accent hover:underline font-medium">
-              Read infrastructure architecture →
+            <a href="/lab" class="text-accent-dark dark:text-accent hover:underline font-medium">
+              Explore lab &amp; current service stack →
             </a>
           </div>
         </article>
@@ -209,25 +209,7 @@ const sortedNotes = allNotes.sort(
         <!-- Secondary Lab Projects: Editorial Rows -->
         <div class="divide-y divide-border-light/70 dark:border-border-dark/70">
           
-          <!-- Lab 2: Smart Fan Controller -->
-          <article class="py-6 group">
-            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-2">
-              <h4 class="text-lg sm:text-xl font-semibold text-ink-light dark:text-ink-dark">
-                <a href="/lab#smart-fan-controller" class="hover:text-accent-dark dark:hover:text-accent transition-colors inline-flex items-center gap-1.5">
-                  <span>Smart Fan Controller</span>
-                  <span class="text-accent-dark dark:text-accent opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all text-xs">→</span>
-                </a>
-              </h4>
-              <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
-                ESP32 · Optocoupled Relays · Galvanic Isolation · FreeRTOS
-              </span>
-            </div>
-            <p class="text-[0.98rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed max-w-3xl">
-              Retrofitting a conventional 110V 3-speed pedestal fan with Wi-Fi control using an ESP32 while maintaining physical isolation between mains voltage and 3.3V logic, with fail-safe manual override.
-            </p>
-          </article>
-
-          <!-- Lab 3: AI Tools & Experiments -->
+          <!-- Lab 2: AI Tools & Experiments -->
           <article class="py-6 group">
             <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-2">
               <h4 class="text-lg sm:text-xl font-semibold text-ink-light dark:text-ink-dark">
@@ -245,7 +227,7 @@ const sortedNotes = allNotes.sort(
             </p>
           </article>
 
-          <!-- Lab 4: Field Engineering Tools -->
+          <!-- Lab 3: Field Engineering Tools -->
           <article class="py-6 group">
             <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-2">
               <h4 class="text-lg sm:text-xl font-semibold text-ink-light dark:text-ink-dark">

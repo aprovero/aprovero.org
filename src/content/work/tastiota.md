@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Tastiota Solar PV"
 subtitle: "Desert utility-scale solar commissioning and operational acceptance"
 clientOrOwner: "Utility-Scale Solar Project"
@@ -13,8 +13,8 @@ keyMetrics:
   - "High-ambient operating environment"
   - "Commissioning & SAT"
 confidentialityNotice: "Proprietary dispatch records, internal manufacturer punch lists, and customer logs are intentionally omitted."
-featured: true
-order: 3
+featured: false
+order: 5
 ---
 
 ## Overview

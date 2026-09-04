@@ -1,4 +1,4 @@
-﻿---
+---
 import { siteConfig } from '@/config/site';
 
 const currentYear = new Date().getFullYear();
@@ -14,7 +14,7 @@ const currentYear = new Date().getFullYear();
         <span class="text-ink-light-muted dark:text-ink-dark-muted">© {currentYear}</span>
       </div>
       <p class="text-[0.78rem] text-ink-light-muted dark:text-ink-dark-muted">
-        {siteConfig.location} · {siteConfig.timezone} · Self-hosted.
+        {siteConfig.location} · {siteConfig.timezone} · {siteConfig.homelabMetadata.hosting}.
       </p>
     </div>
 

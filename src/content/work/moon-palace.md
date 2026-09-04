@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Moon Palace BESS"
 subtitle: "Utility-scale battery energy storage system and power conversion commissioning"
 clientOrOwner: "Commercial & Critical Infrastructure"
@@ -14,7 +14,7 @@ keyMetrics:
   - "NFPA 70E / safety protocols"
 confidentialityNotice: "Cell-level telemetry, commercial dispatch strategies, and proprietary vendor control logic are intentionally omitted."
 featured: true
-order: 4
+order: 3
 ---
 
 ## Overview

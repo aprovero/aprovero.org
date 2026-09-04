@@ -1,4 +1,4 @@
-﻿# aprovero.org
+# aprovero.org
 
 > **"Engineering that survives contact with the field."**
 
@@ -40,11 +40,11 @@ aprovero.org/
 │   │   ├── work/                        # Engineering case studies (Markdown)
 │   │   │   ├── la-pimienta.md           # 358 MW Solar PV
 │   │   │   ├── los-cuervos.md           # 234 MW Solar PV
-│   │   │   ├── tastiota.md              # 120 MW Solar PV
-│   │   │   └── moon-palace.md           # 12.5 MW / 24 MWh BESS
+│   │   │   ├── moon-palace.md           # 12.5 MW / 24 MWh BESS
+│   │   │   ├── level3support.md         # Field Engineering ToolHub
+│   │   │   └── tastiota.md              # 120 MW Solar PV
 │   │   ├── lab/                         # Homelab & electronics projects
 │   │   │   ├── homelab-infrastructure.md
-│   │   │   ├── smart-fan-controller.md
 │   │   │   ├── ai-tools-agents.md
 │   │   │   └── engineering-tools.md
 │   │   └── notes/                       # Technical drafts & writing

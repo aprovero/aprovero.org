@@ -1,4 +1,4 @@
-﻿export interface NavItem {
+export interface NavItem {
   label: string;
   href: string;
 }
@@ -75,7 +75,7 @@ export const siteConfig: SiteConfig = {
     },
   },
   homelabMetadata: {
-    hosting: "Self-hosted",
+    hosting: "Cloudflare Pages",
     location: "Mexico City",
     domain: "aprovero.org",
   },

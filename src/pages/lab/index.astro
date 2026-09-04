@@ -1,161 +1,660 @@
-﻿---
+---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import StatusBadge from '@/components/StatusBadge.astro';
-import { getCollection } from 'astro:content';
+import LabServerPhoto from '@/components/LabServerPhoto.astro';
 
-const allLab = await getCollection('lab');
-const sortedLab = allLab.sort((a, b) => a.data.order - b.data.order);
+interface ServiceItem {
+  name: string;
+  role: string;
+  category: 'Management' | 'Automation' | 'Household' | 'Media' | 'Utilities' | 'AI';
+  status: 'Running' | 'Active development' | 'Configuring' | 'Testing' | 'Installed / evaluating' | 'Planned';
+  description: string;
+  details?: string;
+}
 
-const labWithRendered = await Promise.all(
-  sortedLab.map(async (project) => {
-    const { Content } = await project.render();
-    return { ...project, Content };
-  })
-);
+const currentStack: ServiceItem[] = [
+  {
+    name: "Portainer",
+    role: "Container Operations",
+    category: "Management",
+    status: "Running",
+    description: "Deeper Docker and container lifecycle management when a basic interface is not enough.",
+  },
+  {
+    name: "n8n",
+    role: "Workflow Automation",
+    category: "Automation",
+    status: "Active development",
+    description: "Self-hosted workflow automation engine; gradual replacement for cloud automations previously handled through Make.",
+    details: "Core active development area. Powers multi-stage workflows including smart budgeting and task orchestration.",
+  },
+  {
+    name: "Immich",
+    role: "Photo Storage & Backup",
+    category: "Household",
+    status: "Running",
+    description: "Self-hosted photo and video backup; evaluating as an eventual replacement for Google Photos.",
+    details: "Currently operating alongside Google Photos. Full transition will happen only once comfortable with local storage redundancy.",
+  },
+  {
+    name: "Home Assistant",
+    role: "Smart Home Centralization",
+    category: "Household",
+    status: "Configuring",
+    description: "Centralizes control of household smart-home systems to eliminate dependence on multiple vendor apps.",
+    details: "Currently integrating local cameras, smart plugs, and door locks under local control.",
+  },
+  {
+    name: "Stirling-PDF",
+    role: "PDF Manipulation",
+    category: "Utilities",
+    status: "Running",
+    description: "Everyday PDF merge, split, and conversion tasks for household and family use without cloud uploads or subscriptions.",
+  },
+  {
+    name: "Jellyfin",
+    role: "Local Media Streaming",
+    category: "Media",
+    status: "Running",
+    description: "Personal media server for local household TV and video streaming.",
+  },
+  {
+    name: "MeTube",
+    role: "Media Download Agent",
+    category: "Media",
+    status: "Running",
+    description: "Web GUI wrapper for downloading web video and audio streams directly to local storage.",
+  },
+  {
+    name: "AdGuard Home",
+    role: "DNS & Content Filtering",
+    category: "Utilities",
+    status: "Testing",
+    description: "Network-wide ad blocking, tracker reduction, family/child filtering, and local DNS management.",
+    details: "Currently in testing mode; not yet configured as the authoritative DNS resolver for the full household.",
+  },
+  {
+    name: "Cloudflared",
+    role: "Egress Tunnel Agent",
+    category: "Utilities",
+    status: "Running",
+    description: "Encrypted outbound tunnel providing selective connectivity for external webhooks without opening inbound router ports.",
+  },
+  {
+    name: "Hermes",
+    role: "AI Agent Experimentation",
+    category: "AI",
+    status: "Installed / evaluating",
+    description: "Local environment for testing AI agent workflows and autonomous task execution.",
+    details: "Installed to explore future local agent patterns; not yet actively powering everyday automations.",
+  },
+];
+
+const nextUpItems = [
+  {
+    name: "Nginx Proxy Manager",
+    category: "Routing & SSL",
+    status: "Planned",
+    description: "Planned next step for cleaner internal service routing, local domain resolution, and consolidated reverse proxy management.",
+  },
+  {
+    name: "Actual Budget",
+    category: "Personal Finance",
+    status: "Planned",
+    description: "Likely core backend component for the smart budgeting project; currently being evaluated alongside n8n ingest pipelines.",
+  },
+  {
+    name: "Hermes Active Evaluation",
+    category: "AI Workflows",
+    status: "Planned",
+    description: "Begin hands-on testing of the existing installation to assess practical agentic capabilities on modest infrastructure.",
+  },
+];
+
+const statusStyles: Record<string, string> = {
+  Running: "text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border-emerald-500/25",
+  "Active development": "text-amber-600 dark:text-amber-400 bg-amber-500/10 border-amber-500/25",
+  Configuring: "text-sky-600 dark:text-sky-400 bg-sky-500/10 border-sky-500/25",
+  Testing: "text-violet-600 dark:text-violet-400 bg-violet-500/10 border-violet-500/25",
+  "Installed / evaluating": "text-zinc-600 dark:text-zinc-400 bg-zinc-500/10 border-zinc-500/25",
+  Planned: "text-zinc-500 dark:text-zinc-400 bg-zinc-500/5 border-zinc-500/25 border-dashed",
+};
 ---
 
 <BaseLayout
   title="The Lab | Andres Provero"
-  description="Homelab infrastructure, hardware prototyping, automation, and electronics experiments by Andres Provero in Mexico City."
+  description="A hands-on learning homelab built on repurposed hardware: Docker containers, Linux administration, n8n automations, and household services in Mexico City."
 >
-  <main class="max-w-6xl mx-auto px-6 sm:px-10 py-12 sm:py-20 space-y-16 sm:space-y-20">
+  <main class="max-w-4xl mx-auto px-6 sm:px-10 py-12 sm:py-20 space-y-16 sm:space-y-24">
     
-    <!-- Header & Manifesto -->
-    <header class="space-y-5 border-b border-border-light/80 dark:border-border-dark/80 pb-10">
+    <!-- 1. HERO / LAB INTRODUCTION -->
+    <header class="space-y-6 border-b border-border-light/80 dark:border-border-dark/80 pb-12">
       <div class="flex items-center gap-2 font-mono text-xs sm:text-sm text-accent-dark dark:text-accent tracking-wider uppercase font-medium">
-        <span>SELF-HOSTED COMPUTE · HARDWARE · EXPERIMENTAL WORK</span>
+        <span>SELF-HOSTED EXPERIMENTS · LEARNING SYSTEMS · MEXICO CITY</span>
       </div>
 
-      <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
-        The Lab
-      </h1>
+      <div class="space-y-3">
+        <h1 class="text-3xl sm:text-5xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+          The Lab
+        </h1>
+        <p class="text-xl sm:text-2xl font-medium text-ink-light-secondary dark:text-ink-dark-secondary">
+          Learning systems by building and operating them.
+        </p>
+      </div>
 
       <div class="pt-1">
         <StatusBadge />
       </div>
 
-      <div class="space-y-4 text-ink-light-secondary dark:text-ink-dark-secondary text-[1.05rem] leading-[1.8] pt-2 max-w-3xl">
-        <p class="font-medium text-ink-light dark:text-ink-dark">
-          This site is served from infrastructure I operate myself.
+      <div class="space-y-4 text-ink-light-secondary dark:text-ink-dark-secondary text-[1.05rem] leading-[1.8] pt-2">
+        <p>
+          This homelab isn’t a fabricated enterprise showcase or a data center rack tucked into a closet. It is an evolving, hands-on learning environment built on hardware that was already sitting in a drawer.
         </p>
         <p>
-          My homelab is where I experiment with servers, networking, self-hosting, monitoring, automation, electronics, software, AI, and things that were probably easier not to build.
+          The primary purpose is practical education: giving old hardware a useful second life, learning Docker, Linux administration, networking, and self-hosting through daily operational use, building genuinely useful household services, and proving use cases before spending money on dedicated infrastructure. Reducing cloud subscriptions is a welcome side effect, but it is not the main driver.
         </p>
-        <p class="text-sm sm:text-base text-ink-light-muted dark:text-ink-dark-muted">
-          Commercial clouds optimize for rapid delivery by hiding complexity behind managed abstractions. Running bare metal, routing isolated networks, and designing circuit protection forces you to confront the physical limits of hardware—thermal dissipation, electrical isolation, and the unyielding reality of failure modes.
+        <p class="text-sm sm:text-base text-ink-light-muted dark:text-ink-dark-muted font-mono bg-surface-light-muted dark:bg-surface-dark-muted p-4 rounded border border-border-light/80 dark:border-border-dark/80">
+          <strong class="text-ink-light dark:text-ink-dark">Note on site hosting:</strong> This website is part of the experiment, but it isn’t currently served from the ASUS. The source lives in GitHub and Cloudflare Pages automatically builds and serves <span class="text-accent-dark dark:text-accent">aprovero.org</span>. Moving it home is still an option, but I haven’t decided whether self-hosting the public site adds enough value to justify the additional operational responsibility. Self-host where it makes sense, not simply because it is possible.
         </p>
       </div>
     </header>
 
-    <!-- Sanitized System Architecture Diagram (Technical character for /lab) -->
-    <section class="space-y-5 max-w-4xl">
-      <div class="flex items-baseline justify-between border-b border-border-light/80 dark:border-border-dark/80 pb-3">
-        <h2 class="text-base sm:text-lg font-bold font-mono tracking-tight text-ink-light dark:text-ink-dark">
-          [ ARCHITECTURE: SANITIZED TOPOLOGY ]
+    <!-- 2. ORIGIN STORY -->
+    <section class="space-y-6">
+      <div class="border-b border-border-light/80 dark:border-border-dark/80 pb-3 flex items-baseline justify-between">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+          Origin Story
         </h2>
         <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
-          Egress-Only Tunnel
+          2013 Hardware · ~MXN 250 Total Investment
         </span>
       </div>
 
-      <div class="p-5 sm:p-6 rounded bg-surface-dark-card border border-border-dark font-mono text-xs sm:text-sm text-slate-300 overflow-x-auto leading-relaxed">
-        <pre class="text-[#c9d1d9]"><code>+-------------------------------------------------------------+
-|                     EXTERNAL TRAFFIC                        |
-|   https://aprovero.org  --&gt;  Cloudflare Edge / CDN          |
-|   - WAF rules &amp; DDoS mitigation                             |
-|   - Automatic TLS certificate lifecycle                     |
-+------------------------------+------------------------------+
-                               |
-                               | (Outbound-only Encrypted Tunnel)
-                               v
-+-------------------------------------------------------------+
-|                HOMELAB INGRESS &amp; ISOLATION                  |
-|   - Zero exposed inbound router ports                       |
-|   - Reverse proxy container terminates ingress              |
-+------------------------------+------------------------------+
-                               |
-                               | (Internal Isolated Docker Network)
-                               v
-+-------------------------------------------------------------+
-|                PRODUCTION SERVICE WORKLOAD                  |
-|   [ Container: aprovero.org ]                               |
-|   - Alpine Linux (minimal read-only root)                   |
-|   - Nginx static worker (unprivileged user)                 |
-|   - Memory footprint: &lt; 15 MB                               |
-+-------------------------------------------------------------+
-                               |
-                               | (Telemetry Scraping)
-                               v
-+-------------------------------------------------------------+
-|                MONITORING &amp; RESILIENCE                      |
-|   - Prometheus time-series metric collection                |
-|   - Grafana telemetry dashboards (thermals, memory, UPS)    |
-|   - ZFS storage pools with hourly encrypted off-site sync   |
-+-------------------------------------------------------------+</code></pre>
+      <div class="space-y-4 text-[1.02rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-[1.8]">
+        <p>
+          The current homelab started with an older ASUS VivoPC VM40B that was sitting unused. Years ago, it served as my media server when I lived in Argentina, but after moving it had been collecting dust on a shelf.
+        </p>
+        <p>
+          The immediate trigger for bringing it back was automation. I was starting to bump against the execution limits of Make’s free tier and wanted to experiment with self-hosted n8n. My initial idea also included running a local LLM to assist with tasks and data categorization.
+        </p>
+        <p>
+          The modest hardware quickly delivered a dose of reality: meaningful local LLM workloads were simply not realistic on this processor. But instead of abandoning the machine, the scope naturally expanded:
+        </p>
+        <blockquote class="my-4 border-l-2 border-accent pl-5 italic text-ink-light dark:text-ink-dark">
+          If a small server is already running 24/7, what other useful services can reasonably be brought home?
+        </blockquote>
+        <p>
+          Over time, the lab transformed into a real platform to learn Docker, Linux administration, networking fundamentals, local DNS, reverse proxies, persistent storage permissions, automation pipelines, and potential self-hosted alternatives for paid cloud services.
+        </p>
+        <p>
+          The entire proof of concept required almost zero new capital. I already owned the PC and external drives. The only new hardware purchase was approximately <span class="font-mono font-medium text-ink-light dark:text-ink-dark">MXN 250</span> for an 8 GB stick of DDR3 RAM to bring the machine up to 12 GB. The hardware wasn’t chosen through deliberate optimization—it was simply what was on hand.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3. CURRENT SERVER & HARDWARE SHOWCASE -->
+    <section class="space-y-8">
+      <div class="border-b border-border-light/80 dark:border-border-dark/80 pb-3 flex items-baseline justify-between">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+          Current Server &amp; Host
+        </h2>
+        <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+          ASUS VivoPC VM40B
+        </span>
+      </div>
+
+      <!-- Prominent Photo Container -->
+      <LabServerPhoto 
+        caption="The hardware wasn't selected for the job. It was what I had."
+        subcaption="The local LLM idea is still alive. The current Celeron just strongly disagrees."
+      />
+
+      <!-- Hardware & Operating Specs Table -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm font-mono">
+        <div class="p-4 rounded border border-border-light/80 dark:border-border-dark/80 bg-surface-light-card dark:bg-surface-dark-card space-y-2">
+          <div class="text-accent-dark dark:text-accent font-semibold uppercase tracking-wider text-xs">
+            Host Hardware
+          </div>
+          <ul class="space-y-1.5 text-ink-light-secondary dark:text-ink-dark-secondary">
+            <li><span class="text-ink-light dark:text-ink-dark font-medium">Model:</span> ASUS VivoPC VM40B (~2013-era)</li>
+            <li><span class="text-ink-light dark:text-ink-dark font-medium">Processor:</span> Intel Celeron (No dedicated GPU)</li>
+            <li><span class="text-ink-light dark:text-ink-dark font-medium">Memory:</span> 12 GB DDR3 RAM</li>
+            <li><span class="text-ink-light dark:text-ink-dark font-medium">Duty Cycle:</span> 24/7 continuous operation</li>
+            <li><span class="text-ink-light dark:text-ink-dark font-medium">Power:</span> Standard wall power (No UPS today)</li>
+          </ul>
+        </div>
+
+        <div class="p-4 rounded border border-border-light/80 dark:border-border-dark/80 bg-surface-light-card dark:bg-surface-dark-card space-y-2">
+          <div class="text-accent-dark dark:text-accent font-semibold uppercase tracking-wider text-xs">
+            OS &amp; Storage Layout
+          </div>
+          <ul class="space-y-1.5 text-ink-light-secondary dark:text-ink-dark-secondary">
+            <li><span class="text-ink-light dark:text-ink-dark font-medium">Host OS:</span> Ubuntu Server (Runs headless)</li>
+            <li><span class="text-ink-light dark:text-ink-dark font-medium">Container Engine:</span> Docker via CasaOS &amp; Portainer</li>
+            <li><span class="text-ink-light dark:text-ink-dark font-medium">Internal Drive:</span> 1 TB HDD (workloads &amp; container data)</li>
+            <li><span class="text-ink-light dark:text-ink-dark font-medium">External Drive 1:</span> Media storage &amp; large files</li>
+            <li><span class="text-ink-light dark:text-ink-dark font-medium">External Drive 2:</span> Dedicated server backups</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- OS and Management Philosophy -->
+      <div class="space-y-3 text-[1.02rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-[1.8]">
+        <h3 class="text-lg font-semibold text-ink-light dark:text-ink-dark font-sans">
+          Management: CasaOS &amp; Portainer
+        </h3>
+        <p>
+          All application workloads run as isolated Docker containers on top of headless Ubuntu Server. 
+        </p>
+        <p>
+          For everyday operations, I use <strong>CasaOS</strong> as the dashboard GUI. I originally tried it because it was widely recommended, and I kept it because it works well enough for daily visibility, launching services, and one-click app installs. It is not an enterprise architecture decision; it is simply a convenient lens into the server. When deeper container inspection, compose stack management, or granular volume configuration is needed, I step into <strong>Portainer</strong> or the command line.
+        </p>
+        <p>
+          Monitoring is kept straightforward: I use <strong>DaRemote</strong> on my phone for manual status checks alongside CasaOS and Portainer. There is no automated telemetry, Prometheus, or Grafana cluster running behind the scenes.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. ARCHITECTURE OVERVIEW (SANITIZED) -->
+    <section class="space-y-6">
+      <div class="border-b border-border-light/80 dark:border-border-dark/80 pb-3 flex items-baseline justify-between">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+          Architecture Overview
+        </h2>
+        <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+          Sanitized Topology
+        </span>
+      </div>
+
+      <p class="text-[1.02rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed">
+        The network architecture follows a strict principle: <strong>most services stay private</strong>. Access occurs locally over Wi-Fi or remotely through Tailscale. A container is only given outbound or inbound tunnel connectivity when an external technical requirement (such as an incoming webhook for n8n) demands it. Administrative interfaces are never exposed to the public internet.
+      </p>
+
+      <!-- Polished Sanitized Topology Block -->
+      <div class="p-5 sm:p-6 rounded-lg bg-surface-dark-card border border-border-dark font-mono text-xs sm:text-[0.82rem] text-slate-300 overflow-x-auto leading-relaxed shadow-sm">
+        <pre class="text-[#c9d1d9]"><code>+=============================================================================+
+|                      PUBLIC EDGE (SEPARATED HOSTING)                        |
+|                                                                             |
+|   GitHub Repo  ──[ Automatic CI/CD ]──&gt;  Cloudflare Pages  ──&gt;  aprovero.org|
+|                                                                             |
+|   * Zero dependence on homelab uptime or residential ISP bandwidth          |
++=============================================================================+
+
++=============================================================================+
+|                      PRIVATE HOMELAB ENVIRONMENT                            |
++=============================================================================+
+|                                                                             |
+|   [ Private Remote Access ]               [ Selective Webhook Ingress ]      |
+|    Tailscale Mesh VPN                      Cloudflare Tunnel (Outbound)     |
+|    (Encrypted Admin Channels)              (Strictly for required webhooks) |
+|               │                                          │                  |
+|               ▼                                          ▼                  |
+|   +─────────────────────────────────────────────────────────────────────+   |
+|   |  PHYSICAL SERVER (24/7 HEADLESS)                                    |   |
+|   |  ASUS VivoPC VM40B (~2013) · 12 GB RAM · Intel Celeron              |   |
+|   |  Host OS: Ubuntu Server · Wi-Fi (Static Local Addressing)           |   |
+|   |  Storage: 1 TB Internal HDD + External Media &amp; Backup HDDs          |   |
+|   +──────────────────────────────────┬──────────────────────────────────+   |
+|                                      │                                      |
+|                                      ▼                                      |
+|   +─────────────────────────────────────────────────────────────────────+   |
+|   |  CONTAINER RUNTIME: DOCKER ENGINE                                   |   |
+|   |  Visibility: CasaOS (Day-to-day GUI) · Portainer (Deep Management)  |   |
+|   +──────────────────────────────────┬──────────────────────────────────+   |
+|                                      │                                      |
+|         ┌────────────────────────────┼────────────────────────────┐         |
+|         ▼                            ▼                            ▼         |
+|   [ AUTOMATION ]             [ HOUSEHOLD &amp; MEDIA ]      [ UTILITIES &amp; DNS ] |
+|   • n8n (Active dev)         • Immich (Evaluating)      • AdGuard (Testing) |
+|     - Smart Budgeting        • Home Assistant (Config)  • Stirling-PDF      |
+|     - Smart To-Do            • Jellyfin (TV streams)    • Cloudflared       |
+|   • Hermes (Evaluating)      • MeTube (Media downloads) • NPM (Planned)     |
++=============================================================================+</code></pre>
       </div>
 
       <p class="text-xs font-mono text-ink-light-muted dark:text-ink-dark-muted">
-        <span class="text-accent-dark dark:text-accent font-semibold">* Security Policy:</span> Sensitive hostnames, IP allocations, VLAN numbering, firewall rules, and authentication hashes are deliberately excluded.
+        <span class="text-accent-dark dark:text-accent font-semibold">* Security Policy:</span> Sensitive hostnames, IP allocations, internal subnets, credentials, and tunnel identifiers are deliberately omitted. This diagram communicates operational roles, not an attack map.
       </p>
     </section>
 
-    <!-- Lab Projects Deep-Dive -->
-    <section class="space-y-12 max-w-4xl">
-      <div class="border-b border-border-light/80 dark:border-border-dark/80 pb-4">
+    <!-- 5. CURRENT SERVICE STACK -->
+    <section class="space-y-6">
+      <div class="border-b border-border-light/80 dark:border-border-dark/80 pb-3 flex items-baseline justify-between">
         <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
-          Projects &amp; Experiments
+          Current Service Stack
         </h2>
-        <p class="text-sm sm:text-base text-ink-light-muted dark:text-ink-dark-muted mt-1 font-mono">
-          Hardware prototyping, embedded electronics, and software tools built to solve specific problems.
-        </p>
+        <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+          Active Containers
+        </span>
       </div>
 
-      <div class="space-y-16">
+      <p class="text-[1.02rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed">
+        Rather than listing every container image ever downloaded, this catalog reflects the active services running on the machine today. Statuses are manually maintained to truthfully communicate operational maturity.
+      </p>
+
+      <!-- Extensible Stack Table / Rows -->
+      <div class="divide-y divide-border-light/70 dark:divide-border-dark/70 border-y border-border-light/70 dark:border-border-dark/70">
         {
-          labWithRendered.map((project) => (
-            <article id={project.slug} class="scroll-mt-24 space-y-6 pt-6 border-t border-border-light/80 dark:border-border-dark/80 first:border-t-0 first:pt-0">
-              <header class="space-y-3">
-                <div class="flex flex-wrap items-center justify-between gap-2 font-mono text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted">
-                  <span class="text-accent-dark dark:text-accent font-medium">[{project.data.category}]</span>
-                  <span>STATUS: {project.data.status}</span>
+          currentStack.map((service) => (
+            <div class="py-4 sm:py-5 flex flex-col md:flex-row md:items-start justify-between gap-3 group">
+              <div class="space-y-1.5 md:max-w-xl">
+                <div class="flex items-center gap-2.5">
+                  <h3 class="text-base sm:text-lg font-semibold text-ink-light dark:text-ink-dark">
+                    {service.name}
+                  </h3>
+                  <span class="font-mono text-[0.72rem] text-ink-light-muted dark:text-ink-dark-muted uppercase">
+                    [{service.category}]
+                  </span>
                 </div>
-
-                <h3 class="text-2xl sm:text-3xl font-bold text-ink-light dark:text-ink-dark">
-                  {project.data.title}
-                </h3>
-
-                <p class="text-[1.05rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed">
-                  {project.data.summary}
+                <p class="text-sm text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed">
+                  {service.description}
                 </p>
-
-                <div class="flex flex-wrap gap-2 pt-1 font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
-                  {project.data.technologies.map((tech) => (
-                    <span class="bg-surface-light-muted dark:bg-surface-dark-muted px-2 py-0.5 rounded">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </header>
-
-              <div class="prose-editorial">
-                <project.Content />
+                {service.details && (
+                  <p class="text-xs font-mono text-ink-light-muted dark:text-ink-dark-muted pt-0.5">
+                    ↳ {service.details}
+                  </p>
+                )}
               </div>
-            </article>
+
+              <div class="shrink-0 flex items-center md:pt-1">
+                <span class={`font-mono text-xs px-2.5 py-1 rounded border font-medium ${statusStyles[service.status] || "text-zinc-500"}`}>
+                  {service.status}
+                </span>
+              </div>
+            </div>
           ))
         }
       </div>
     </section>
 
-    <!-- Footer navigation -->
-    <div class="pt-10 border-t border-border-light/80 dark:border-border-dark/80 flex items-center justify-between font-mono text-xs sm:text-sm">
-      <a href="/" class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1.5">
+    <!-- 6. CURRENT PROJECTS (N8N AUTOMATIONS) -->
+    <section class="space-y-8">
+      <div class="border-b border-border-light/80 dark:border-border-dark/80 pb-3 flex items-baseline justify-between">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+          Active Projects: Automation
+        </h2>
+        <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+          n8n Core Workflows
+        </span>
+      </div>
+
+      <p class="text-[1.02rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed">
+        Self-hosted automations are the heart of why the server was revived. These two projects receive the bulk of active development:
+      </p>
+
+      <div class="space-y-6">
+        <!-- Project 1: Smart Budgeting -->
+        <article class="p-6 sm:p-7 rounded-lg border border-border-light/80 dark:border-border-dark/80 bg-surface-light-card/60 dark:bg-surface-dark-card/60 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+            <h3 class="text-xl font-bold text-ink-light dark:text-ink-dark">
+              1. Smart Budgeting &amp; Expense Tracking
+            </h3>
+            <span class="font-mono text-xs px-2 py-0.5 rounded border text-amber-600 dark:text-amber-400 bg-amber-500/10 border-amber-500/25">
+              In Development
+            </span>
+          </div>
+
+          <p class="text-[0.98rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed">
+            Building an automated pipeline to handle personal and household finances without manual data entry or subscription tools.
+          </p>
+
+          <div class="space-y-2 text-sm text-ink-light-secondary dark:text-ink-dark-secondary">
+            <div class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted uppercase tracking-wider">
+              Intended Functional Direction:
+            </div>
+            <ul class="list-disc pl-5 space-y-1 text-ink-light-muted dark:text-ink-dark-muted">
+              <li>Capture and automatically import incoming transaction receipts and statements.</li>
+              <li>Categorize transactions using deterministic logic and pattern matching.</li>
+              <li>Update the central budgeting ledger and summarize monthly spending trends.</li>
+              <li>Flag unusual expenses or sudden changes in recurring subscriptions.</li>
+              <li>Generate periodic financial summaries and reports.</li>
+              <li>Eventually support conversational natural-language queries about account balances and budget limits.</li>
+            </ul>
+          </div>
+
+          <div class="pt-2 text-xs font-mono text-ink-light-muted dark:text-ink-dark-muted border-t border-border-light/60 dark:border-border-dark/60">
+            <span class="text-accent-dark dark:text-accent font-medium">Architecture Note:</span> <strong>Actual Budget</strong> is currently being evaluated as the dedicated local ledger component. The overall architecture is actively evolving and not yet finalized.
+          </div>
+        </article>
+
+        <!-- Project 2: Smart To-Do -->
+        <article class="p-6 sm:p-7 rounded-lg border border-border-light/80 dark:border-border-dark/80 bg-surface-light-card/60 dark:bg-surface-dark-card/60 space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+            <h3 class="text-xl font-bold text-ink-light dark:text-ink-dark">
+              2. Smart To-Do System
+            </h3>
+            <span class="font-mono text-xs px-2 py-0.5 rounded border text-amber-600 dark:text-amber-400 bg-amber-500/10 border-amber-500/25">
+              In Development
+            </span>
+          </div>
+
+          <p class="text-[0.98rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed">
+            An intelligent task routing workflow designed to capture tasks across varying interfaces and synthesize them into an actionable daily priority agenda.
+          </p>
+
+          <div class="space-y-2 text-sm text-ink-light-secondary dark:text-ink-dark-secondary">
+            <div class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted uppercase tracking-wider">
+              Intended Functional Direction:
+            </div>
+            <ul class="list-disc pl-5 space-y-1 text-ink-light-muted dark:text-ink-dark-muted">
+              <li>Ingest action items from multiple sources (quick notes, email, mobile input).</li>
+              <li>Create, organize, and update tasks with contextual priorities.</li>
+              <li>Identify overdue commitments and resurface forgotten follow-ups.</li>
+              <li>Provide a concise, focused daily view of immediate priorities.</li>
+              <li>Decompose broad, complex tasks into smaller, sequential steps.</li>
+              <li>Eventually enable conversational task capture and status checks.</li>
+            </ul>
+          </div>
+
+          <div class="pt-2 text-xs font-mono text-ink-light-muted dark:text-ink-dark-muted border-t border-border-light/60 dark:border-border-dark/60">
+            <span class="text-accent-dark dark:text-accent font-medium">Storage Note:</span> Currently connected conceptually to Notion as the repository. I also use Supabase for other projects and have considered eventually running a local PostgreSQL container. The architecture is evolving directly from the use case rather than being locked down in advance.
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 7. HOUSEHOLD SERVICES -->
+    <section class="space-y-6">
+      <div class="border-b border-border-light/80 dark:border-border-dark/80 pb-3 flex items-baseline justify-between">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+          Household Services Platform
+        </h2>
+        <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+          Practical Utility
+        </span>
+      </div>
+
+      <div class="space-y-4 text-[1.02rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-[1.8]">
+        <p>
+          Beyond developer tooling, part of the lab is gradually turning into a small personal and household utility platform. Services like Immich for photo backup, Stirling-PDF for family document processing, Jellyfin for TV streams, MeTube for downloads, AdGuard Home for filtering, and Home Assistant for smart devices all serve real needs.
+        </p>
+        <blockquote class="my-4 border-l-2 border-accent pl-5 italic text-ink-light dark:text-ink-dark">
+          "The useful test is not whether I can install a container. It's whether anybody actually wants to use it."
+        </blockquote>
+        <p>
+          Self-hosting household utilities requires a measured approach: services only replace commercial services when they have proven reliable enough not to cause friction. 
+        </p>
+        <p>
+          For example, <strong>Immich</strong> has backed up my complete photo library, but it operates alongside Google Photos rather than replacing it outright. The complete migration will only happen once I am fully confident in my local storage redundancy and backup routines. Similarly, <strong>AdGuard Home</strong> is tested on individual devices before taking over as the authoritative DNS server for the whole home.
+        </p>
+      </div>
+    </section>
+
+    <!-- 8. LEARNING BY OPERATING -->
+    <section class="space-y-6">
+      <div class="border-b border-border-light/80 dark:border-border-dark/80 pb-3 flex items-baseline justify-between">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+          Learning by Operating
+        </h2>
+        <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+          Real Systems · Real Friction
+        </span>
+      </div>
+
+      <div class="space-y-4 text-[1.02rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-[1.8]">
+        <p>
+          Operating a physical server forces you to confront the practical layers of computing that modern cloud abstractions sweep under the rug. I am not an experienced Linux systems administrator—I am learning as I go.
+        </p>
+        <blockquote class="my-4 border-l-2 border-accent pl-5 italic text-ink-light dark:text-ink-dark">
+          "This isn't a polished production environment. It's a working lab where I'm learning Docker, Linux, networking, self-hosting and automation by actually using them."
+        </blockquote>
+        <p>
+          Running this modest machine has provided hands-on experience with:
+        </p>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm font-mono text-ink-light-muted dark:text-ink-dark-muted list-disc pl-5">
+          <li>Docker containers &amp; multi-container networking</li>
+          <li>Persistent storage volumes &amp; bind mounts</li>
+          <li>Linux user permissions &amp; UID/GID mapping</li>
+          <li>Headless Ubuntu Server maintenance</li>
+          <li>Local DNS resolution &amp; split-horizon routing</li>
+          <li>Reverse proxies &amp; SSL certificates</li>
+          <li>Tailscale private overlay networking</li>
+          <li>Cloudflare outbound tunnels</li>
+          <li>Diagnosing failing containers &amp; debugging logs</li>
+          <li>Physical drive organization &amp; backup routines</li>
+        </ul>
+        <p>
+          CasaOS made the initial on-ramp easy, but it quickly highlighted where a GUI is no longer enough and understanding what Docker is doing underneath becomes essential.
+        </p>
+        <p class="font-mono text-sm text-ink-light dark:text-ink-dark pt-1">
+          <em>"I still break things. Then I figure out why."</em>
+        </p>
+      </div>
+    </section>
+
+    <!-- 9. LOCAL AI DIRECTION -->
+    <section class="space-y-6">
+      <div class="border-b border-border-light/80 dark:border-border-dark/80 pb-3 flex items-baseline justify-between">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+          Local AI Direction
+        </h2>
+        <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+          Future Roadmap
+        </span>
+      </div>
+
+      <div class="space-y-4 text-[1.02rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-[1.8]">
+        <p>
+          Running a local large language model was part of the original motivation for bringing the ASUS back to life. However, running meaningful inference on a 2013 Celeron without a dedicated GPU quickly proved unworkable.
+        </p>
+        <p>
+          The ambition, however, remains central to the future direction of the lab. Once compute permits, the intended roles for a local model include:
+        </p>
+        <ul class="list-disc pl-5 space-y-1.5 text-sm sm:text-base text-ink-light-muted dark:text-ink-dark-muted">
+          <li>Serving as a general-purpose private personal assistant.</li>
+          <li>Assisting with n8n workflow execution and unstructured data ingestion.</li>
+          <li>Parsing receipts, invoices, and expense descriptions for the budgeting project.</li>
+          <li>Eventually integrating with automated household routines.</li>
+        </ul>
+        <p>
+          Potential user interfaces under consideration include a simple web chat, direct n8n webhook triggers, messaging channels (such as Telegram or WhatsApp), or voice control via Home Assistant.
+        </p>
+        <p class="text-xs font-mono text-ink-light-muted dark:text-ink-dark-muted bg-surface-light-muted dark:bg-surface-dark-muted p-3.5 rounded border border-border-light/80 dark:border-border-dark/80">
+          <strong class="text-ink-light dark:text-ink-dark">Undecided Architecture:</strong> No model family, GPU architecture, inference framework, or vector database has been locked down. Hardware and software decisions will be made when actual workloads demand them.
+        </p>
+      </div>
+    </section>
+
+    <!-- 10. WHAT'S NEXT -->
+    <section class="space-y-6">
+      <div class="border-b border-border-light/80 dark:border-border-dark/80 pb-3 flex items-baseline justify-between">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+          What's Next
+        </h2>
+        <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+          Uncommitted Direction
+        </span>
+      </div>
+
+      <p class="text-[1.02rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed">
+        The homelab evolves as time and practical needs dictate. There are no arbitrary launch dates or firm commitments, but these items represent the near-term trajectory:
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm font-mono">
+        <div class="p-3.5 rounded border border-border-light/80 dark:border-border-dark/80 bg-surface-light-card dark:bg-surface-dark-card space-y-1">
+          <span class="text-accent-dark dark:text-accent font-semibold">1. Wired Ethernet Migration</span>
+          <p class="text-ink-light-muted dark:text-ink-dark-muted font-sans text-xs">
+            Move the server from its current Wi-Fi connection to wired Ethernet if daily homelab use warrants the cabling.
+          </p>
+        </div>
+
+        <div class="p-3.5 rounded border border-border-light/80 dark:border-border-dark/80 bg-surface-light-card dark:bg-surface-dark-card space-y-1">
+          <span class="text-accent-dark dark:text-accent font-semibold">2. Expand n8n Automations</span>
+          <p class="text-ink-light-muted dark:text-ink-dark-muted font-sans text-xs">
+            Continue building out the smart budgeting and smart to-do pipelines; gradually retire legacy Make workflows.
+          </p>
+        </div>
+
+        <div class="p-3.5 rounded border border-border-light/80 dark:border-border-dark/80 bg-surface-light-card dark:bg-surface-dark-card space-y-1">
+          <span class="text-accent-dark dark:text-accent font-semibold">3. Nginx Proxy Manager</span>
+          <p class="text-ink-light-muted dark:text-ink-dark-muted font-sans text-xs">
+            Configure NPM for cleaner internal service routing and local domain resolution without port memorization.
+          </p>
+        </div>
+
+        <div class="p-3.5 rounded border border-border-light/80 dark:border-border-dark/80 bg-surface-light-card dark:bg-surface-dark-card space-y-1">
+          <span class="text-accent-dark dark:text-accent font-semibold">4. Actual Budget Integration</span>
+          <p class="text-ink-light-muted dark:text-ink-dark-muted font-sans text-xs">
+            Evaluate Actual Budget as the local ledger component for automated expense recording.
+          </p>
+        </div>
+
+        <div class="p-3.5 rounded border border-border-light/80 dark:border-border-dark/80 bg-surface-light-card dark:bg-surface-dark-card space-y-1">
+          <span class="text-accent-dark dark:text-accent font-semibold">5. Hermes Active Evaluation</span>
+          <p class="text-ink-light-muted dark:text-ink-dark-muted font-sans text-xs">
+            Begin hands-on testing of the existing Hermes container to assess practical AI agent patterns.
+          </p>
+        </div>
+
+        <div class="p-3.5 rounded border border-border-light/80 dark:border-border-dark/80 bg-surface-light-card dark:bg-surface-dark-card space-y-1">
+          <span class="text-accent-dark dark:text-accent font-semibold">6. Home Assistant Deepening</span>
+          <p class="text-ink-light-muted dark:text-ink-dark-muted font-sans text-xs">
+            Continue integrating household smart plugs, cameras, and locks into centralized local automations.
+          </p>
+        </div>
+
+        <div class="p-3.5 rounded border border-border-light/80 dark:border-border-dark/80 bg-surface-light-card dark:bg-surface-dark-card space-y-1">
+          <span class="text-accent-dark dark:text-accent font-semibold">7. Storage Redundancy</span>
+          <p class="text-ink-light-muted dark:text-ink-dark-muted font-sans text-xs">
+            Improve drive redundancy and automated backup scripts as more household data moves onto the machine.
+          </p>
+        </div>
+
+        <div class="p-3.5 rounded border border-border-light/80 dark:border-border-dark/80 bg-surface-light-card dark:bg-surface-dark-card space-y-1">
+          <span class="text-accent-dark dark:text-accent font-semibold">8. Future Hardware &amp; Local AI</span>
+          <p class="text-ink-light-muted dark:text-ink-dark-muted font-sans text-xs">
+            If the homelab proves genuinely useful, eventually replace the ASUS with more capable compute to revisit local LLMs.
+          </p>
+        </div>
+      </div>
+
+      <p class="text-sm text-ink-light-muted dark:text-ink-dark-muted leading-relaxed">
+        Any future hardware upgrade will be driven strictly by actual operational workloads, not anticipation.
+      </p>
+    </section>
+
+    <!-- 11. FOOTER NAVIGATION -->
+    <div class="pt-10 border-t border-border-light/80 dark:border-border-dark/80 flex flex-wrap items-center justify-between gap-4 font-mono text-xs sm:text-sm">
+      <a href="/" class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1.5 transition-colors">
         <span>←</span>
         <span>Back to homepage</span>
       </a>
-      <a href="#top" class="text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark inline-flex items-center gap-1.5">
-        <span>Back to top</span>
-        <span>↑</span>
-      </a>
+
+      <div class="flex items-center gap-6">
+        <a href="/work" class="text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark transition-colors">
+          Work
+        </a>
+        <a href="/notes" class="text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark transition-colors">
+          Notes
+        </a>
+        <a href="/contact" class="text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark transition-colors">
+          Contact
+        </a>
+        <a href="#top" class="text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark inline-flex items-center gap-1.5 transition-colors">
+          <span>Top</span>
+          <span>↑</span>
+        </a>
+      </div>
     </div>
 
   </main>

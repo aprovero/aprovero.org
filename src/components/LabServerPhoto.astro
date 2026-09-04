@@ -1,0 +1,39 @@
+---
+interface Props {
+  caption?: string;
+  subcaption?: string;
+}
+
+const {
+  caption = "The hardware wasn't selected for the job. It was what I had.",
+  subcaption = "The local LLM idea is still alive. The current Celeron just strongly disagrees.",
+} = Astro.props;
+---
+
+<figure class="space-y-3">
+  <div class="flex items-center justify-between font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted px-1">
+    <span class="text-accent-dark dark:text-accent font-medium tracking-wider uppercase">
+      [ HARDWARE: ASUS VIVOPC VM40B ]
+    </span>
+    <span>HEADLESS · 24/7 OPERATION</span>
+  </div>
+
+  <div class="relative rounded-lg overflow-hidden border border-border-light/80 dark:border-border-dark/80 bg-surface-light-card dark:bg-surface-dark-card shadow-sm">
+    <img
+      src="/lab/asus-vivopc.jpg"
+      onerror="this.onerror=null; this.src='/lab/asus-vivopc-placeholder.svg';"
+      alt="ASUS VivoPC VM40B running headless Ubuntu Server and Docker containers in Mexico City"
+      class="w-full h-auto aspect-[16/9] sm:aspect-[21/10] object-cover object-center"
+      loading="lazy"
+    />
+  </div>
+
+  <figcaption class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted font-mono pt-1 px-1">
+    <span class="text-ink-light-secondary dark:text-ink-dark-secondary italic">
+      "{caption}"
+    </span>
+    <span class="text-[0.75rem] text-ink-light-muted dark:text-ink-dark-muted">
+      {subcaption}
+    </span>
+  </figcaption>
+</figure>

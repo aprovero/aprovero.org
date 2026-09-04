@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%" fill="none" stroke="currentColor">
+  <defs>
+    <radialGradient id="spunMetal" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#2a303c" />
+      <stop offset="40%" stop-color="#1e232e" />
+      <stop offset="75%" stop-color="#141720" />
+      <stop offset="100%" stop-color="#0e1117" />
+    </radialGradient>
+    <linearGradient id="edgeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3a4252" />
+      <stop offset="100%" stop-color="#1a1d26" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background container -->
+  <rect width="800" height="450" fill="#0B0D11" />
+  
+  <!-- Subtle Grid overlay -->
+  <g stroke="#1a202c" stroke-width="0.5" stroke-dasharray="4 4" opacity="0.4">
+    <line x1="100" y1="0" x2="100" y2="450" />
+    <line x1="200" y1="0" x2="200" y2="450" />
+    <line x1="300" y1="0" x2="300" y2="450" />
+    <line x1="400" y1="0" x2="400" y2="450" />
+    <line x1="500" y1="0" x2="500" y2="450" />
+    <line x1="600" y1="0" x2="600" y2="450" />
+    <line x1="700" y1="0" x2="700" y2="450" />
+    <line x1="0" y1="75" x2="800" y2="75" />
+    <line x1="0" y1="150" x2="800" y2="150" />
+    <line x1="0" y1="225" x2="800" y2="225" />
+    <line x1="0" y1="300" x2="800" y2="300" />
+    <line x1="0" y1="375" x2="800" y2="375" />
+  </g>
+
+  <!-- Chassis Perspective Drawing (ASUS VivoPC VM40B) -->
+  <g transform="translate(190, 65)">
+    <!-- Shadow -->
+    <rect x="20" y="30" width="380" height="240" rx="28" fill="#05070a" opacity="0.8" />
+    
+    <!-- Outer Bezel / Base -->
+    <rect x="10" y="10" width="400" height="260" rx="24" fill="url(#edgeGrad)" stroke="#3a4252" stroke-width="1.5" />
+    
+    <!-- Top Face (Concentric Spun Metal Pattern) -->
+    <rect x="18" y="18" width="384" height="244" rx="20" fill="url(#spunMetal)" stroke="#232834" stroke-width="1" />
+    
+    <!-- Concentric circles mimicking Asus Zen spun metal finish -->
+    <ellipse cx="210" cy="140" rx="140" ry="90" stroke="#2d3545" stroke-width="0.75" opacity="0.6" />
+    <ellipse cx="210" cy="140" rx="110" ry="70" stroke="#2d3545" stroke-width="0.75" opacity="0.7" />
+    <ellipse cx="210" cy="140" rx="80" ry="50" stroke="#333c4d" stroke-width="0.75" opacity="0.8" />
+    <ellipse cx="210" cy="140" rx="50" ry="30" stroke="#3d485c" stroke-width="0.75" opacity="0.9" />
+    <ellipse cx="210" cy="140" rx="20" ry="12" stroke="#4a5568" stroke-width="1" />
+
+    <!-- Center ASUS Logo Subtle engraving -->
+    <text x="210" y="144" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#717a8c" letter-spacing="3" text-anchor="middle">ASUS</text>
+
+    <!-- Front LED Indicator -->
+    <circle cx="210" cy="254" r="2.5" fill="#00D3A5" />
+    <circle cx="210" cy="254" r="6" fill="#00D3A5" opacity="0.25" />
+  </g>
+
+  <!-- Technical Callouts / Monospace Details -->
+  <g font-family="'JetBrains Mono', monospace" font-size="11" fill="#94A3B8">
+    <!-- Eyebrow label -->
+    <text x="40" y="45" fill="#00D3A5" font-weight="600" letter-spacing="1.5">[ HARDWARE SHOWCASE ]</text>
+    <text x="760" y="45" text-anchor="end" fill="#64748B">24/7 UPTIME · HEADLESS</text>
+
+    <!-- Dimension & specs pointers -->
+    <path d="M 120 180 L 195 180" stroke="#00D3A5" stroke-width="1" stroke-dasharray="2 2" />
+    <circle cx="120" cy="180" r="2" fill="#00D3A5" />
+    <text x="110" y="175" text-anchor="end" font-weight="500" fill="#F4F4F6">ASUS VivoPC VM40B</text>
+    <text x="110" y="192" text-anchor="end" fill="#64748B" font-size="10">~2013 Form Factor</text>
+
+    <path d="M 680 160 L 595 160" stroke="#00D3A5" stroke-width="1" stroke-dasharray="2 2" />
+    <circle cx="680" cy="160" r="2" fill="#00D3A5" />
+    <text x="690" y="155" text-anchor="start" font-weight="500" fill="#F4F4F6">12 GB DDR3 RAM</text>
+    <text x="690" y="172" text-anchor="start" fill="#64748B" font-size="10">+8 GB Upgrade (~MXN 250)</text>
+
+    <path d="M 680 230 L 595 230" stroke="#00D3A5" stroke-width="1" stroke-dasharray="2 2" />
+    <circle cx="680" cy="230" r="2" fill="#00D3A5" />
+    <text x="690" y="225" text-anchor="start" font-weight="500" fill="#F4F4F6">Triple HDD Layout</text>
+    <text x="690" y="242" text-anchor="start" fill="#64748B" font-size="10">1 TB Internal + 2x External</text>
+
+    <path d="M 120 270 L 195 270" stroke="#00D3A5" stroke-width="1" stroke-dasharray="2 2" />
+    <circle cx="120" cy="270" r="2" fill="#00D3A5" />
+    <text x="110" y="265" text-anchor="end" font-weight="500" fill="#F4F4F6">Intel Celeron (Headless)</text>
+    <text x="110" y="282" text-anchor="end" fill="#64748B" font-size="10">Ubuntu Server · Docker</text>
+  </g>
+
+  <!-- Bottom banner badge -->
+  <g transform="translate(40, 400)" font-family="'JetBrains Mono', monospace" font-size="10">
+    <rect width="720" height="30" rx="4" fill="#12151B" stroke="#232834" />
+    <text x="15" y="19" fill="#94A3B8">LAB HARDWARE SCHEMATIC — PHOTOGRAPH READY CONTAINER</text>
+    <text x="705" y="19" text-anchor="end" fill="#00D3A5">STATUS: 24/7 ONLINE</text>
+  </g>
+</svg>
