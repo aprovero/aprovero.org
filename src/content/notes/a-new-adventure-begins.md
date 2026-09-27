@@ -13,9 +13,20 @@ readTime: "4 min read"
 
 ### Stepping Into New Territory
 
-Starting at **Huawei Digital Power** marks a significant milestone in my career, but getting here was a journey in itself. The selection process, technical evaluations, and preparation required for a global leader in power electronics and energy infrastructure were intense and demanding.
-
-My official role is **Executive Solutions Sales Manager (Utility PV & BESS)**. While the printed business card shortened it to *Executive Solutions Manager* to fit the card layout, the full title reflects the true scope: leading technical solution sales for utility-scale solar PV and battery energy storage systems across the region.
+<div class="my-6 flex flex-col md:flex-row items-start gap-6">
+  <div class="flex-1">
+    <p class="mt-0">
+      Starting at <strong>Huawei Digital Power</strong> as Executive Solutions Sales Manager (Utility PV &amp; BESS) marks a significant milestone in my career, but getting here was a journey in itself. The selection process, technical evaluations, and preparation required for a global leader in power electronics and energy infrastructure were intense and demanding.
+    </p>
+  </div>
+  <div class="w-full md:w-80 shrink-0">
+    <img
+      src="/brand/huawei-card.png"
+      alt="Andres Provero Huawei Digital Power Business Card"
+      class="w-full h-auto rounded-lg border border-border-light dark:border-border-dark shadow-sm my-0"
+    />
+  </div>
+</div>
 
 ### The Sales Shift: Technical Sales for the First Time
 
