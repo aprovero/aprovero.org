@@ -370,4 +370,4 @@ When timesheets depend on memory, that is resistance. When incident reports get 
 
 By approaching administrative and operational challenges with an engineer's mindset—and leveraging AI-assisted development tools to implement solutions rapidly—we transformed LATNOVVA's field operations from a collection of fragile manual handoffs into an integrated, auditable, and resilient engine.
 
-That is what *"engineering that survives contact with the field"* means to me.
+That is what *"real power doesn't run on paper"* means to me.

@@ -20,6 +20,7 @@ export interface SiteConfig {
   email: string;
   descriptor: string;
   thesis: string;
+  motto?: string;
   intro: string;
   secondaryIntro: string;
   nav: NavItem[];
@@ -47,7 +48,8 @@ export const siteConfig: SiteConfig = {
   timezone: "UTC−6",
   email: "andres@aprovero.org",
   descriptor: "Electronics Engineer · Technical Operations · Energy Infrastructure",
-  thesis: "Engineering that survives contact with the field.",
+  thesis: "Real power doesn't run on paper.",
+  motto: "Medido en caliente.",
   intro:
     "I work on the systems between the drawings and reality: utility-scale solar, battery storage, power electronics, commissioning, field operations, and the technical problems that appear when complex infrastructure actually has to work.",
   secondaryIntro:
@@ -84,5 +86,5 @@ export const siteConfig: SiteConfig = {
   // - [PATCH] (rightmost): tracks minor changes, tweaks, and fixes
   // - [MINOR] (middle): tracks major feature additions and new sections
   // - [MAJOR] (leftmost): tracks major redesigns or complete structural changes
-  version: "1.3.1",
+  version: "1.3.2",
 };
