@@ -8,9 +8,16 @@ const currentYear = new Date().getFullYear();
   <div class="max-w-6xl mx-auto px-6 sm:px-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 text-[0.82rem] text-ink-light-muted dark:text-ink-dark-muted font-mono">
     
     <div class="space-y-1.5">
-      <div class="flex items-center gap-2">
+      <div class="flex flex-wrap items-center gap-2">
         <span class="inline-block w-1.5 h-1.5 rounded-full bg-accent"></span>
         <span class="text-ink-light dark:text-ink-dark font-sans font-medium text-[0.92rem]">{siteConfig.name}</span>
+        {siteConfig.motto && (
+          <>
+            <span class="opacity-30">·</span>
+            <span class="text-ink-light-secondary dark:text-ink-dark-secondary italic font-sans">{siteConfig.motto}</span>
+          </>
+        )}
+        <span class="opacity-30">·</span>
         <span class="text-ink-light-muted dark:text-ink-dark-muted">© {currentYear}</span>
         <span class="opacity-30">·</span>
         <span class="text-[0.75rem] text-ink-light-secondary dark:text-ink-dark-secondary">v{siteConfig.version}</span>

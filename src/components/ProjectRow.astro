@@ -1,4 +1,4 @@
-﻿---
+---
 interface Props {
   title: string;
   subtitle: string;
@@ -15,8 +15,8 @@ const { title, subtitle, location, capacity, systemType, year, role, summary, sl
 ---
 
 <article class="group py-8 sm:py-10 border-b border-border-light/80 dark:border-border-dark/80 transition-colors">
-  <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-2 mb-3">
-    <div>
+  <div class="flex flex-col gap-2 mb-3">
+    <div class="flex flex-col lg:flex-row lg:items-baseline justify-between gap-x-6 gap-y-1.5">
       <h3 class="text-xl sm:text-2xl font-bold text-ink-light dark:text-ink-dark tracking-tight">
         <a
           href={`/work/${slug}`}
@@ -26,21 +26,22 @@ const { title, subtitle, location, capacity, systemType, year, role, summary, sl
           <span class="text-accent-dark dark:text-accent opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-base">→</span>
         </a>
       </h3>
-      <p class="text-sm sm:text-base text-ink-light-muted dark:text-ink-dark-muted mt-1">
-        {subtitle}
-      </p>
+
+      <!-- Editorial Publication Metadata Line (No UI pill boxes) -->
+      <div class="font-mono text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted shrink-0">
+        <span class="text-ink-light dark:text-ink-dark font-medium">{capacity}</span>
+        <span class="opacity-30 mx-1.5">·</span>
+        <span>{location}</span>
+        <span class="opacity-30 mx-1.5">·</span>
+        <span>{systemType}</span>
+        <span class="opacity-30 mx-1.5">·</span>
+        <span>{year}</span>
+      </div>
     </div>
 
-    <!-- Editorial Publication Metadata Line (No UI pill boxes) -->
-    <div class="font-mono text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted shrink-0 pt-1">
-      <span class="text-ink-light dark:text-ink-dark font-medium">{capacity}</span>
-      <span class="opacity-30 mx-1.5">·</span>
-      <span>{location}</span>
-      <span class="opacity-30 mx-1.5">·</span>
-      <span>{systemType}</span>
-      <span class="opacity-30 mx-1.5">·</span>
-      <span>{year}</span>
-    </div>
+    <p class="text-sm sm:text-base text-ink-light-muted dark:text-ink-dark-muted max-w-3xl">
+      {subtitle}
+    </p>
   </div>
 
   <p class="text-[1.03rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-[1.8] my-4 max-w-3xl">
