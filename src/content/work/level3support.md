@@ -14,7 +14,7 @@ keyMetrics:
   - "Zero-Account / Local-First Storage"
 confidentialityNotice: "Internal company request workflows, proprietary documents, and corporate records were retired prior to public release. Level3Support serves as an engineering aid and does not replace manufacturer manuals, project procedures, applicable electrical/safety standards, utility requirements, or certified engineering determinations."
 featured: true
-order: 4
+order: 5
 ---
 
 ## Overview
@@ -45,12 +45,12 @@ On utility-scale solar sites, central inverter fault logs frequently report alar
 
 The process worked, but it was slow, cumbersome, and error-prone when standing inside an inverter enclosure under 40°C ambient heat. A single misaligned bit meant misidentifying a critical protection trip.
 
-To solve this, Andres built a self-contained Excel converter. An engineer could type the raw hex string into a single cell and immediately see:
+To solve this, I built a self-contained Excel converter. Typing the raw hex string into a single cell immediately displayed:
 - The full binary representation.
 - Every active fault bit highlighted.
 - The corresponding plain-language fault explanation and associated subsystem.
 
-The spreadsheet was lightweight, functioned entirely offline, and opened reliably on a smartphone screen in the field. Andres shared it with colleagues on site; within weeks, other field engineers were keeping it on their phones as their first line of defense during inverter trips.
+The spreadsheet was lightweight, functioned entirely offline, and opened reliably on a smartphone screen in the field. I shared it with colleagues on site; within weeks, other field engineers were keeping it on their phones as their first line of defense during inverter trips.
 
 That single offline converter was the seed for what eventually became Level3Support.
 
@@ -78,7 +78,7 @@ As recurring technical bottlenecks emerged across commissioning campaigns, the s
    *Origin:* Created to investigate an elusive field anomaly that emerged immediately following an inverter firmware update on an active project.  
    *Purpose:* Rapidly diff two complete parameter files to highlight unintended configuration drifts or altered protection thresholds.
 4. **UMCG Data Analysis Tool**  
-   *Origin:* A multi-step diagnostic data-analysis routine Andres had previously executed in Excel using pivot tables and taught to his field team.  
+   *Origin:* A multi-step diagnostic data-analysis routine I had previously executed in Excel using pivot tables and taught to my field team.  
    *Purpose:* Automate the diagnostic methodology directly so that any engineer could evaluate operating trends and identify thermal or electrical anomalies without having to rebuild the pivot structure by hand.
 
 The core insight behind these tools was consistent: technical execution was repeatedly bogged down by processes that were entirely solvable, but unnecessarily dependent on knowing which manual to locate, calculating numbers manually, building spreadsheets from scratch, or relying on troubleshooting intuition that existed only in an experienced engineer's memory.
@@ -87,13 +87,13 @@ The core insight behind these tools was consistent: technical execution was repe
 
 ## Center of Expertise Phase
 
-When Andres transitioned into a regional Center of Expertise (CoE) role, his responsibility broadened from direct field execution to technical governance and organizational enablement. Part of that objective became translating specialized domain knowledge into tools that the wider technical organization could leverage across regions.
+When I transitioned into a regional Center of Expertise (CoE) role, my responsibility broadened from direct field execution to technical governance and organizational enablement. Part of my objective became translating specialized domain knowledge into tools that the wider technical organization could leverage across regions.
 
 The internal platform grew into three coordinated operational pillars:
 
 1. **Engineering Tools**: Self-service diagnostic utilities and calculation engines for field technicians and engineers.
 2. **Curated Technical Document Library**: Technical documentation across energy equipment is notoriously fragmented across vendor portals, local drives, and internal folders. The document library curated reliable, authoritative technical documentation in a single indexed location, ensuring engineers consulted vetted material.
-3. **Structured Technical Request Workflow**: Technical escalations and support requests frequently reached the Center of Expertise through informal, uncoordinated channels—chat messages, phone calls, and hallway conversations. Andres introduced a structured communication channel between operational technical teams and the Center of Expertise. This provided a formal venue to articulate requirements, establish clear ownership, track investigative progress, and foster mutual accountability on both sides.
+3. **Structured Technical Request Workflow**: Technical escalations and support requests frequently reached the Center of Expertise through informal, uncoordinated channels—chat messages, phone calls, and hallway conversations. I introduced a structured communication channel between operational technical teams and the Center of Expertise. This provided a formal venue to articulate requirements, establish clear ownership, track investigative progress, and foster mutual accountability on both sides.
 
 ---
 
@@ -101,7 +101,7 @@ The internal platform grew into three coordinated operational pillars:
 
 ### "Yes, a lot of it was vibe-coded."
 
-The original internal portal was built rapidly using modern AI coding assistants. Andres is an electronics and field commissioning engineer, not a professional software developer. The technical architecture reflected an engineer leveraging available tools to solve immediate operational requirements:
+The original internal portal was built rapidly using modern AI coding assistants. I am an electronics and field commissioning engineer, not a professional software developer. The technical architecture reflected an engineer leveraging available tools to solve immediate operational requirements:
 
 - **Frontend**: Lightweight HTML, CSS, and vanilla JavaScript.
 - **Backend**: Node.js microservice hosted on Render.
@@ -113,13 +113,13 @@ The development process evolved pragmatically:
 - **Claude** served as an early coding companion to scaffold JavaScript logic and write UI components.
 - **ChatGPT** helped integrate backend API routes, debug edge cases, and tie the services together.
 
-The field knowledge, mathematical formulas, workflow design, diagnostic logic, and product priorities came entirely from Andres's engineering background. AI coding tools provided the leverage to translate that domain experience into functional, production-grade tools.
+The field knowledge, mathematical formulas, workflow design, diagnostic logic, and product priorities came entirely from my engineering background. AI coding tools provided the leverage to translate that domain experience into functional, production-grade tools.
 
 ---
 
 ## After the Center of Expertise
 
-Following his transition out of the CoE role, Andres restructured the project for the public domain:
+Following my transition out of the CoE role, I restructured the project for the public domain:
 
 - **Internal Request Pipelines Removed**: All corporate support ticketing, intake workflows, and notification hooks were decoupled and retired.
 - **Internal Document Library Removed**: All corporate, proprietary, and manufacturer-confidential technical manuals were removed from the public experience.
@@ -127,7 +127,7 @@ Following his transition out of the CoE role, Andres restructured the project fo
 
 While legacy scaffolding may remain in the public repository for historical tracking, none of these internal corporate functions are active in the live tool.
 
-Andres retained the four original engineering calculators, rebranded the project as **Level3Support**, and chose to continue expanding it as an independent personal engineering project.
+I retained the four original engineering calculators, rebranded the project as **Level3Support**, and chose to continue expanding it as an independent personal engineering project.
 
 ---
 
@@ -141,9 +141,9 @@ The tools originate directly from practical engineering work:
 - Troubleshooting rules of thumb accumulated across years of on-site commissioning.
 - Routine verifications performed during site acceptance testing and plant turnarounds.
 - Direct feedback and suggestions gathered from other field practitioners, including a survey conducted across professional LinkedIn networks.
-- Theoretical concepts Andres researched to assess whether they could be packaged into a useful field tool.
+- Theoretical concepts I researched to assess whether they could be packaged into a useful field tool.
 
-Positioned strictly as a platform **built from field experience, for field engineers**, Level3Support makes no claims of massive user numbers, venture backing, or universal enterprise adoption. Some of the original tools continue to be relied upon by engineers Andres worked with in the field; the broader public suite is freely available for any engineer, technician, or student who finds it useful.
+Positioned strictly as a platform **built from field experience, for field engineers**, Level3Support makes no claims of massive user numbers, venture backing, or universal enterprise adoption. Some of the original tools continue to be relied upon by engineers I worked with in the field; the broader public suite is freely available for any engineer, technician, or student who finds it useful.
 
 ---
 
@@ -224,12 +224,12 @@ photographic annex        <───  edit narrative      <───  all fields
 ```
 
 ### The Field-to-Desk Workflow:
-1. **On Site (Smartphone)**: The engineer inspects an inverter station, inputs measurements into a report template, and attaches photos directly from the phone camera.
+1. **On Site (Smartphone)**: Inspect an inverter station, input measurements into a report template, and attach photos directly from the phone camera.
 2. **Local Persistence**: Data and images are saved immediately into local browser storage.
-3. **Export Package**: The engineer taps *Export*, packaging the structured data payload and all attached binary image files into a single `.zip` bundle.
-4. **Transfer**: The package is transferred to a field laptop via USB drive, AirDrop, or local Wi-Fi.
-5. **Import on Laptop**: Opening Level3Support in the laptop browser, the engineer imports the `.zip`. The application parses the package and completely hydrates the report state—including full-resolution photos.
-6. **Finalize & Deliver**: The engineer refines the technical narrative on a full keyboard and exports the finished document as a clean, standardized PDF.
+3. **Export Package**: Tap *Export*, packaging the structured data payload and all attached binary image files into a single `.zip` bundle.
+4. **Transfer**: Transfer the package to a field laptop via USB drive, AirDrop, or local Wi-Fi.
+5. **Import on Laptop**: Open Level3Support in the laptop browser and import the `.zip`. The application parses the package and completely hydrates the report state—including full-resolution photos.
+6. **Finalize & Deliver**: Refine the technical narrative on a full keyboard and export the finished document as a clean, standardized PDF.
 
 This architecture delivers cloud-like portability across devices without introducing user accounts, cloud database hosting, or remote privacy vulnerabilities.
 
@@ -237,7 +237,7 @@ This architecture delivers cloud-like portability across devices without introdu
 
 ## Current Status & Links
 
-Level3Support remains an active personal engineering project. Andres continues developing, testing, and refining tools because they are genuinely useful in his own technical work and may benefit other field practitioners. 
+Level3Support remains an active personal engineering project. I continue developing, testing, and refining tools because they are genuinely useful in my own technical work and may benefit other field practitioners. 
 
 There is no commercial business model, no venture backing, no paid tier, and no product-marketing campaign behind it. If the platform eventually evolves into a formal commercial offering, that decision will be driven by genuine operational demand. For now, it exists as a free, open, and practical engineering aid.
 

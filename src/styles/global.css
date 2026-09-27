@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -83,4 +83,28 @@
 
 .prose-editorial a {
   @apply text-accent-dark dark:text-accent underline underline-offset-4 hover:opacity-80 transition-opacity;
+}
+
+.prose-editorial img {
+  @apply rounded-lg border border-border-light dark:border-border-dark my-8 shadow-sm max-w-full h-auto;
+}
+
+.prose-editorial figure {
+  @apply my-8;
+}
+
+.prose-editorial figcaption {
+  @apply text-xs font-mono text-ink-light-muted dark:text-ink-dark-muted mt-2.5 text-center leading-normal;
+}
+
+.prose-editorial table {
+  @apply w-full my-8 text-sm font-mono border-collapse;
+}
+
+.prose-editorial th {
+  @apply text-left p-2.5 border-b border-border-light dark:border-border-dark text-ink-light dark:text-ink-dark font-semibold bg-surface-light-card/60 dark:bg-surface-dark-card/60;
+}
+
+.prose-editorial td {
+  @apply p-2.5 border-b border-border-light/60 dark:border-border-dark/60 text-ink-light-secondary dark:text-ink-dark-secondary;
 }

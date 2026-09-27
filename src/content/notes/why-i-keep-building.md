@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Why I keep building things I could probably just buy"
 date: "2026-01-20"
 summary: "On the deliberate inefficiency of building hardware, homelabs, and software tools from scratch to preserve deep understanding."
@@ -16,7 +16,7 @@ readTime: "4 min read"
 
 You can buy a smart fan on Amazon for $35. You can buy a commercial NAS appliance with a polished web interface. You can spin up a managed database with two clicks.
 
-Economically, building your own version of these things makes no sense. The hours spent reading ESP32 datasheet errata, routing PCBs, and configuring ZFS storage pools will never show a positive financial return on investment.
+Economically, building your own version of these things makes no sense. The hours spent reading ESP32 datasheet errata, routing PCBs, and configuring storage and container permissions will never show a positive financial return on investment.
 
 ### Understanding as an Antidote to Fragility
 

@@ -9,7 +9,7 @@ import { getCollection } from 'astro:content';
 
 const allWork = await getCollection('work');
 const sortedWork = allWork.sort((a, b) => a.data.order - b.data.order);
-const featuredWork = sortedWork.filter((item) => item.data.featured).slice(0, 4);
+const featuredWork = sortedWork.filter((item) => item.data.featured).slice(0, 5);
 
 const allNotes = await getCollection('notes');
 const sortedNotes = allNotes.sort(
