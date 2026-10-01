@@ -1,0 +1,578 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ServiceCard from '@/components/ServiceCard.astro';
+import { serverServices } from '@/config/services';
+
+const categories = [
+  'All',
+  'Core & OS',
+  'Automation',
+  'Cloud & Storage',
+  'Media & Photos',
+  'Utilities & Network',
+] as const;
+---
+
+<BaseLayout
+  title="Services Gallery | Andres Provero"
+  description="Personal homelab services gallery and launcher for CasaOS, n8n, Immich, Nextcloud, and container infrastructure routed through Cloudflare Tunnels."
+>
+  <main class="max-w-6xl mx-auto px-6 sm:px-10 py-10 sm:py-16 space-y-12">
+    
+    <!-- Top Bar: Navigation & Status -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border-light/80 dark:border-border-dark/80 pb-6">
+      <div class="flex items-center gap-3">
+        <a
+          href="/"
+          class="font-mono text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted hover:text-accent-dark dark:hover:text-accent transition-colors inline-flex items-center gap-1.5"
+        >
+          <span>←</span>
+          <span>aprovero.org</span>
+        </a>
+        <span class="text-border-light dark:text-border-dark">/</span>
+        <span class="font-mono text-xs sm:text-sm text-ink-light dark:text-ink-dark font-medium">
+          Services
+        </span>
+      </div>
+
+      <div class="flex items-center gap-3 font-mono text-xs">
+        <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-surface-light-card dark:bg-surface-dark-card border border-border-light dark:border-border-dark text-ink-light-secondary dark:text-ink-dark-secondary">
+          <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+          <span>Cloudflare Zero Trust Ingress</span>
+        </div>
+        <button
+          id="open-config-btn"
+          type="button"
+          class="px-3 py-1 rounded-full bg-surface-light-muted dark:bg-surface-dark-muted hover:bg-surface-light-card dark:hover:bg-surface-dark-card text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark border border-border-light dark:border-border-dark transition-colors inline-flex items-center gap-1.5"
+          title="Configure Tunnel Hostnames"
+        >
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          <span>Tunnel Settings</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Page Header Title & Philosophy -->
+    <header class="space-y-4 max-w-3xl">
+      <div class="flex items-center gap-2 font-mono text-xs sm:text-sm text-accent-dark dark:text-accent tracking-wider uppercase font-medium">
+        <span class="inline-block w-2 h-2 rounded-full bg-accent"></span>
+        <span>PERSONAL HOMELAB CONSOLE · {serverServices.length} ACTIVE WORKLOADS</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
+        Services Gallery
+      </h1>
+
+      <p class="text-lg sm:text-xl text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed">
+        Quick-launch console for server applications, self-hosted automation, cloud files, and media infrastructure routed securely through Cloudflare Tunnels.
+      </p>
+    </header>
+
+    <!-- Controls: Search & Category Filter Pills -->
+    <section class="space-y-5" aria-label="Services Filters">
+      <div class="flex flex-col sm:flex-row gap-4 justify-between items-stretch sm:items-center">
+        <!-- Search Input -->
+        <div class="relative flex-1 max-w-md">
+          <input
+            id="service-search"
+            type="search"
+            placeholder="Search services (e.g. n8n, photos, docker, cloud)..."
+            class="w-full px-4 py-2.5 pl-10 rounded-lg text-sm bg-surface-light-card dark:bg-surface-dark-card border border-border-light dark:border-border-dark text-ink-light dark:text-ink-dark placeholder:text-ink-light-muted dark:placeholder:text-ink-dark-muted focus:outline-none focus:ring-1 focus:ring-accent"
+          />
+          <svg
+            class="w-4 h-4 text-ink-light-muted dark:text-ink-dark-muted absolute left-3.5 top-3.5 pointer-events-none"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </div>
+
+        <!-- Quick Info counter -->
+        <div id="service-count-text" class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted self-center sm:self-auto">
+          Showing {serverServices.length} of {serverServices.length} services
+        </div>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="flex flex-wrap items-center gap-2 pt-1" id="category-pills">
+        {categories.map((cat, idx) => (
+          <button
+            type="button"
+            class:list={[
+              "category-pill px-3.5 py-1.5 rounded-lg font-mono text-xs font-medium transition-colors border",
+              idx === 0
+                ? "bg-accent text-surface-dark border-transparent shadow-sm active-pill"
+                : "bg-surface-light-card dark:bg-surface-dark-card text-ink-light-secondary dark:text-ink-dark-secondary border-border-light dark:border-border-dark hover:border-accent/40",
+            ]}
+            data-category={cat}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+    </section>
+
+    <!-- Services Gallery Grid -->
+    <section aria-label="Services Grid">
+      <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+        {serverServices.map((service) => (
+          <ServiceCard service={service} />
+        ))}
+      </div>
+
+      <!-- Empty State for Search -->
+      <div id="empty-state" class="hidden py-16 text-center space-y-3 rounded-xl border border-dashed border-border-light dark:border-border-dark">
+        <p class="text-ink-light dark:text-ink-dark font-medium text-lg">No matching services found</p>
+        <p class="text-sm text-ink-light-muted dark:text-ink-dark-muted font-mono">
+          Try adjusting your search query or select "All" categories.
+        </p>
+        <button
+          id="reset-filter-btn"
+          type="button"
+          class="mt-2 px-4 py-2 rounded font-mono text-xs bg-accent text-surface-dark font-medium hover:bg-accent-hover transition-colors"
+        >
+          Reset Filters
+        </button>
+      </div>
+    </section>
+
+    <!-- Security & Architecture Banner -->
+    <section class="p-6 sm:p-7 rounded-xl border border-border-light dark:border-border-dark bg-surface-light-card/60 dark:bg-surface-dark-card/60 space-y-3">
+      <div class="flex items-center gap-2 text-accent-dark dark:text-accent font-mono text-xs font-semibold uppercase tracking-wider">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+        <span>Zero Trust Routing Architecture</span>
+      </div>
+      <p class="text-sm text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed">
+        Services are routed via encrypted outbound Cloudflare Tunnels (<code class="text-xs font-mono px-1 py-0.5 rounded bg-surface-light-muted dark:bg-surface-dark-muted text-ink-light dark:text-ink-dark">cloudflared</code>) without exposing inbound residential router ports. Endpoints requiring administrative privileges are protected behind Cloudflare Access policies with multi-factor authentication.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- URL Customization Modal / Dialog -->
+  <dialog
+    id="custom-url-dialog"
+    class="backdrop:bg-black/60 backdrop:backdrop-blur-sm rounded-xl p-0 bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark shadow-2xl max-w-md w-[92vw] text-ink-light dark:text-ink-dark transition-all"
+  >
+    <div class="p-6 space-y-5">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-bold tracking-tight text-ink-light dark:text-ink-dark" id="dialog-title">
+          Customize Service URL
+        </h3>
+        <button
+          type="button"
+          id="close-dialog-btn"
+          class="text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark p-1 rounded font-mono text-sm"
+          aria-label="Close dialog"
+        >
+          ✕
+        </button>
+      </div>
+
+      <div class="space-y-2">
+        <label for="dialog-url-input" class="block font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+          Target Cloudflare Tunnel URL or Local Hostname:
+        </label>
+        <input
+          id="dialog-url-input"
+          type="url"
+          class="w-full px-3.5 py-2 rounded-lg font-mono text-xs bg-surface-light-card dark:bg-surface-dark-card border border-border-light dark:border-border-dark text-ink-light dark:text-ink-dark focus:outline-none focus:ring-1 focus:ring-accent"
+          placeholder="https://service.aprovero.org"
+        />
+        <p class="text-[0.78rem] text-ink-light-muted dark:text-ink-dark-muted">
+          Stored locally in your browser only. Never transmitted or committed to public code.
+        </p>
+      </div>
+
+      <div class="flex items-center justify-between pt-2">
+        <button
+          type="button"
+          id="reset-single-url-btn"
+          class="font-mono text-xs text-rose-500 hover:underline"
+        >
+          Reset to Default
+        </button>
+
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            id="cancel-dialog-btn"
+            class="px-3.5 py-1.5 rounded-lg font-mono text-xs border border-border-light dark:border-border-dark text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            id="save-dialog-btn"
+            class="px-4 py-1.5 rounded-lg font-mono text-xs bg-accent text-surface-dark font-medium hover:bg-accent-hover transition-colors"
+          >
+            Save URL
+          </button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Global Tunnel Domain Settings Dialog -->
+  <dialog
+    id="global-config-dialog"
+    class="backdrop:bg-black/60 backdrop:backdrop-blur-sm rounded-xl p-0 bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark shadow-2xl max-w-lg w-[92vw] text-ink-light dark:text-ink-dark transition-all"
+  >
+    <div class="p-6 space-y-5">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-bold tracking-tight text-ink-light dark:text-ink-dark">
+          Tunnel Domain Configuration
+        </h3>
+        <button
+          type="button"
+          id="close-global-dialog-btn"
+          class="text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark p-1 rounded font-mono text-sm"
+          aria-label="Close dialog"
+        >
+          ✕
+        </button>
+      </div>
+
+      <div class="space-y-3 text-sm text-ink-light-secondary dark:text-ink-dark-secondary">
+        <p>
+          Configure the base domain for your Cloudflare Tunnels (e.g. <code class="font-mono text-xs px-1 py-0.5 rounded bg-surface-light-muted dark:bg-surface-dark-muted">aprovero.org</code>). Subdomains will automatically append (e.g. <code class="font-mono text-xs px-1 py-0.5 rounded bg-surface-light-muted dark:bg-surface-dark-muted">n8n.aprovero.org</code>, <code class="font-mono text-xs px-1 py-0.5 rounded bg-surface-light-muted dark:bg-surface-dark-muted">casa.aprovero.org</code>).
+        </p>
+
+        <div class="space-y-1.5">
+          <label for="global-domain-input" class="block font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+            Base Tunnel Domain:
+          </label>
+          <input
+            id="global-domain-input"
+            type="text"
+            class="w-full px-3.5 py-2 rounded-lg font-mono text-xs bg-surface-light-card dark:bg-surface-dark-card border border-border-light dark:border-border-dark text-ink-light dark:text-ink-dark focus:outline-none focus:ring-1 focus:ring-accent"
+            placeholder="aprovero.org"
+          />
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-2">
+        <button
+          type="button"
+          id="reset-all-urls-btn"
+          class="font-mono text-xs text-rose-500 hover:underline"
+        >
+          Clear All Overrides
+        </button>
+
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            id="cancel-global-dialog-btn"
+            class="px-3.5 py-1.5 rounded-lg font-mono text-xs border border-border-light dark:border-border-dark text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            id="save-global-domain-btn"
+            class="px-4 py-1.5 rounded-lg font-mono text-xs bg-accent text-surface-dark font-medium hover:bg-accent-hover transition-colors"
+          >
+            Apply to All
+          </button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Client-side Interactive Gallery Controller -->
+  <script is:inline>
+    (function () {
+      const STORAGE_KEY = 'homelab_custom_service_urls';
+      const DOMAIN_KEY = 'homelab_base_tunnel_domain';
+
+      const cards = Array.from(document.querySelectorAll('.service-card'));
+      const searchInput = document.getElementById('service-search');
+      const categoryPills = Array.from(document.querySelectorAll('.category-pill'));
+      const countText = document.getElementById('service-count-text');
+      const emptyState = document.getElementById('empty-state');
+      const resetFilterBtn = document.getElementById('reset-filter-btn');
+
+      // Dialog Elements
+      const customUrlDialog = document.getElementById('custom-url-dialog');
+      const dialogTitle = document.getElementById('dialog-title');
+      const dialogUrlInput = document.getElementById('dialog-url-input');
+      const closeDialogBtn = document.getElementById('close-dialog-btn');
+      const cancelDialogBtn = document.getElementById('cancel-dialog-btn');
+      const saveDialogBtn = document.getElementById('save-dialog-btn');
+      const resetSingleUrlBtn = document.getElementById('reset-single-url-btn');
+
+      // Global Domain Dialog Elements
+      const openConfigBtn = document.getElementById('open-config-btn');
+      const globalConfigDialog = document.getElementById('global-config-dialog');
+      const globalDomainInput = document.getElementById('global-domain-input');
+      const closeGlobalDialogBtn = document.getElementById('close-global-dialog-btn');
+      const cancelGlobalDialogBtn = document.getElementById('cancel-global-dialog-btn');
+      const saveGlobalDomainBtn = document.getElementById('save-global-domain-btn');
+      const resetAllUrlsBtn = document.getElementById('reset-all-urls-btn');
+
+      let currentActiveServiceId = null;
+      let activeCategory = 'All';
+      let searchQuery = '';
+
+      // Load saved URLs and apply to cards
+      function getCustomUrls() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : {};
+        } catch (e) {
+          return {};
+        }
+      }
+
+      function getBaseDomain() {
+        return localStorage.getItem(DOMAIN_KEY) || 'aprovero.org';
+      }
+
+      function applyUrls() {
+        const customUrls = getCustomUrls();
+        const baseDomain = getBaseDomain();
+
+        cards.forEach((card) => {
+          const id = card.getAttribute('data-service-id');
+          const defaultUrl = card.getAttribute('data-default-url') || '';
+          
+          let effectiveUrl = customUrls[id];
+          if (!effectiveUrl) {
+            if (baseDomain !== 'aprovero.org') {
+              const urlObj = new URL(defaultUrl);
+              const subdomain = urlObj.hostname.split('.')[0];
+              effectiveUrl = `${urlObj.protocol}//${subdomain}.${baseDomain}`;
+            } else {
+              effectiveUrl = defaultUrl;
+            }
+          }
+
+          // Update launch link
+          const launchLink = card.querySelector('.service-launch-link');
+          if (launchLink) {
+            launchLink.setAttribute('href', effectiveUrl);
+          }
+
+          // Update display text
+          const displaySpan = card.querySelector('.service-url-display');
+          if (displaySpan) {
+            displaySpan.textContent = effectiveUrl.replace('https://', '').replace('http://', '');
+            displaySpan.setAttribute('title', effectiveUrl);
+          }
+
+          // Update copy button data
+          const copyBtn = card.querySelector('.copy-url-btn');
+          if (copyBtn) {
+            copyBtn.setAttribute('data-url', effectiveUrl);
+          }
+        });
+      }
+
+      // Filter and Search logic
+      function updateFilter() {
+        let visibleCount = 0;
+        const q = searchQuery.toLowerCase().trim();
+
+        cards.forEach((card) => {
+          const cat = card.getAttribute('data-category');
+          const name = card.getAttribute('data-name') || '';
+          const tags = card.getAttribute('data-tags') || '';
+          const text = (card.textContent || '').toLowerCase();
+
+          const matchesCategory = activeCategory === 'All' || cat === activeCategory;
+          const matchesSearch = !q || name.includes(q) || tags.includes(q) || text.includes(q);
+
+          if (matchesCategory && matchesSearch) {
+            card.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+
+        if (countText) {
+          countText.textContent = `Showing ${visibleCount} of ${cards.length} services`;
+        }
+
+        if (emptyState) {
+          if (visibleCount === 0) {
+            emptyState.classList.remove('hidden');
+          } else {
+            emptyState.classList.add('hidden');
+          }
+        }
+      }
+
+      // Category Pill handlers
+      categoryPills.forEach((pill) => {
+        pill.addEventListener('click', () => {
+          categoryPills.forEach((p) => {
+            p.classList.remove('bg-accent', 'text-surface-dark', 'border-transparent', 'active-pill');
+            p.classList.add('bg-surface-light-card', 'dark:bg-surface-dark-card', 'text-ink-light-secondary', 'dark:text-ink-dark-secondary', 'border-border-light', 'dark:border-border-dark');
+          });
+
+          pill.classList.remove('bg-surface-light-card', 'dark:bg-surface-dark-card', 'text-ink-light-secondary', 'dark:text-ink-dark-secondary', 'border-border-light', 'dark:border-border-dark');
+          pill.classList.add('bg-accent', 'text-surface-dark', 'border-transparent', 'active-pill');
+
+          activeCategory = pill.getAttribute('data-category') || 'All';
+          updateFilter();
+        });
+      });
+
+      // Search Handler
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          searchQuery = e.target.value;
+          updateFilter();
+        });
+      }
+
+      // Reset Button Handler
+      if (resetFilterBtn) {
+        resetFilterBtn.addEventListener('click', () => {
+          if (searchInput) searchInput.value = '';
+          searchQuery = '';
+          categoryPills[0]?.click();
+        });
+      }
+
+      // Copy to Clipboard handler
+      document.addEventListener('click', async (e) => {
+        const copyBtn = e.target.closest('.copy-url-btn');
+        if (!copyBtn) return;
+
+        const url = copyBtn.getAttribute('data-url');
+        if (!url) return;
+
+        try {
+          await navigator.clipboard.writeText(url);
+          const copyIcon = copyBtn.querySelector('.copy-icon');
+          const checkIcon = copyBtn.querySelector('.check-icon');
+
+          if (copyIcon && checkIcon) {
+            copyIcon.classList.add('hidden');
+            checkIcon.classList.remove('hidden');
+            setTimeout(() => {
+              copyIcon.classList.remove('hidden');
+              checkIcon.classList.add('hidden');
+            }, 2000);
+          }
+        } catch (err) {
+          console.error('Failed to copy to clipboard', err);
+        }
+      });
+
+      // Edit Single URL Handler
+      document.addEventListener('click', (e) => {
+        const editBtn = e.target.closest('.edit-url-btn');
+        if (!editBtn) return;
+
+        const serviceId = editBtn.getAttribute('data-service-id');
+        const serviceName = editBtn.getAttribute('data-service-name');
+        currentActiveServiceId = serviceId;
+
+        const card = editBtn.closest('.service-card');
+        const launchLink = card?.querySelector('.service-launch-link');
+        const currentUrl = launchLink ? launchLink.getAttribute('href') : '';
+
+        if (dialogTitle) dialogTitle.textContent = `Customize URL for ${serviceName}`;
+        if (dialogUrlInput) dialogUrlInput.value = currentUrl || '';
+
+        if (customUrlDialog) {
+          customUrlDialog.showModal();
+        }
+      });
+
+      function closeDialog() {
+        if (customUrlDialog) customUrlDialog.close();
+        currentActiveServiceId = null;
+      }
+
+      if (closeDialogBtn) closeDialogBtn.addEventListener('click', closeDialog);
+      if (cancelDialogBtn) cancelDialogBtn.addEventListener('click', closeDialog);
+
+      if (saveDialogBtn) {
+        saveDialogBtn.addEventListener('click', () => {
+          if (!currentActiveServiceId || !dialogUrlInput) return;
+          const newUrl = dialogUrlInput.value.trim();
+          if (!newUrl) return;
+
+          const customUrls = getCustomUrls();
+          customUrls[currentActiveServiceId] = newUrl;
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(customUrls));
+          applyUrls();
+          closeDialog();
+        });
+      }
+
+      if (resetSingleUrlBtn) {
+        resetSingleUrlBtn.addEventListener('click', () => {
+          if (!currentActiveServiceId) return;
+          const customUrls = getCustomUrls();
+          delete customUrls[currentActiveServiceId];
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(customUrls));
+          applyUrls();
+          closeDialog();
+        });
+      }
+
+      // Global Domain Configuration Handlers
+      if (openConfigBtn) {
+        openConfigBtn.addEventListener('click', () => {
+          if (globalDomainInput) {
+            globalDomainInput.value = getBaseDomain();
+          }
+          if (globalConfigDialog) {
+            globalConfigDialog.showModal();
+          }
+        });
+      }
+
+      function closeGlobalDialog() {
+        if (globalConfigDialog) globalConfigDialog.close();
+      }
+
+      if (closeGlobalDialogBtn) closeGlobalDialogBtn.addEventListener('click', closeGlobalDialog);
+      if (cancelGlobalDialogBtn) cancelGlobalDialogBtn.addEventListener('click', closeGlobalDialog);
+
+      if (saveGlobalDomainBtn) {
+        saveGlobalDomainBtn.addEventListener('click', () => {
+          if (!globalDomainInput) return;
+          const domain = globalDomainInput.value.trim();
+          if (domain) {
+            localStorage.setItem(DOMAIN_KEY, domain);
+          } else {
+            localStorage.removeItem(DOMAIN_KEY);
+          }
+          applyUrls();
+          closeGlobalDialog();
+        });
+      }
+
+      if (resetAllUrlsBtn) {
+        resetAllUrlsBtn.addEventListener('click', () => {
+          localStorage.removeItem(STORAGE_KEY);
+          localStorage.removeItem(DOMAIN_KEY);
+          applyUrls();
+          closeGlobalDialog();
+        });
+      }
+
+      // Initialize on load
+      applyUrls();
+      updateFilter();
+    })();
+  </script>
+</BaseLayout>

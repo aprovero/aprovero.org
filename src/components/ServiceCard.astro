@@ -1,0 +1,190 @@
+---
+import type { ServerService } from '@/config/services';
+
+interface Props {
+  service: ServerService;
+}
+
+const { service } = Astro.props;
+---
+
+<article
+  class="service-card group relative flex flex-col justify-between p-6 sm:p-7 rounded-xl border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card hover:border-accent/50 dark:hover:border-accent/40 shadow-sm hover:shadow-md transition-all duration-200"
+  data-category={service.category}
+  data-name={service.name.toLowerCase()}
+  data-tags={service.tags.join(' ').toLowerCase()}
+  data-service-id={service.id}
+  data-default-url={service.defaultUrl}
+>
+  <div>
+    <!-- Top Row: Icon, Service Meta & Status -->
+    <div class="flex items-start justify-between gap-4 mb-4">
+      <div class="flex items-center gap-3.5">
+        <!-- Service Icon Badge -->
+        <div
+          class="w-12 h-12 rounded-lg flex items-center justify-center border border-border-light/80 dark:border-border-dark/80 bg-surface-light-muted/80 dark:bg-surface-dark-muted/80 shrink-0 group-hover:scale-105 transition-transform"
+          style={`border-top-color: ${service.accentColor}; border-top-width: 2px;`}
+        >
+          {service.id === 'casaos' && (
+            <svg class="w-6 h-6 text-blue-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7" rx="1.5" />
+              <rect x="14" y="3" width="7" height="7" rx="1.5" />
+              <rect x="3" y="14" width="7" height="7" rx="1.5" />
+              <rect x="14" y="14" width="7" height="7" rx="1.5" />
+            </svg>
+          )}
+
+          {service.id === 'n8n' && (
+            <svg class="w-6 h-6 text-rose-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="6" cy="6" r="3" />
+              <circle cx="18" cy="6" r="3" />
+              <circle cx="6" cy="18" r="3" />
+              <path d="M9 6h6" />
+              <path d="M6 9v6" />
+              <path d="M16 8l-8 8" />
+            </svg>
+          )}
+
+          {service.id === 'immich' && (
+            <svg class="w-6 h-6 text-indigo-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="3" />
+              <circle cx="8.5" cy="8.5" r="1.5" />
+              <path d="M21 15l-5-5L5 21" />
+            </svg>
+          )}
+
+          {service.id === 'nextcloud' && (
+            <svg class="w-6 h-6 text-sky-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
+            </svg>
+          )}
+
+          {service.id === 'portainer' && (
+            <svg class="w-6 h-6 text-cyan-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 17l10 5 10-5M2 12l10 5 10-5M12 2l10 5-10 5-10-5z" />
+            </svg>
+          )}
+
+          {service.id === 'homeassistant' && (
+            <svg class="w-6 h-6 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z" />
+            </svg>
+          )}
+
+          {service.id === 'jellyfin' && (
+            <svg class="w-6 h-6 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="6 3 20 12 6 21 6 3" />
+            </svg>
+          )}
+
+          {service.id === 'adguard' && (
+            <svg class="w-6 h-6 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              <path d="m9 12 2 2 4-4" />
+            </svg>
+          )}
+
+          {service.id === 'stirling-pdf' && (
+            <svg class="w-6 h-6 text-rose-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="9" y1="15" x2="15" y2="15" />
+            </svg>
+          )}
+
+          {service.id === 'metube' && (
+            <svg class="w-6 h-6 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+          )}
+        </div>
+
+        <div>
+          <h3 class="text-lg font-bold tracking-tight text-ink-light dark:text-ink-dark group-hover:text-accent-dark dark:group-hover:text-accent transition-colors flex items-center gap-1.5">
+            <span>{service.name}</span>
+          </h3>
+          <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+            {service.role}
+          </span>
+        </div>
+      </div>
+
+      <!-- Online Status Badge -->
+      <div class="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[0.7rem] font-mono font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 shrink-0">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>{service.status}</span>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <p class="text-[0.92rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed mb-4">
+      {service.description}
+    </p>
+
+    <!-- Tags -->
+    <div class="flex flex-wrap gap-1.5 mb-5">
+      {service.tags.map((tag) => (
+        <span class="px-2 py-0.5 rounded text-[0.72rem] font-mono bg-surface-light-muted dark:bg-surface-dark-muted text-ink-light-muted dark:text-ink-dark-muted border border-border-light/60 dark:border-border-dark/60">
+          {tag}
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <!-- Bottom Launch Section -->
+  <div class="pt-4 border-t border-border-light/70 dark:border-border-dark/70 space-y-3">
+    <!-- Tunnel URL Display & Quick Actions -->
+    <div class="flex items-center justify-between gap-2 text-xs font-mono text-ink-light-muted dark:text-ink-dark-muted bg-surface-light-muted/50 dark:bg-surface-dark-muted/40 px-3 py-1.5 rounded border border-border-light/50 dark:border-border-dark/50">
+      <span class="truncate service-url-display select-all" title={service.defaultUrl}>
+        {service.defaultUrl.replace('https://', '')}
+      </span>
+
+      <div class="flex items-center gap-1 shrink-0">
+        <!-- Copy URL Button -->
+        <button
+          type="button"
+          class="copy-url-btn p-1 rounded hover:bg-surface-light-muted dark:hover:bg-surface-dark-muted text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark transition-colors"
+          data-url={service.defaultUrl}
+          title="Copy URL"
+          aria-label={`Copy URL for ${service.name}`}
+        >
+          <svg class="w-3.5 h-3.5 copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <svg class="w-3.5 h-3.5 check-icon hidden text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </button>
+
+        <!-- Edit URL Button -->
+        <button
+          type="button"
+          class="edit-url-btn p-1 rounded hover:bg-surface-light-muted dark:hover:bg-surface-dark-muted text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark transition-colors"
+          data-service-id={service.id}
+          data-service-name={service.name}
+          title="Customize URL"
+          aria-label={`Customize URL for ${service.name}`}
+        >
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20h9"></path>
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Launch Button -->
+    <a
+      href={service.defaultUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="service-launch-link w-full py-2.5 px-4 rounded-lg bg-surface-light-muted dark:bg-surface-dark-muted hover:bg-accent hover:text-surface-dark dark:hover:bg-accent dark:hover:text-surface-dark text-ink-light dark:text-ink-dark font-mono text-xs sm:text-sm font-medium transition-colors flex items-center justify-center gap-2 border border-border-light dark:border-border-dark hover:border-transparent group/btn"
+    >
+      <span>Open {service.name}</span>
+      <span class="text-accent-dark dark:text-accent group-hover/btn:text-surface-dark transition-colors">↗</span>
+    </a>
+  </div>
+</article>
