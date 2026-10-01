@@ -6,6 +6,7 @@ export interface ServerService {
   description: string;
   defaultSubdomain: string;
   defaultUrl: string;
+  iconUrl: string;
   port?: number;
   tags: string[];
   status: 'Online' | 'Active' | 'Configuring';
@@ -21,10 +22,11 @@ export const serverServices: ServerService[] = [
     description: "Primary server dashboard, hardware telemetry, container lifecycle, and central application launchpad.",
     defaultSubdomain: "casa",
     defaultUrl: "https://casa.aprovero.org",
+    iconUrl: "/icons/services/casaos.svg",
     port: 80,
     tags: ["Dashboard", "Docker", "System", "Storage"],
     status: "Online",
-    accentColor: "#2563EB", // Blue
+    accentColor: "#2563EB",
   },
   {
     id: "n8n",
@@ -34,10 +36,11 @@ export const serverServices: ServerService[] = [
     description: "Self-hosted node-based workflow automation for personal tasks, smart budgeting, and multi-service API pipelines.",
     defaultSubdomain: "n8n",
     defaultUrl: "https://n8n.aprovero.org",
+    iconUrl: "/icons/services/n8n.svg",
     port: 5678,
     tags: ["Automation", "Webhooks", "API", "Pipelines"],
     status: "Online",
-    accentColor: "#FF6D5A", // n8n Coral
+    accentColor: "#FF6D5A",
   },
   {
     id: "immich",
@@ -47,10 +50,11 @@ export const serverServices: ServerService[] = [
     description: "High-performance self-hosted photo and video backup solution with timeline navigation, facial recognition, and mobile sync.",
     defaultSubdomain: "immich",
     defaultUrl: "https://immich.aprovero.org",
+    iconUrl: "/icons/services/immich.svg",
     port: 2283,
     tags: ["Photos", "Backup", "Machine Learning", "Mobile Sync"],
     status: "Online",
-    accentColor: "#4255FF", // Immich Indigo
+    accentColor: "#4255FF",
   },
   {
     id: "nextcloud",
@@ -60,10 +64,11 @@ export const serverServices: ServerService[] = [
     description: "Decentralized file sync, private cloud storage, document collaboration, and household data synchronization.",
     defaultSubdomain: "nextcloud",
     defaultUrl: "https://nextcloud.aprovero.org",
+    iconUrl: "/icons/services/nextcloud.svg",
     port: 8080,
     tags: ["Cloud", "Files", "Sync", "Productivity"],
     status: "Online",
-    accentColor: "#0082C9", // Nextcloud Blue
+    accentColor: "#0082C9",
   },
   {
     id: "portainer",
@@ -73,10 +78,11 @@ export const serverServices: ServerService[] = [
     description: "Granular Docker stack and container environment management, compose configurations, and persistent volume tracking.",
     defaultSubdomain: "portainer",
     defaultUrl: "https://portainer.aprovero.org",
+    iconUrl: "/icons/services/portainer.svg",
     port: 9000,
     tags: ["Docker", "DevOps", "Stacks", "Containers"],
     status: "Online",
-    accentColor: "#13BEF9", // Portainer Cyan
+    accentColor: "#13BEF9",
   },
   {
     id: "homeassistant",
@@ -86,10 +92,11 @@ export const serverServices: ServerService[] = [
     description: "Unified local smart home controller integrating household cameras, plugs, environmental sensors, and automations.",
     defaultSubdomain: "ha",
     defaultUrl: "https://ha.aprovero.org",
+    iconUrl: "/icons/services/home-assistant.svg",
     port: 8123,
     tags: ["IoT", "Sensors", "Automation", "Zigbee/Wi-Fi"],
     status: "Online",
-    accentColor: "#18BCF2", // Home Assistant Cyan
+    accentColor: "#18BCF2",
   },
   {
     id: "jellyfin",
@@ -99,10 +106,11 @@ export const serverServices: ServerService[] = [
     description: "Hardware-friendly personal media system streaming personal video and audio collections across home devices.",
     defaultSubdomain: "jellyfin",
     defaultUrl: "https://jellyfin.aprovero.org",
+    iconUrl: "/icons/services/jellyfin.svg",
     port: 8096,
     tags: ["Streaming", "Media", "TV", "Entertainment"],
     status: "Online",
-    accentColor: "#AA5CC3", // Jellyfin Purple
+    accentColor: "#AA5CC3",
   },
   {
     id: "adguard",
@@ -112,10 +120,11 @@ export const serverServices: ServerService[] = [
     description: "Network-wide recursive DNS server providing ad blocking, tracker filtering, and private household DNS routing.",
     defaultSubdomain: "adguard",
     defaultUrl: "https://adguard.aprovero.org",
+    iconUrl: "/icons/services/adguard-home.svg",
     port: 3000,
     tags: ["DNS", "Security", "Privacy", "AdBlock"],
     status: "Online",
-    accentColor: "#68BC71", // AdGuard Green
+    accentColor: "#68BC71",
   },
   {
     id: "stirling-pdf",
@@ -125,10 +134,11 @@ export const serverServices: ServerService[] = [
     description: "Full-featured offline-first web utility for merging, splitting, OCR, compressing, and signing PDF documents.",
     defaultSubdomain: "pdf",
     defaultUrl: "https://pdf.aprovero.org",
+    iconUrl: "/icons/services/stirling-pdf.svg",
     port: 8080,
     tags: ["PDF", "Productivity", "Documents", "Tools"],
     status: "Online",
-    accentColor: "#E11D48", // Stirling Rose/Red
+    accentColor: "#E11D48",
   },
   {
     id: "metube",
@@ -138,9 +148,37 @@ export const serverServices: ServerService[] = [
     description: "Web GUI wrapper for youtube-dl / yt-dlp to download and preserve media directly onto server storage.",
     defaultSubdomain: "metube",
     defaultUrl: "https://metube.aprovero.org",
+    iconUrl: "/icons/services/metube.svg",
     port: 8081,
     tags: ["Downloads", "Archive", "Media", "Utility"],
     status: "Online",
-    accentColor: "#EAB308", // Amber
+    accentColor: "#EAB308",
+  },
+  {
+    id: "uptimekuma",
+    name: "Uptime Kuma",
+    category: "Utilities & Network",
+    role: "Uptime & Health Monitor",
+    description: "Self-hosted monitoring tool tracking server availability, HTTP responses, Docker containers, and ping metrics.",
+    defaultSubdomain: "status",
+    defaultUrl: "https://status.aprovero.org",
+    iconUrl: "/icons/services/uptime-kuma.svg",
+    port: 3001,
+    tags: ["Monitoring", "Uptime", "Docker", "Alerts"],
+    status: "Online",
+    accentColor: "#5CD475",
+  },
+  {
+    id: "tailscale",
+    name: "Tailscale",
+    category: "Utilities & Network",
+    role: "Mesh VPN & Admin Console",
+    description: "Zero-config WireGuard mesh network connecting server, workstations, and mobile devices with encrypted peer-to-peer tunnels.",
+    defaultSubdomain: "tailscale",
+    defaultUrl: "https://login.tailscale.com/admin/machines",
+    iconUrl: "/icons/services/tailscale.svg",
+    tags: ["VPN", "Mesh", "WireGuard", "Security"],
+    status: "Online",
+    accentColor: "#4F46E5",
   },
 ];

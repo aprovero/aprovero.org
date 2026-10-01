@@ -260,6 +260,21 @@ const categories = [
             placeholder="aprovero.org"
           />
         </div>
+
+        <div class="space-y-1.5 pt-2 border-t border-border-light/60 dark:border-border-dark/60">
+          <label for="kuma-url-input" class="block font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+            Uptime Kuma Status Page URL:
+          </label>
+          <input
+            id="kuma-url-input"
+            type="url"
+            class="w-full px-3.5 py-2 rounded-lg font-mono text-xs bg-surface-light-card dark:bg-surface-dark-card border border-border-light dark:border-border-dark text-ink-light dark:text-ink-dark focus:outline-none focus:ring-1 focus:ring-accent"
+            placeholder="https://status.aprovero.org/status/default"
+          />
+          <p class="text-[0.75rem] text-ink-light-muted dark:text-ink-dark-muted">
+            Connect your Uptime Kuma status page to automatically reflect real-time container health and 24h uptime.
+          </p>
+        </div>
       </div>
 
       <div class="flex items-center justify-between pt-2">
@@ -296,6 +311,7 @@ const categories = [
     (function () {
       const STORAGE_KEY = 'homelab_custom_service_urls';
       const DOMAIN_KEY = 'homelab_base_tunnel_domain';
+      const KUMA_KEY = 'homelab_uptime_kuma_url';
 
       const cards = Array.from(document.querySelectorAll('.service-card'));
       const searchInput = document.getElementById('service-search');
@@ -317,6 +333,7 @@ const categories = [
       const openConfigBtn = document.getElementById('open-config-btn');
       const globalConfigDialog = document.getElementById('global-config-dialog');
       const globalDomainInput = document.getElementById('global-domain-input');
+      const kumaUrlInput = document.getElementById('kuma-url-input');
       const closeGlobalDialogBtn = document.getElementById('close-global-dialog-btn');
       const cancelGlobalDialogBtn = document.getElementById('cancel-global-dialog-btn');
       const saveGlobalDomainBtn = document.getElementById('save-global-domain-btn');
@@ -326,7 +343,6 @@ const categories = [
       let activeCategory = 'All';
       let searchQuery = '';
 
-      // Load saved URLs and apply to cards
       function getCustomUrls() {
         try {
           const raw = localStorage.getItem(STORAGE_KEY);
@@ -340,6 +356,10 @@ const categories = [
         return localStorage.getItem(DOMAIN_KEY) || 'aprovero.org';
       }
 
+      function getKumaUrl() {
+        return localStorage.getItem(KUMA_KEY) || '';
+      }
+
       function applyUrls() {
         const customUrls = getCustomUrls();
         const baseDomain = getBaseDomain();
@@ -350,7 +370,7 @@ const categories = [
           
           let effectiveUrl = customUrls[id];
           if (!effectiveUrl) {
-            if (baseDomain !== 'aprovero.org') {
+            if (baseDomain !== 'aprovero.org' && !defaultUrl.includes('tailscale.com')) {
               const urlObj = new URL(defaultUrl);
               const subdomain = urlObj.hostname.split('.')[0];
               effectiveUrl = `${urlObj.protocol}//${subdomain}.${baseDomain}`;
@@ -364,18 +384,120 @@ const categories = [
           if (launchLink) {
             launchLink.setAttribute('href', effectiveUrl);
           }
+        });
+      }
 
-          // Update display text
-          const displaySpan = card.querySelector('.service-url-display');
-          if (displaySpan) {
-            displaySpan.textContent = effectiveUrl.replace('https://', '').replace('http://', '');
-            displaySpan.setAttribute('title', effectiveUrl);
+      // Update badge UI
+      function setBadgeState(card, state, label) {
+        const badge = card.querySelector('.service-status-badge');
+        if (!badge) return;
+        const dot = badge.querySelector('span:first-child');
+        const text = badge.querySelector('.status-text');
+
+        badge.className = 'service-status-badge flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[0.7rem] font-mono font-medium transition-all';
+        dot.className = 'w-1.5 h-1.5 rounded-full';
+
+        if (state === 'online') {
+          badge.classList.add('bg-emerald-500/10', 'text-emerald-600', 'dark:text-emerald-400', 'border', 'border-emerald-500/20');
+          dot.classList.add('bg-emerald-500', 'animate-pulse');
+        } else if (state === 'offline') {
+          badge.classList.add('bg-rose-500/10', 'text-rose-600', 'dark:text-rose-400', 'border', 'border-rose-500/20');
+          dot.classList.add('bg-rose-500');
+        } else if (state === 'pending') {
+          badge.classList.add('bg-amber-500/10', 'text-amber-600', 'dark:text-amber-400', 'border', 'border-amber-500/20');
+          dot.classList.add('bg-amber-500', 'animate-pulse');
+        }
+
+        if (text) {
+          text.textContent = label;
+        }
+      }
+
+      // Real status checking via Uptime Kuma or fallback browser ping
+      async function updateRealServiceStates() {
+        const kumaUrl = getKumaUrl();
+
+        if (kumaUrl) {
+          try {
+            // Parse Kuma URL (e.g. https://status.aprovero.org or https://status.aprovero.org/status/default)
+            let base = kumaUrl.replace(/\/status\/.*$/, '').replace(/\/+$/, '');
+            let slug = 'default';
+            const slugMatch = kumaUrl.match(/\/status\/([a-zA-Z0-9_-]+)/);
+            if (slugMatch) slug = slugMatch[1];
+
+            const [statusRes, heartbeatRes] = await Promise.all([
+              fetch(`${base}/api/status-page/${slug}`),
+              fetch(`${base}/api/status-page/heartbeat/${slug}`),
+            ]);
+
+            if (statusRes.ok && heartbeatRes.ok) {
+              const statusData = await statusRes.json();
+              const heartbeatData = await heartbeatRes.json();
+
+              // Map monitors to name
+              const monitorMap = {};
+              if (statusData.publicGroupList) {
+                statusData.publicGroupList.forEach((group) => {
+                  group.monitorList?.forEach((m) => {
+                    monitorMap[m.name.toLowerCase().trim()] = m.id;
+                  });
+                });
+              }
+
+              // Update cards
+              cards.forEach((card) => {
+                const serviceName = (card.getAttribute('data-name') || '').toLowerCase().trim();
+                const monitorId = monitorMap[serviceName];
+
+                if (monitorId && heartbeatData.heartbeatList?.[monitorId]) {
+                  const beats = heartbeatData.heartbeatList[monitorId];
+                  const latest = beats[beats.length - 1];
+                  const uptime = heartbeatData.uptimeList?.[`${monitorId}_24`];
+                  const uptimePercent = uptime !== undefined ? `${Math.round(uptime * 100)}%` : null;
+
+                  if (latest && latest.status === 1) {
+                    setBadgeState(card, 'online', uptimePercent ? `UP · ${uptimePercent}` : 'Online');
+                    return;
+                  } else if (latest && latest.status === 0) {
+                    setBadgeState(card, 'offline', 'Offline');
+                    return;
+                  } else if (latest && latest.status === 2) {
+                    setBadgeState(card, 'pending', 'Pending');
+                    return;
+                  }
+                }
+              });
+              return;
+            }
+          } catch (e) {
+            console.warn('Uptime Kuma fetch did not respond, using live probe fallback:', e);
           }
+        }
 
-          // Update copy button data
-          const copyBtn = card.querySelector('.copy-url-btn');
-          if (copyBtn) {
-            copyBtn.setAttribute('data-url', effectiveUrl);
+        // Fallback: Live browser reachability check
+        cards.forEach(async (card) => {
+          const launchLink = card.querySelector('.service-launch-link');
+          const targetUrl = launchLink ? launchLink.getAttribute('href') : null;
+          if (!targetUrl || targetUrl.includes('tailscale.com')) return;
+
+          setBadgeState(card, 'pending', 'Checking...');
+
+          const start = performance.now();
+          try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 4000);
+
+            await fetch(targetUrl, {
+              method: 'GET',
+              mode: 'no-cors',
+              cache: 'no-store',
+              signal: controller.signal,
+            });
+            clearTimeout(timeoutId);
+            const ms = Math.round(performance.now() - start);
+            setBadgeState(card, 'online', `Online · ${ms}ms`);
+          } catch (err) {
+            setBadgeState(card, 'offline', 'Unreachable');
           }
         });
       }
@@ -448,32 +570,6 @@ const categories = [
         });
       }
 
-      // Copy to Clipboard handler
-      document.addEventListener('click', async (e) => {
-        const copyBtn = e.target.closest('.copy-url-btn');
-        if (!copyBtn) return;
-
-        const url = copyBtn.getAttribute('data-url');
-        if (!url) return;
-
-        try {
-          await navigator.clipboard.writeText(url);
-          const copyIcon = copyBtn.querySelector('.copy-icon');
-          const checkIcon = copyBtn.querySelector('.check-icon');
-
-          if (copyIcon && checkIcon) {
-            copyIcon.classList.add('hidden');
-            checkIcon.classList.remove('hidden');
-            setTimeout(() => {
-              copyIcon.classList.remove('hidden');
-              checkIcon.classList.add('hidden');
-            }, 2000);
-          }
-        } catch (err) {
-          console.error('Failed to copy to clipboard', err);
-        }
-      });
-
       // Edit Single URL Handler
       document.addEventListener('click', (e) => {
         const editBtn = e.target.closest('.edit-url-btn');
@@ -513,6 +609,7 @@ const categories = [
           customUrls[currentActiveServiceId] = newUrl;
           localStorage.setItem(STORAGE_KEY, JSON.stringify(customUrls));
           applyUrls();
+          updateRealServiceStates();
           closeDialog();
         });
       }
@@ -524,15 +621,19 @@ const categories = [
           delete customUrls[currentActiveServiceId];
           localStorage.setItem(STORAGE_KEY, JSON.stringify(customUrls));
           applyUrls();
+          updateRealServiceStates();
           closeDialog();
         });
       }
 
-      // Global Domain Configuration Handlers
+      // Global Domain & Kuma Configuration Handlers
       if (openConfigBtn) {
         openConfigBtn.addEventListener('click', () => {
           if (globalDomainInput) {
             globalDomainInput.value = getBaseDomain();
+          }
+          if (kumaUrlInput) {
+            kumaUrlInput.value = getKumaUrl();
           }
           if (globalConfigDialog) {
             globalConfigDialog.showModal();
@@ -549,14 +650,24 @@ const categories = [
 
       if (saveGlobalDomainBtn) {
         saveGlobalDomainBtn.addEventListener('click', () => {
-          if (!globalDomainInput) return;
-          const domain = globalDomainInput.value.trim();
-          if (domain) {
-            localStorage.setItem(DOMAIN_KEY, domain);
-          } else {
-            localStorage.removeItem(DOMAIN_KEY);
+          if (globalDomainInput) {
+            const domain = globalDomainInput.value.trim();
+            if (domain) {
+              localStorage.setItem(DOMAIN_KEY, domain);
+            } else {
+              localStorage.removeItem(DOMAIN_KEY);
+            }
+          }
+          if (kumaUrlInput) {
+            const kumaUrl = kumaUrlInput.value.trim();
+            if (kumaUrl) {
+              localStorage.setItem(KUMA_KEY, kumaUrl);
+            } else {
+              localStorage.removeItem(KUMA_KEY);
+            }
           }
           applyUrls();
+          updateRealServiceStates();
           closeGlobalDialog();
         });
       }
@@ -565,7 +676,9 @@ const categories = [
         resetAllUrlsBtn.addEventListener('click', () => {
           localStorage.removeItem(STORAGE_KEY);
           localStorage.removeItem(DOMAIN_KEY);
+          localStorage.removeItem(KUMA_KEY);
           applyUrls();
+          updateRealServiceStates();
           closeGlobalDialog();
         });
       }
@@ -573,6 +686,7 @@ const categories = [
       // Initialize on load
       applyUrls();
       updateFilter();
+      updateRealServiceStates();
     })();
   </script>
 </BaseLayout>
