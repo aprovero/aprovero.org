@@ -1,21 +1,25 @@
 ---
-// CareerTimeline.astro - Restrained chronological narrative with company logos below title
+// CareerTimeline.astro - Restrained chronological narrative with company logos as entry headers
 ---
 
 <div class="space-y-12 sm:space-y-16">
   
   <!-- Entry 1: Huawei Digital Power (Sept 2026–present) -->
   <article class="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4 md:gap-10 items-start">
-    <!-- Left Column: Dates, Company Name, Role Subtitle, Logo Below Title -->
-    <div class="space-y-1.5 font-mono text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted">
+    <!-- Left Column: Dates, Logo Header, Role Subtitle -->
+    <div class="space-y-2 font-mono text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted">
       <span class="text-ink-light dark:text-ink-dark font-medium block">Sept 2026 — Present</span>
-      <h3 class="font-sans font-semibold text-ink-light dark:text-ink-dark text-base pt-0.5">Huawei Digital Power</h3>
-      <p class="text-xs text-ink-light-muted dark:text-ink-dark-muted">Exec. Solutions Sales Mgr</p>
 
-      <!-- Logo Below Title -->
-      <div class="pt-2">
-        <img src="/logos/huawei-digital-power.svg" alt="Huawei Digital Power" class="h-6.5 w-auto max-w-[150px] object-contain block dark:brightness-110" />
+      <!-- Huawei Digital Power Logo replaces text header -->
+      <div class="py-1">
+        <img 
+          src="/logos/huawei-digital-power.svg" 
+          alt="Huawei Digital Power" 
+          class="h-7 w-auto max-w-[160px] object-contain block dark:brightness-110" 
+        />
       </div>
+
+      <p class="text-xs text-ink-light-muted dark:text-ink-dark-muted">Exec. Solutions Sales Mgr</p>
     </div>
     
     <!-- Right Column: Narrative Description -->
@@ -28,16 +32,20 @@
 
   <!-- Entry 2: LATNOVVA (Oct 2025–Aug 2026) -->
   <article class="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4 md:gap-10 items-start">
-    <!-- Left Column: Dates, Company Name, Role Subtitle, Logo Below Title -->
-    <div class="space-y-1.5 font-mono text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted">
+    <!-- Left Column: Dates, Logo Header, Role Subtitle -->
+    <div class="space-y-2 font-mono text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted">
       <span class="text-ink-light dark:text-ink-dark font-medium block">Oct 2025 — Aug 2026</span>
-      <h3 class="font-sans font-semibold text-ink-light dark:text-ink-dark text-base pt-0.5">LATNOVVA</h3>
-      <p class="text-xs text-ink-light-muted dark:text-ink-dark-muted">Technical Operations</p>
 
-      <!-- Logo Below Title -->
-      <div class="pt-2">
-        <img src="/logos/latnovva.png" alt="LATNOVVA" class="h-5.5 w-auto max-w-[130px] object-contain block dark:brightness-110" />
+      <!-- LATNOVVA Logo replaces text header -->
+      <div class="py-1">
+        <img 
+          src="/logos/latnovva.png" 
+          alt="LATNOVVA" 
+          class="h-7 w-auto max-w-[150px] object-contain block dark:brightness-110" 
+        />
       </div>
+
+      <p class="text-xs text-ink-light-muted dark:text-ink-dark-muted">Technical Operations</p>
     </div>
     
     <!-- Right Column: Narrative Description -->
@@ -50,16 +58,20 @@
 
   <!-- Entry 3: Sungrow Power (2020–2025) -->
   <article class="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4 md:gap-10 items-start">
-    <!-- Left Column: Dates, Company Name, Role Subtitle, Logo Below Title -->
-    <div class="space-y-1.5 font-mono text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted">
+    <!-- Left Column: Dates, Logo Header, Role Subtitle -->
+    <div class="space-y-2 font-mono text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted">
       <span class="text-ink-light dark:text-ink-dark font-medium block">2020 — 2025</span>
-      <h3 class="font-sans font-semibold text-ink-light dark:text-ink-dark text-base pt-0.5">Sungrow Power</h3>
-      <p class="text-xs text-ink-light-muted dark:text-ink-dark-muted">Field Engineering to CoE</p>
 
-      <!-- Logo Below Title -->
-      <div class="pt-2">
-        <img src="/logos/sungrow.png" alt="Sungrow Power" class="h-5.5 w-auto max-w-[130px] object-contain block" />
+      <!-- Sungrow Logo replaces text header -->
+      <div class="py-1">
+        <img 
+          src="/logos/sungrow.png" 
+          alt="Sungrow Power" 
+          class="h-7 w-auto max-w-[150px] object-contain block" 
+        />
       </div>
+
+      <p class="text-xs text-ink-light-muted dark:text-ink-dark-muted">Field Engineering to CoE</p>
     </div>
     
     <!-- Right Column: Narrative Description -->
@@ -75,18 +87,19 @@
 
   <!-- Entry 4: Field Foundation (2008–2020) -->
   <article class="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4 md:gap-10 items-start">
-    <!-- Left Column: Dates, Company Name, Role Subtitle, Logos Below Title -->
+    <!-- Left Column: Dates, Title, Subtitle, Logo Pool -->
     <div class="space-y-1.5 font-mono text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted">
       <span class="text-ink-light dark:text-ink-dark font-medium block">2008 — 2020</span>
       <h3 class="font-sans font-semibold text-ink-light dark:text-ink-dark text-base pt-0.5">Field Foundation</h3>
       <p class="text-xs text-ink-light-muted dark:text-ink-dark-muted">Asset Mgmt &amp; Electronics</p>
 
-      <!-- Clean company logos below title (Vector, SLB, YPF, América Móvil) -->
-      <div class="pt-2 flex flex-wrap items-center gap-3">
+      <!-- Clean company logo pool (Vector, SLB, YPF, América Móvil, Corpodomotica) -->
+      <div class="pt-2.5 flex flex-wrap items-center gap-3">
         <img src="/logos/vector.png" alt="Vector Renewables" class="w-7 h-7 object-contain rounded shrink-0" title="Vector Renewables" />
-        <img src="/logos/slb.svg" alt="SLB" class="h-4.5 w-auto max-w-[50px] object-contain shrink-0 dark:invert" title="SLB (Schlumberger)" />
-        <img src="/logos/ypf.png" alt="YPF S.A." class="h-4.5 w-auto max-w-[45px] object-contain shrink-0" title="YPF S.A." />
-        <img src="/logos/america-movil.svg" alt="América Móvil" class="h-5.5 w-auto max-w-[70px] object-contain shrink-0 dark:brightness-200" title="América Móvil" />
+        <img src="/logos/slb.svg" alt="SLB" class="h-4.5 w-auto max-w-[45px] object-contain shrink-0 dark:invert" title="SLB (Schlumberger)" />
+        <img src="/logos/ypf.png" alt="YPF S.A." class="h-4.5 w-auto max-w-[42px] object-contain shrink-0" title="YPF S.A." />
+        <img src="/logos/america-movil.svg" alt="América Móvil" class="h-5 w-auto max-w-[65px] object-contain shrink-0 dark:brightness-200" title="América Móvil" />
+        <img src="/logos/corpodomotica.svg" alt="Corpodomotica" class="h-4.5 w-auto max-w-[70px] object-contain shrink-0" title="Corpodomotica" />
       </div>
     </div>
     
