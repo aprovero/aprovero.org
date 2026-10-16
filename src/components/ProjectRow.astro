@@ -12,109 +12,68 @@ interface Props {
 }
 
 const { title, subtitle, location, capacity, systemType, year, role, summary, slug } = Astro.props;
-
-// Determine single-line diagram (SLD) topology nodes based on project type
-function getTopologyNodes(slug: string, systemType: string): string[] {
-  if (slug === 'moon-palace' || systemType.toLowerCase().includes('bess')) {
-    return ['LFP Rack Array', 'DC Bus', 'Bi-Directional PCS', 'MV Skid', 'EMS / Microgrid POI'];
-  }
-  if (slug === 'level3support') {
-    return ['Field Measurement', 'Offline PWA Engine', 'IndexedDB State', 'Portable .ZIP', 'PDF Deliverable'];
-  }
-  if (slug === 'latnovva-digital-tools') {
-    return ['Site Crew Check-In', 'Geo / Timestamp Verify', 'Operations Ledger', 'Client Dispatch Portal'];
-  }
-  return ['PV String Array', '1500V DC Combiner', 'Central Inverter', 'MV Step-Up Tx', 'HV Substation POI'];
-}
-
-const topologyNodes = getTopologyNodes(slug, systemType);
 const isLevel3 = slug === 'level3support';
 ---
 
-<article class="group rounded-lg border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card hover:border-accent-dark/60 dark:hover:border-accent/50 transition-all overflow-hidden shadow-sm">
-  <!-- Top Technical Nameplate Strip -->
-  <div class="px-5 sm:px-7 py-2.5 bg-surface-light-muted/70 dark:bg-surface-dark-elevated/80 border-b border-border-light dark:border-border-dark flex flex-wrap items-center justify-between gap-x-6 gap-y-1.5 font-mono text-xs">
-    <div class="flex flex-wrap items-center gap-2 sm:gap-3">
-      <span class="inline-flex items-center gap-1.5 text-accent-dark dark:text-accent font-semibold">
-        <span class="w-1.5 h-1.5 rounded-full bg-signal"></span>
-        <span>{capacity}</span>
-      </span>
-      <span class="opacity-30">//</span>
-      <span class="text-ink-light dark:text-ink-dark font-medium uppercase tracking-wide">{systemType}</span>
+<article class="group py-8 sm:py-10 grid grid-cols-1 md:grid-cols-[210px_1fr] lg:grid-cols-[240px_1fr] gap-4 md:gap-10 lg:gap-12 items-start transition-colors">
+  <!-- Left Column: Tabular Architectural Spec Block -->
+  <div class="font-mono text-xs space-y-1.5 pt-1 md:border-r md:border-border-light/80 dark:md:border-border-dark/80 md:pr-6">
+    <div class="text-ink-light dark:text-ink-dark font-semibold text-sm tracking-tight">
+      {capacity}
     </div>
-
-    <div class="flex items-center gap-3 text-ink-light-muted dark:text-ink-dark-muted">
-      <span>{location}</span>
-      <span class="opacity-30">·</span>
-      <span>{year}</span>
+    <div class="text-accent-dark dark:text-accent font-medium">
+      {systemType}
+    </div>
+    <div class="text-ink-light-muted dark:text-ink-dark-muted pt-1">
+      {location} · {year}
     </div>
   </div>
 
-  <!-- Main Dossier Body -->
-  <div class="p-5 sm:p-7 space-y-4">
-    <div class="flex flex-col lg:flex-row lg:items-baseline justify-between gap-2">
-      <div>
-        <h3 class="font-display text-2xl sm:text-3xl font-bold uppercase tracking-tight text-ink-light dark:text-ink-dark">
-          <a
-            href={`/work/${slug}`}
-            class="inline-flex items-center gap-2 hover:text-accent-dark dark:hover:text-accent transition-colors"
-          >
-            <span>{title}</span>
-            <span class="text-accent-dark dark:text-accent opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-lg">→</span>
-          </a>
-        </h3>
-        <p class="font-mono text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted mt-0.5">
-          {subtitle}
-        </p>
-      </div>
-
-      <div class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted shrink-0">
-        <span class="uppercase text-[0.7rem] tracking-wider">ROLE:</span>{' '}
-        <span class="text-ink-light dark:text-ink-dark font-medium">{role}</span>
-      </div>
+  <!-- Right Column: Narrative & Action Row -->
+  <div class="space-y-3">
+    <div>
+      <h3 class="font-display text-2xl sm:text-[1.65rem] font-semibold tracking-tight text-ink-light dark:text-ink-dark leading-snug">
+        <a
+          href={`/work/${slug}`}
+          class="inline-flex items-center gap-2 hover:text-accent-dark dark:hover:text-accent transition-colors"
+        >
+          <span>{title}</span>
+          <span class="text-accent-dark dark:text-accent opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-base font-mono">→</span>
+        </a>
+      </h3>
+      <p class="text-sm text-ink-light-muted dark:text-ink-dark-muted mt-0.5">
+        {subtitle}
+      </p>
     </div>
 
-    <p class="text-[1rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-[1.78] max-w-4xl">
+    <p class="text-[1.01rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-[1.78] max-w-3xl">
       {summary}
     </p>
 
-    <!-- Single-Line Diagram (SLD) Topology Strip -->
-    <div class="pt-2">
-      <div class="p-3 rounded bg-surface-light/80 dark:bg-surface-dark/80 border border-border-light/80 dark:border-border-dark/80 flex flex-wrap items-center justify-between gap-3 font-mono text-[0.72rem]">
-        <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 text-ink-light-secondary dark:text-ink-dark-secondary">
-          <span class="text-accent-dark dark:text-accent font-semibold uppercase mr-1">[SLD]</span>
-          {topologyNodes.map((node, idx) => (
-            <>
-              <span class="px-2 py-0.5 rounded bg-surface-light-card dark:bg-surface-dark-card border border-border-light dark:border-border-dark text-ink-light dark:text-ink-dark">
-                {node}
-              </span>
-              {idx < topologyNodes.length - 1 && (
-                <span class="text-accent-dark dark:text-accent font-bold">→</span>
-              )}
-            </>
-          ))}
-        </div>
+    <div class="pt-2 flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
+      <div class="text-ink-light-muted dark:text-ink-dark-muted">
+        <span class="text-ink-light dark:text-ink-dark font-medium">Role:</span> {role}
+      </div>
 
-        <div class="flex items-center gap-4 shrink-0 ml-auto">
-          {isLevel3 && (
-            <a
-              href="https://level3supporttools.onrender.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-signal font-semibold hover:underline inline-flex items-center gap-1"
-            >
-              <span>Launch Live App</span>
-              <span>↗</span>
-            </a>
-          )}
+      <div class="flex items-center gap-5">
+        {isLevel3 && (
           <a
-            href={`/work/${slug}`}
-            class="text-accent-dark dark:text-accent font-semibold hover:underline inline-flex items-center gap-1 uppercase tracking-wider"
+            href="https://level3supporttools.onrender.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-ink-light-secondary dark:text-ink-dark-secondary hover:text-accent-dark dark:hover:text-accent transition-colors inline-flex items-center gap-1"
           >
-            <span>Open Dossier</span>
-            <span>→</span>
+            <span>Launch live app</span>
+            <span>↗</span>
           </a>
-        </div>
+        )}
+        <a
+          href={`/work/${slug}`}
+          class="text-accent-dark dark:text-accent font-medium hover:underline inline-flex items-center gap-1"
+        >
+          <span>Read case study</span>
+          <span>→</span>
+        </a>
       </div>
     </div>
   </div>

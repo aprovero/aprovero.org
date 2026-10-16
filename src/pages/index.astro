@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import CareerTimeline from '@/components/CareerTimeline.astro';
-import Level3SupportSpotlight from '@/components/Level3SupportSpotlight.astro';
 import ProjectRow from '@/components/ProjectRow.astro';
 import NoteRow from '@/components/NoteRow.astro';
 import StatusBadge from '@/components/StatusBadge.astro';
@@ -10,64 +9,50 @@ import { getCollection } from 'astro:content';
 
 const allWork = await getCollection('work');
 const sortedWork = allWork.sort((a, b) => a.data.order - b.data.order);
-// Filter physical/operational infrastructure dossiers (Level3Support gets its own flagship console above)
-const infrastructureWork = sortedWork.filter((item) => item.slug !== 'level3support');
+const featuredWork = sortedWork.filter((item) => item.data.featured);
 
 const allNotes = await getCollection('notes');
 const sortedNotes = allNotes.sort(
   (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 );
 
-const fleetMetrics = [
+const indexMetrics = [
   {
-    code: "MTR-01",
     value: "2.1+ GW",
-    label: "Operating Solar Fleet Supported",
-    sub: "North LATAM Service & CoE Governance",
+    label: "Operating solar fleet supported",
   },
   {
-    code: "MTR-02",
     value: "800+ MW",
-    label: "Personally Commissioned (SAT)",
-    sub: "Utility PV, Central Inverters & MV Stations",
+    label: "Personally commissioned (SAT)",
   },
   {
-    code: "MTR-03",
     value: "60+ MWh",
-    label: "Battery Storage (BESS) & PCS",
-    sub: "Grid-Tied & Microgrid Storage Systems",
+    label: "Battery energy storage (BESS)",
   },
   {
-    code: "MTR-04",
-    value: "40+ Tools",
-    label: "Live in Level3Support ToolHub",
-    sub: "100% Offline-First Field Engineering PWA",
+    value: "15+ Years",
+    label: "Field operations to executive",
   },
 ];
 ---
 
 <BaseLayout>
-  <main class="max-w-6xl mx-auto px-5 sm:px-10 py-10 sm:py-16 space-y-24 sm:space-y-32">
+  <main class="max-w-6xl mx-auto px-6 sm:px-10 py-12 sm:py-20 space-y-28 sm:space-y-36">
 
-    <!-- BUS-00: SCHEMATIC HERO & FLEET TELEMETRY NAMEPLATE -->
-    <section class="space-y-8" aria-labelledby="hero-heading">
-      <!-- Top Bus Eyebrow Bar -->
-      <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-border-light dark:border-border-dark font-mono text-xs">
-        <div class="flex items-center gap-2 text-accent-dark dark:text-accent tracking-wider uppercase font-semibold">
-          <span class="inline-block w-2 h-2 rounded-full bg-signal"></span>
-          <span>BUS-00 // ENERGY INFRASTRUCTURE · TECHNICAL OPERATIONS · MEXICO CITY</span>
-        </div>
-        <div class="text-ink-light-muted dark:text-ink-dark-muted tracking-widest uppercase text-[0.72rem]">
-          MOTTO: <span class="text-ink-light dark:text-ink-dark font-semibold">"{siteConfig.motto}"</span>
-        </div>
+    <!-- HERO SECTION -->
+    <section class="space-y-12 pt-4 sm:pt-6" aria-labelledby="hero-heading">
+      <!-- Eyebrow Metadata -->
+      <div class="flex items-center gap-2.5 font-mono text-xs sm:text-sm text-accent-dark dark:text-accent tracking-wider uppercase font-medium">
+        <span class="inline-block w-2 h-2 rounded-full bg-accent-dark dark:bg-accent"></span>
+        <span>ENERGY INFRASTRUCTURE · TECHNICAL OPERATIONS · MEXICO CITY</span>
       </div>
 
-      <!-- Main Statement & Engineering Portrait Dossier -->
-      <div class="grid grid-cols-1 md:grid-cols-[1fr_280px] lg:grid-cols-[1fr_310px] gap-10 lg:gap-14 items-start pt-2">
+      <!-- Main Statement & Portrait -->
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_280px] lg:grid-cols-[1fr_300px] gap-10 lg:gap-16 items-start">
         <div class="space-y-6">
           <h1
             id="hero-heading"
-            class="font-display text-4xl sm:text-6xl lg:text-[4.1rem] font-bold uppercase tracking-tight text-ink-light dark:text-ink-dark leading-[1.02]"
+            class="font-display text-4xl sm:text-5xl lg:text-[3.6rem] font-semibold tracking-tight text-ink-light dark:text-ink-dark leading-[1.08]"
           >
             {siteConfig.thesis}
           </h1>
@@ -76,130 +61,94 @@ const fleetMetrics = [
             {siteConfig.intro}
           </p>
 
-          <p class="text-base sm:text-[1.05rem] text-ink-light-muted dark:text-ink-dark-muted leading-relaxed max-w-2xl">
+          <p class="text-base sm:text-lg text-ink-light-muted dark:text-ink-dark-muted leading-relaxed max-w-2xl">
             {siteConfig.secondaryIntro}
           </p>
 
-          <!-- Primary Action Controls -->
-          <div class="pt-3 flex flex-wrap items-center gap-3 sm:gap-4 font-mono text-xs sm:text-sm">
-            <a
-              href="https://level3supporttools.onrender.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="px-4 py-2.5 rounded bg-accent hover:bg-accent-hover text-surface-dark font-semibold inline-flex items-center gap-2 transition-colors shadow-sm"
-            >
-              <span class="w-1.5 h-1.5 rounded-full bg-surface-dark"></span>
-              <span>Launch L3 Field ToolHub</span>
-              <span>↗</span>
-            </a>
+          <!-- Restrained Text Links -->
+          <div class="pt-3 flex flex-wrap items-center gap-7 text-sm sm:text-base font-mono">
             <a
               href="#work"
-              class="px-4 py-2.5 rounded border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card hover:border-accent-dark dark:hover:border-accent text-ink-light dark:text-ink-dark font-medium inline-flex items-center gap-1.5 transition-colors"
+              class="text-ink-light dark:text-ink-dark hover:text-accent-dark dark:hover:text-accent font-medium inline-flex items-center gap-1.5 transition-colors"
             >
-              <span>Plant Dossiers</span>
+              <span>Selected work</span>
               <span class="text-accent-dark dark:text-accent">↓</span>
             </a>
             <a
               href="#story"
-              class="px-4 py-2.5 rounded border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card hover:border-accent-dark dark:hover:border-accent text-ink-light dark:text-ink-dark font-medium inline-flex items-center gap-1.5 transition-colors"
+              class="text-ink-light dark:text-ink-dark hover:text-accent-dark dark:hover:text-accent font-medium inline-flex items-center gap-1.5 transition-colors"
             >
-              <span>Track Record</span>
+              <span>Career</span>
               <span class="text-accent-dark dark:text-accent">↓</span>
+            </a>
+            <a
+              href="#lab"
+              class="text-ink-light dark:text-ink-dark hover:text-accent-dark dark:hover:text-accent font-medium inline-flex items-center gap-1.5 transition-colors"
+            >
+              <span>The lab</span>
+              <span class="text-accent-dark dark:text-accent">↓</span>
+            </a>
+            <a
+              href={siteConfig.socials.linkedin.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark inline-flex items-center gap-1 transition-colors"
+            >
+              <span>LinkedIn</span>
+              <span>↗</span>
             </a>
           </div>
         </div>
 
-        <!-- Framed Substation Nameplate Portrait -->
-        <div class="order-first md:order-last w-full max-w-[260px] md:max-w-[310px] mx-auto md:mx-0 rounded-lg border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card p-2.5 shadow-sm space-y-2.5">
-          <div class="flex items-center justify-between font-mono text-[0.68rem] text-ink-light-muted dark:text-ink-dark-muted px-1">
-            <span class="text-accent-dark dark:text-accent font-semibold">ID // A. PROVERO</span>
-            <span>UTC−6 · CDMX</span>
-          </div>
+        <!-- Portrait Frame -->
+        <div class="order-first md:order-last w-full max-w-[260px] md:max-w-[300px] mx-auto md:mx-0">
           <img
             src="/brand/portrait.jpg"
             alt="Andres Provero"
-            width="310"
-            height="471"
-            class="w-full h-auto rounded border border-border-light/80 dark:border-border-dark/80 object-cover"
+            width="300"
+            height="456"
+            class="w-full h-auto rounded border border-border-light dark:border-border-dark shadow-sm object-cover"
           />
-          <div class="px-1 pt-0.5 flex items-center justify-between font-mono text-[0.68rem] text-ink-light-secondary dark:text-ink-dark-secondary">
-            <span>ELECTRONICS ENG.</span>
-            <span class="text-signal font-semibold">● FIELD / EXEC</span>
-          </div>
         </div>
       </div>
 
-      <!-- 4-Cell Fleet Telemetry Nameplate Bar -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border border-border-light dark:border-border-dark rounded-lg bg-surface-light-card dark:bg-surface-dark-card divide-y sm:divide-y-0 sm:divide-x divide-border-light dark:divide-border-dark overflow-hidden shadow-sm">
-        {fleetMetrics.map((m) => (
-          <div class="p-4 sm:p-5 space-y-1">
-            <div class="flex items-center justify-between font-mono text-[0.68rem] text-ink-light-muted dark:text-ink-dark-muted">
-              <span class="text-accent-dark dark:text-accent font-semibold">{m.code}</span>
-              <span>VERIFIED</span>
-            </div>
-            <div class="font-display text-3xl sm:text-4xl font-bold text-ink-light dark:text-ink-dark tracking-tight pt-0.5">
+      <!-- Architectural Hairline Index Strip -->
+      <div class="border-y border-border-light dark:border-border-dark py-6 grid grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-8 lg:gap-x-0 lg:divide-x divide-border-light dark:divide-border-dark">
+        {indexMetrics.map((m, idx) => (
+          <div class:list={["space-y-1", idx > 0 && "lg:pl-8"]}>
+            <div class="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-ink-light dark:text-ink-dark">
               {m.value}
             </div>
-            <div class="font-sans text-xs sm:text-sm font-semibold text-ink-light dark:text-ink-dark">
+            <div class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
               {m.label}
-            </div>
-            <div class="font-mono text-[0.7rem] text-ink-light-muted dark:text-ink-dark-muted leading-snug">
-              {m.sub}
             </div>
           </div>
         ))}
       </div>
     </section>
 
-    <!-- BUS-01: LEVEL3SUPPORT FLAGSHIP INTERACTIVE SPOTLIGHT -->
-    <section id="toolhub" class="space-y-6" aria-labelledby="toolhub-heading">
-      <div class="bus-header">
+    <!-- SELECTED WORK SECTION -->
+    <section id="work" class="space-y-4" aria-labelledby="work-heading">
+      <div class="border-b border-border-light dark:border-border-dark pb-5 flex items-baseline justify-between gap-4">
         <div>
-          <div class="font-mono text-xs text-accent-dark dark:text-accent font-semibold uppercase tracking-wider mb-1">
-            BUS-01 // LIVE ENGINEERING PLATFORM
-          </div>
-          <h2 id="toolhub-heading" class="font-display text-2xl sm:text-4xl font-bold uppercase tracking-tight text-ink-light dark:text-ink-dark">
-            Field Engineering ToolHub (Level3Support)
-          </h2>
-        </div>
-        <a
-          href="https://level3supporttools.onrender.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="font-mono text-xs sm:text-sm text-accent-dark dark:text-accent hover:underline font-semibold shrink-0"
-        >
-          Open level3supporttools.onrender.com ↗
-        </a>
-      </div>
-
-      <Level3SupportSpotlight />
-    </section>
-
-    <!-- BUS-02: INFRASTRUCTURE DOSSIERS (SELECTED WORK) -->
-    <section id="work" class="space-y-8" aria-labelledby="work-heading">
-      <div class="bus-header">
-        <div>
-          <div class="font-mono text-xs text-accent-dark dark:text-accent font-semibold uppercase tracking-wider mb-1">
-            BUS-02 //ENERGIZED PLANTS &amp; FIELD SYSTEMS
-          </div>
-          <h2 id="work-heading" class="font-display text-2xl sm:text-4xl font-bold uppercase tracking-tight text-ink-light dark:text-ink-dark">
-            Selected Infrastructure Dossiers
+          <h2 id="work-heading" class="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-ink-light dark:text-ink-dark">
+            Selected Work
           </h2>
           <p class="text-sm sm:text-base text-ink-light-muted dark:text-ink-dark-muted mt-1">
-            Utility-scale solar PV, battery storage, power conversion, and operational systems delivered in the field.
+            Real infrastructure and engineering tools delivered across solar PV, battery storage, and field operations.
           </p>
         </div>
         <a
           href="/work"
-          class="font-mono text-xs sm:text-sm text-accent-dark dark:text-accent hover:underline font-semibold shrink-0"
+          class="font-mono text-xs sm:text-sm text-accent-dark dark:text-accent hover:underline shrink-0"
         >
-          All 6 dossiers →
+          View all →
         </a>
       </div>
 
-      <div class="space-y-5">
+      <div class="divide-y divide-border-light dark:divide-border-dark border-b border-border-light dark:border-border-dark">
         {
-          infrastructureWork.map((project) => (
+          featuredWork.map((project) => (
             <ProjectRow
               title={project.data.title}
               subtitle={project.data.subtitle}
@@ -215,157 +164,131 @@ const fleetMetrics = [
         }
       </div>
 
-      <!-- Confidentiality notice banner -->
-      <div class="p-4 sm:p-5 rounded-lg border border-border-light dark:border-border-dark bg-surface-light-card/80 dark:bg-surface-dark-card/60 text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted font-mono leading-relaxed flex items-start gap-3">
-        <span class="text-accent-dark dark:text-accent font-bold shrink-0">[NDA]</span>
-        <div>
-          <strong class="text-ink-light dark:text-ink-dark">Field Confidentiality Protocol:</strong> Specific customer telemetry, proprietary relay/PCS parameter files, internal OEM escalations, and commercial dispatch thresholds are deliberately omitted from public documentation.
-        </div>
-      </div>
+      <!-- Quiet Confidentiality Footnote -->
+      <p class="pt-3 text-xs text-ink-light-muted dark:text-ink-dark-muted font-mono leading-relaxed max-w-3xl">
+        <strong class="text-ink-light-secondary dark:text-ink-dark-secondary font-medium">Confidentiality note:</strong> Specific customer telemetry, proprietary equipment settings, internal manufacturer investigations, and commercial dispatch parameters are omitted from public documentation.
+      </p>
     </section>
 
-    <!-- BUS-03: OPERATIONAL PROGRESSION (CAREER STORY) -->
-    <section id="story" class="space-y-8" aria-labelledby="story-heading">
-      <div class="bus-header">
-        <div>
-          <div class="font-mono text-xs text-accent-dark dark:text-accent font-semibold uppercase tracking-wider mb-1">
-            BUS-03 // OPERATIONAL PROGRESSION MATRIX
-          </div>
-          <h2 id="story-heading" class="font-display text-2xl sm:text-4xl font-bold uppercase tracking-tight text-ink-light dark:text-ink-dark">
-            15+ Years: From Field Commissioning to Executive Architecture
-          </h2>
-        </div>
+    <!-- CAREER STORY SECTION -->
+    <section id="story" class="space-y-4" aria-labelledby="story-heading">
+      <div class="border-b border-border-light dark:border-border-dark pb-5 flex items-baseline justify-between">
+        <h2 id="story-heading" class="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-ink-light dark:text-ink-dark">
+          Career Story
+        </h2>
         <span class="font-mono text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted">
-          2008 — PRESENT · LATAM
+          2008 — Present
         </span>
       </div>
 
       <CareerTimeline />
     </section>
 
-    <!-- BUS-04: THE LAB SECTION -->
+    <!-- THE LAB SECTION -->
     <section id="lab" class="space-y-8" aria-labelledby="lab-heading">
-      <div class="bus-header">
+      <div class="border-b border-border-light dark:border-border-dark pb-5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
         <div>
-          <div class="font-mono text-xs text-accent-dark dark:text-accent font-semibold uppercase tracking-wider mb-1">
-            BUS-04 // SELF-HOSTED HARDWARE &amp; AUTOMATION
-          </div>
-          <h2 id="lab-heading" class="font-display text-2xl sm:text-4xl font-bold uppercase tracking-tight text-ink-light dark:text-ink-dark">
+          <h2 id="lab-heading" class="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-ink-light dark:text-ink-dark">
             The Lab
           </h2>
           <p class="text-sm sm:text-base text-ink-light-muted dark:text-ink-dark-muted mt-1">
-            Repurposed hardware, Docker containers, n8n automation pipelines, and private household infrastructure.
+            Self-hosted infrastructure, hardware reuse, workflow automation, and household systems.
           </p>
         </div>
-        <div class="flex items-center gap-4 font-mono text-xs sm:text-sm shrink-0">
-          <a
-            href="/services"
-            class="text-ink-light-secondary dark:text-ink-dark-secondary hover:text-accent-dark dark:hover:text-accent transition-colors"
-          >
-            Services Console →
-          </a>
-          <a
-            href="/lab"
-            class="text-accent-dark dark:text-accent hover:underline font-semibold"
-          >
-            Explore lab →
-          </a>
-        </div>
+        <a
+          href="/lab"
+          class="font-mono text-xs sm:text-sm text-accent-dark dark:text-accent hover:underline shrink-0"
+        >
+          Explore lab →
+        </a>
       </div>
 
-      <!-- Lab Grid Layout -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
-        <!-- Main Homelab Host Card (Spans 2 columns on desktop) -->
-        <article class="lg:col-span-2 p-6 sm:p-7 rounded-lg border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card flex flex-col justify-between space-y-5">
-          <div class="space-y-3">
-            <div class="flex flex-wrap items-center justify-between gap-2 font-mono text-xs">
-              <span class="text-accent-dark dark:text-accent font-semibold uppercase tracking-wider">
-                HOST-01 // HOMELAB PLATFORM
-              </span>
-              <span class="text-ink-light-muted dark:text-ink-dark-muted">
-                ASUS VivoPC · Ubuntu Server · Docker · n8n
-              </span>
+      <!-- Architectural Hairline Rows for Lab -->
+      <div class="divide-y divide-border-light dark:divide-border-dark border-b border-border-light dark:border-border-dark">
+        
+        <!-- Row 1: Homelab Infrastructure -->
+        <article class="py-8 grid grid-cols-1 md:grid-cols-[210px_1fr] lg:grid-cols-[240px_1fr] gap-4 md:gap-10 lg:gap-12 items-start">
+          <div class="font-mono text-xs space-y-1.5 pt-1 md:border-r md:border-border-light/80 dark:md:border-border-dark/80 md:pr-6">
+            <div class="text-ink-light dark:text-ink-dark font-semibold text-sm">
+              Homelab Platform
             </div>
-
-            <h3 class="font-display text-2xl sm:text-3xl font-bold uppercase tracking-tight text-ink-light dark:text-ink-dark">
-              <a href="/lab" class="hover:text-accent-dark dark:hover:text-accent transition-colors inline-flex items-center gap-2">
-                <span>Reusing 2013 Hardware for 24/7 Services</span>
-                <span class="text-accent-dark dark:text-accent text-lg">→</span>
-              </a>
-            </h3>
-
-            <p class="text-[0.98rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed">
-              What started as an unused 2013 ASUS VivoPC brought out of retirement with an MXN 250 RAM upgrade has expanded into a 24/7 learning environment for Docker, Linux, Cloudflare Zero Trust tunnels, n8n workflow automation, and household utilities.
-            </p>
+            <div class="text-accent-dark dark:text-accent font-medium">
+              24/7 Headless Host
+            </div>
+            <div class="text-ink-light-muted dark:text-ink-dark-muted pt-1">
+              Ubuntu · Docker · n8n
+            </div>
           </div>
 
-          <div class="pt-3 border-t border-border-light/70 dark:border-border-dark/70 flex flex-wrap items-center justify-between gap-3">
-            <StatusBadge />
-            <a href="/lab" class="font-mono text-xs text-accent-dark dark:text-accent hover:underline font-semibold uppercase">
-              Full Lab Architecture →
-            </a>
+          <div class="space-y-3">
+            <h3 class="font-display text-2xl font-semibold tracking-tight text-ink-light dark:text-ink-dark">
+              <a href="/lab" class="hover:text-accent-dark dark:hover:text-accent transition-colors inline-flex items-center gap-2">
+                <span>Reusing Hardware for Real Services</span>
+                <span class="text-accent-dark dark:text-accent text-base font-mono">→</span>
+              </a>
+            </h3>
+            <p class="text-[1.01rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-[1.78] max-w-3xl">
+              What started as an unused 2013 ASUS VivoPC brought out of retirement to experiment with self-hosted n8n and automation has expanded into a 24/7 learning environment for Docker, Linux, and household services—while public web hosting stays cleanly separated on Cloudflare Pages.
+            </p>
+            <div class="pt-1 flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
+              <StatusBadge />
+              <a href="/lab" class="text-accent-dark dark:text-accent hover:underline font-medium">
+                Explore lab &amp; service stack →
+              </a>
+            </div>
           </div>
         </article>
 
-        <!-- Stacked Side Cards: AI Experiments & Services Launcher -->
-        <div class="space-y-5 flex flex-col justify-between">
-          <article class="p-5 sm:p-6 rounded-lg border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card space-y-2.5 flex-1">
-            <div class="font-mono text-xs text-accent-dark dark:text-accent font-semibold uppercase tracking-wider">
-              LAB-02 // AUTOMATION &amp; AI
+        <!-- Row 2: Local AI & Automation -->
+        <article class="py-8 grid grid-cols-1 md:grid-cols-[210px_1fr] lg:grid-cols-[240px_1fr] gap-4 md:gap-10 lg:gap-12 items-start">
+          <div class="font-mono text-xs space-y-1.5 pt-1 md:border-r md:border-border-light/80 dark:md:border-border-dark/80 md:pr-6">
+            <div class="text-ink-light dark:text-ink-dark font-semibold text-sm">
+              Automation &amp; AI
             </div>
-            <h4 class="font-display text-xl font-bold uppercase tracking-tight text-ink-light dark:text-ink-dark">
-              <a href="/lab" class="hover:text-accent-dark dark:hover:text-accent transition-colors">
-                n8n Pipelines &amp; Local Agent Evaluation →
-              </a>
-            </h4>
-            <p class="text-sm text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed">
-              Self-hosted n8n workflows for automated financial ledger ingestion, smart task routing, and practical evaluation of local agent containers.
-            </p>
-          </article>
+            <div class="text-accent-dark dark:text-accent font-medium">
+              Workflows &amp; Agents
+            </div>
+            <div class="text-ink-light-muted dark:text-ink-dark-muted pt-1">
+              n8n · Python · Local Tools
+            </div>
+          </div>
 
-          <article class="p-5 sm:p-6 rounded-lg border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card space-y-2.5 flex-1">
-            <div class="flex items-center justify-between font-mono text-xs">
-              <span class="text-accent-dark dark:text-accent font-semibold uppercase tracking-wider">
-                LAB-03 // ZERO-TRUST CONSOLE
-              </span>
-              <span class="text-signal font-semibold">● 11 SERVICES</span>
-            </div>
-            <h4 class="font-display text-xl font-bold uppercase tracking-tight text-ink-light dark:text-ink-dark">
-              <a href="/services" class="hover:text-accent-dark dark:hover:text-accent transition-colors">
-                Live Homelab Services Gallery →
+          <div class="space-y-2.5">
+            <h3 class="font-display text-xl sm:text-2xl font-semibold tracking-tight text-ink-light dark:text-ink-dark">
+              <a href="/lab" class="hover:text-accent-dark dark:hover:text-accent transition-colors inline-flex items-center gap-2">
+                <span>Self-Hosted Workflows &amp; Technical Grounding</span>
+                <span class="text-accent-dark dark:text-accent text-base font-mono">→</span>
               </a>
-            </h4>
-            <p class="text-sm text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed">
-              Interactive launcher and live health probe for CasaOS, Portainer, Immich, Home Assistant, Jellyfin, and AdGuard Home.
+            </h3>
+            <p class="text-[1rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-[1.78] max-w-3xl">
+              Practical experiments with automated expense ingestion, task routing, and technical knowledge retrieval over multi-hundred-page equipment manuals and inverter register maps.
             </p>
-          </article>
-        </div>
+          </div>
+        </article>
+
       </div>
     </section>
 
-    <!-- BUS-05: NOTES SECTION -->
-    <section id="notes" class="space-y-8" aria-labelledby="notes-heading">
-      <div class="bus-header">
+    <!-- NOTES SECTION -->
+    <section id="notes" class="space-y-4" aria-labelledby="notes-heading">
+      <div class="border-b border-border-light dark:border-border-dark pb-5 flex items-baseline justify-between">
         <div>
-          <div class="font-mono text-xs text-accent-dark dark:text-accent font-semibold uppercase tracking-wider mb-1">
-            BUS-05 // ENGINEERING LOGS &amp; WRITING
-          </div>
-          <h2 id="notes-heading" class="font-display text-2xl sm:text-4xl font-bold uppercase tracking-tight text-ink-light dark:text-ink-dark">
-            Field Notes &amp; Technical Observations
+          <h2 id="notes-heading" class="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-ink-light dark:text-ink-dark">
+            Notes &amp; Writing
           </h2>
           <p class="text-sm sm:text-base text-ink-light-muted dark:text-ink-dark-muted mt-1">
-            Commissioning lessons, homelab architecture decisions, and observations on building durable systems.
+            Field observations, homelab architecture, and engineering principles.
           </p>
         </div>
         <a
           href="/notes"
-          class="font-mono text-xs sm:text-sm text-accent-dark dark:text-accent hover:underline font-semibold shrink-0"
+          class="font-mono text-xs sm:text-sm text-accent-dark dark:text-accent hover:underline shrink-0"
         >
           All notes →
         </a>
       </div>
 
-      <div class="divide-y divide-border-light dark:divide-border-dark border-y border-border-light dark:border-border-dark">
+      <div class="divide-y divide-border-light dark:divide-border-dark border-b border-border-light dark:border-border-dark">
         {
           sortedNotes.map((note) => (
             <NoteRow
@@ -382,33 +305,23 @@ const fleetMetrics = [
       </div>
     </section>
 
-    <!-- BUS-06: CONTACT SECTION -->
+    <!-- CONTACT SECTION -->
     <section id="contact" class="space-y-8 pt-2" aria-labelledby="contact-heading">
-      <div class="bus-header">
-        <div>
-          <div class="font-mono text-xs text-accent-dark dark:text-accent font-semibold uppercase tracking-wider mb-1">
-            BUS-06 // DIRECT DISPATCH
-          </div>
-          <h2 id="contact-heading" class="font-display text-2xl sm:text-4xl font-bold uppercase tracking-tight text-ink-light dark:text-ink-dark">
-            Initiate Contact
-          </h2>
-        </div>
+      <div class="border-b border-border-light dark:border-border-dark pb-5">
+        <h2 id="contact-heading" class="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-ink-light dark:text-ink-dark">
+          Contact
+        </h2>
       </div>
 
-      <div class="p-6 sm:p-8 rounded-lg border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-        <div class="space-y-2 max-w-xl">
-          <p class="text-ink-light dark:text-ink-dark font-medium text-lg">
-            Available for conversations around utility-scale PV &amp; BESS architecture, technical operations, commissioning, and engineering tools.
-          </p>
-          <p class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
-            LOCATION: MEXICO CITY (UTC−6) · RESPONSE CHANNEL: DIRECT EMAIL OR LINKEDIN
-          </p>
-        </div>
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-start justify-between">
+        <p class="text-ink-light-secondary dark:text-ink-dark-secondary text-[1.05rem] leading-[1.8] max-w-2xl">
+          If you want to talk about engineering, energy infrastructure, technical operations, technology, or something interesting enough to build, feel free to reach out.
+        </p>
 
-        <div class="flex flex-wrap items-center gap-3.5 font-mono text-xs sm:text-sm shrink-0">
+        <div class="flex flex-wrap items-center gap-4 text-sm font-mono shrink-0">
           <a
             href={siteConfig.socials.email.href}
-            class="px-5 py-2.5 rounded bg-accent text-surface-dark font-semibold hover:bg-accent-hover transition-colors inline-flex items-center justify-center gap-2"
+            class="px-5 py-2.5 rounded bg-accent text-surface-dark font-medium hover:bg-accent-hover transition-colors inline-flex items-center justify-center gap-2"
           >
             <span>{siteConfig.email}</span>
             <span>✉</span>
@@ -418,7 +331,7 @@ const fleetMetrics = [
             href={siteConfig.socials.linkedin.href}
             target="_blank"
             rel="noopener noreferrer"
-            class="px-4 py-2.5 rounded border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark-elevated hover:border-accent-dark dark:hover:border-accent text-ink-light dark:text-ink-dark transition-colors inline-flex items-center justify-center gap-2"
+            class="px-5 py-2.5 rounded border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card hover:border-accent/40 text-ink-light dark:text-ink-dark transition-colors inline-flex items-center justify-center gap-2"
           >
             <span>LinkedIn</span>
             <span>↗</span>
@@ -428,7 +341,7 @@ const fleetMetrics = [
             href={siteConfig.socials.github.href}
             target="_blank"
             rel="noopener noreferrer"
-            class="px-4 py-2.5 rounded border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark-elevated hover:border-accent-dark dark:hover:border-accent text-ink-light dark:text-ink-dark transition-colors inline-flex items-center justify-center gap-2"
+            class="px-5 py-2.5 rounded border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card hover:border-accent/40 text-ink-light dark:text-ink-dark transition-colors inline-flex items-center justify-center gap-2"
           >
             <span>GitHub</span>
             <span>↗</span>
@@ -438,4 +351,4 @@ const fleetMetrics = [
     </section>
 
   </main>
-</BaseLayout>
+</BaseLayout>

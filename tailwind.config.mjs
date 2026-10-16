@@ -6,38 +6,34 @@ export default {
     extend: {
       colors: {
         accent: {
-          DEFAULT: '#F59E0B',
-          hover: '#D97706',
-          dim: 'rgba(245, 158, 11, 0.14)',
-          subtle: 'rgba(245, 158, 11, 0.06)',
-          dark: '#B45309',
-        },
-        signal: {
-          DEFAULT: '#10B981',
-          dark: '#059669',
+          DEFAULT: '#E59838',
+          hover: '#D08324',
+          dim: 'rgba(229, 152, 56, 0.12)',
+          subtle: 'rgba(229, 152, 56, 0.05)',
+          dark: '#B8651B',
         },
         surface: {
-          light: '#F6F5F0',
+          light: '#F8F7F4',
           'light-card': '#FFFFFF',
-          'light-muted': '#ECEAE2',
-          dark: '#090B0E',
-          'dark-card': '#10141B',
-          'dark-elevated': '#161B24',
-          'dark-muted': '#1C222D',
+          'light-muted': '#EFECE6',
+          dark: '#0A0C10',
+          'dark-card': '#10131A',
+          'dark-elevated': '#151922',
+          'dark-muted': '#1B202B',
         },
         border: {
-          light: '#DCD9CE',
-          'light-subtle': '#E8E5DC',
-          dark: '#222936',
-          'dark-subtle': '#171C26',
+          light: '#E2E0D8',
+          'light-subtle': '#ECEAE3',
+          dark: '#1E232E',
+          'dark-subtle': '#151922',
         },
         ink: {
-          light: '#141519',
-          'light-secondary': '#4A4D57',
-          'light-muted': '#6E7280',
+          light: '#16171A',
+          'light-secondary': '#4A4D55',
+          'light-muted': '#707480',
           dark: '#F3F4F6',
-          'dark-secondary': '#94A3B8',
-          'dark-muted': '#64748B',
+          'dark-secondary': '#9CA3AF',
+          'dark-muted': '#646B78',
         },
       },
       fontFamily: {
@@ -52,4 +48,5 @@ export default {
   },
   plugins: [],
 };
+
 

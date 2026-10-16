@@ -1,39 +1,40 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import Level3SupportSpotlight from '@/components/Level3SupportSpotlight.astro';
 ---
 
 <BaseLayout
-  title="Field Engineering ToolHub (Level3Support) | Andres Provero"
-  description="Interactive preview and launcher for Level3Support — 40+ offline-capable Solar PV, BESS, Grid, and SCADA engineering utilities built by Andres Provero."
+  title="Archive | Andres Provero"
+  description="Engineering case studies, notes, and field tools by Andres Provero."
 >
-  <main class="max-w-6xl mx-auto px-5 sm:px-10 py-12 sm:py-20 space-y-12">
-    
-    <header class="space-y-4 border-b-2 border-ink-light/85 dark:border-ink-dark/85 pb-8">
-      <div class="flex items-center gap-2 font-mono text-xs text-accent-dark dark:text-accent tracking-wider uppercase font-semibold">
-        <span class="inline-block w-2 h-2 rounded-full bg-signal"></span>
-        <span>SYS-L3 // FIELD ENGINEERING TOOLHUB</span>
+  <main class="max-w-3xl mx-auto px-6 sm:px-10 py-16 sm:py-24 space-y-8">
+    <header class="space-y-3 border-b border-border-light dark:border-border-dark pb-8">
+      <div class="font-mono text-xs text-accent-dark dark:text-accent tracking-wider uppercase font-medium">
+        DIRECT DOCUMENTATION
       </div>
-      <h1 class="font-display text-4xl sm:text-5xl font-bold uppercase tracking-tight text-ink-light dark:text-ink-dark">
-        Don't Just Read About Field Engineering. Run the Tools.
+      <h1 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight text-ink-light dark:text-ink-dark">
+        Case Studies &amp; Technical Notes
       </h1>
-      <p class="text-base sm:text-lg text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed max-w-3xl">
-        Instead of a generic AI résumé chatbot, I maintain <strong>Level3Support</strong>—a live, 100% offline-capable engineering suite with 40+ specialized calculators, fault decoders, and workflows for utility-scale Solar PV, BESS, and medium-voltage commissioning.
+      <p class="text-base sm:text-lg text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed">
+        All project architecture, commissioning methodology, and homelab documentation is published directly on this site without a chatbot intermediary.
       </p>
     </header>
 
-    <Level3SupportSpotlight />
-
-    <div class="pt-4 flex items-center justify-between font-mono text-xs sm:text-sm">
-      <a href="/" class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1.5">
-        <span>←</span>
-        <span>Back to homepage</span>
-      </a>
-      <a href="/work/level3support" class="text-accent-dark dark:text-accent hover:underline font-semibold inline-flex items-center gap-1.5">
-        <span>Read full Level3Support case study</span>
+    <div class="flex flex-wrap items-center gap-6 font-mono text-xs sm:text-sm">
+      <a href="/work" class="text-accent-dark dark:text-accent hover:underline inline-flex items-center gap-1.5">
+        <span>Selected Work</span>
         <span>→</span>
       </a>
+      <a href="/lab" class="text-accent-dark dark:text-accent hover:underline inline-flex items-center gap-1.5">
+        <span>The Lab</span>
+        <span>→</span>
+      </a>
+      <a href="/notes" class="text-accent-dark dark:text-accent hover:underline inline-flex items-center gap-1.5">
+        <span>Notes &amp; Writing</span>
+        <span>→</span>
+      </a>
+      <a href="/" class="text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark">
+        Homepage
+      </a>
     </div>
-
   </main>
 </BaseLayout>

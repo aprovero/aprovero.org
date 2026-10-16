@@ -86,5 +86,5 @@ export const siteConfig: SiteConfig = {
   // - [PATCH] (rightmost): tracks minor changes, tweaks, and fixes
   // - [MINOR] (middle): tracks major feature additions and new sections
   // - [MAJOR] (leftmost): tracks major redesigns or complete structural changes
-  version: "2.0.0",
+  version: "2.0.1",
 };

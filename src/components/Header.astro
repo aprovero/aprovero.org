@@ -15,30 +15,26 @@ function isActive(href: string) {
 ---
 
 <header class="w-full border-b border-border-light dark:border-border-dark backdrop-blur-md sticky top-0 z-40 bg-surface-light/95 dark:bg-surface-dark/95 transition-colors">
-  <div class="max-w-6xl mx-auto px-5 sm:px-10 h-16 sm:h-20 flex items-center justify-between gap-3">
-    <!-- Brand Identity: Vector APROVERO Wordmark with High-Voltage Amber Dot + Telemetry Tag -->
+  <div class="max-w-6xl mx-auto px-6 sm:px-10 h-20 flex items-center justify-between">
+    <!-- Brand Identity: Clean Geometric Wordmark with Anodized Amber Dot -->
     <a
       href="/"
-      class="group inline-flex items-center gap-3 focus:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded py-1 shrink-0"
+      class="group inline-flex items-center focus:outline-none focus-visible:ring-1 focus-visible:ring-accent rounded py-1"
       aria-label="Andres Provero — Home"
     >
-      <div class="relative inline-flex items-baseline font-sans font-semibold tracking-[-0.03em] text-2xl sm:text-[1.75rem] text-ink-light dark:text-ink-dark leading-none select-none">
+      <div class="relative inline-flex items-baseline font-sans font-medium tracking-[-0.035em] text-[1.65rem] sm:text-[1.85rem] text-ink-light dark:text-ink-dark leading-none select-none transition-opacity group-hover:opacity-85">
         <span class="relative inline-block">
           a
           <span
-            class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-accent-dark dark:bg-accent group-hover:scale-110 transition-transform"
+            class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-2 h-2 sm:w-[9px] sm:h-[9px] rounded-full bg-accent-dark dark:bg-accent"
             aria-hidden="true"
           ></span>
         </span><span>provero</span>
       </div>
-      <span class="hidden lg:inline-flex items-center gap-1.5 pl-3 border-l border-border-light dark:border-border-dark font-mono text-[0.68rem] uppercase tracking-widest text-ink-light-muted dark:text-ink-dark-muted">
-        <span class="w-1.5 h-1.5 rounded-full bg-signal"></span>
-        <span>SYS · PV / BESS</span>
-      </span>
     </a>
 
-    <!-- Primary Navigation & ToolHub Launcher -->
-    <nav class="flex items-center gap-1.5 sm:gap-5 lg:gap-7" aria-label="Primary Navigation">
+    <!-- Primary Navigation -->
+    <nav class="flex items-center gap-3 sm:gap-7" aria-label="Primary Navigation">
       {
         siteConfig.nav.map((item) => {
           const active = isActive(item.href);
@@ -46,10 +42,10 @@ function isActive(href: string) {
             <a
               href={item.href}
               class:list={[
-                "px-1.5 sm:px-0 py-1 font-display uppercase tracking-wider font-semibold transition-colors text-xs sm:text-[0.92rem]",
+                "px-1.5 sm:px-0 py-1 font-medium transition-colors text-[0.92rem] sm:text-[0.95rem]",
                 active
-                  ? "text-accent-dark dark:text-accent"
-                  : "text-ink-light-secondary hover:text-ink-light dark:text-ink-dark-secondary dark:hover:text-ink-dark",
+                  ? "text-ink-light dark:text-ink-dark"
+                  : "text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark",
               ]}
               aria-current={active ? "page" : undefined}
             >
@@ -59,32 +55,18 @@ function isActive(href: string) {
         })
       }
 
-      <div class="flex items-center gap-1.5 sm:gap-2.5 pl-2 sm:pl-4 border-l border-border-light dark:border-border-dark ml-0.5 sm:ml-1">
-        <!-- Direct L3 ToolHub Launch Button -->
-        <a
-          href="https://level3supporttools.onrender.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded border border-accent-dark/40 dark:border-accent/40 bg-accent/10 hover:bg-accent hover:text-surface-dark dark:hover:bg-accent dark:hover:text-surface-dark text-accent-dark dark:text-accent font-mono text-[0.7rem] sm:text-xs font-semibold tracking-tight transition-all group/l3"
-          title="Launch Level3Support Field Engineering ToolHub (40+ Offline Tools)"
-        >
-          <span class="w-1.5 h-1.5 rounded-full bg-signal group-hover/l3:bg-surface-dark"></span>
-          <span class="hidden sm:inline">L3 ToolHub</span>
-          <span class="sm:hidden">L3</span>
-          <span class="text-[0.68rem] opacity-80">↗</span>
-        </a>
-
+      <div class="flex items-center gap-1 sm:gap-1.5 pl-2 sm:pl-3 border-l border-border-light dark:border-border-dark ml-1 sm:ml-2">
         <!-- Services Portal Link -->
         <a
           href="/services"
           class:list={[
             "relative inline-flex items-center justify-center w-8 h-8 rounded transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-accent",
             isActive('/services')
-              ? "text-accent-dark dark:text-accent bg-accent/15 border border-accent/30"
+              ? "text-accent-dark dark:text-accent bg-accent/10"
               : "text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark hover:bg-surface-light-muted dark:hover:bg-surface-dark-muted",
           ]}
           aria-label="Services Console"
-          title="Homelab Services Console"
+          title="Services Console"
           aria-current={isActive('/services') ? "page" : undefined}
         >
           <svg
