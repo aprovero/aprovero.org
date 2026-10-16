@@ -15,34 +15,32 @@ const { title, subtitle, location, capacity, systemType, year, role, summary, sl
 const isLevel3 = slug === 'level3support';
 ---
 
-<article class="group bg-surface-light dark:bg-surface-dark hover:bg-surface-light-card dark:hover:bg-surface-dark-card p-6 sm:p-8 lg:p-9 flex flex-col justify-between gap-6 transition-colors">
+<article class="group bg-surface-light dark:bg-surface-dark hover:bg-surface-light-card/70 dark:hover:bg-surface-dark-card/70 p-7 sm:p-9 flex flex-col justify-between gap-7 transition-colors">
   <div class="space-y-4">
     <!-- Top Architectural Spec Row -->
-    <div class="flex items-baseline justify-between gap-4 border-b border-border-light/70 dark:border-border-dark/70 pb-3.5">
-      <span class="font-mono text-xs text-accent-dark dark:text-accent font-medium tracking-wide uppercase">
+    <div class="flex items-center justify-between gap-4">
+      <span class="font-mono text-xs text-accent-dark dark:text-accent font-medium tracking-wider uppercase">
         {systemType}
       </span>
-      <span class="font-display text-lg sm:text-xl font-semibold text-ink-light dark:text-ink-dark tracking-tight shrink-0">
+      <span class="font-mono text-xs px-2.5 py-1 rounded bg-surface-light-card dark:bg-surface-dark-card border border-border-light dark:border-border-dark text-ink-light dark:text-ink-dark font-medium shrink-0">
         {capacity}
       </span>
     </div>
 
     <!-- Title & Location Meta -->
-    <div class="space-y-1">
-      <div class="flex items-baseline justify-between gap-2">
-        <h3 class="font-display text-2xl sm:text-[1.7rem] font-semibold tracking-tight text-ink-light dark:text-ink-dark leading-tight">
-          <a
-            href={`/work/${slug}`}
-            class="inline-flex items-center gap-2 hover:text-accent-dark dark:hover:text-accent transition-colors"
-          >
-            <span>{title}</span>
-            <span class="text-accent-dark dark:text-accent opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-base font-mono">→</span>
-          </a>
-        </h3>
-      </div>
+    <div class="space-y-1.5 pt-1">
+      <h3 class="font-display text-2xl sm:text-[1.75rem] font-semibold tracking-tight text-ink-light dark:text-ink-dark leading-tight">
+        <a
+          href={`/work/${slug}`}
+          class="inline-flex items-center gap-2 hover:text-accent-dark dark:hover:text-accent transition-colors"
+        >
+          <span>{title}</span>
+          <span class="text-accent-dark dark:text-accent opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-base font-mono">→</span>
+        </a>
+      </h3>
 
       <p class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
-        {location} · {year}
+        {location} · {year} · {role}
       </p>
     </div>
 
@@ -52,31 +50,26 @@ const isLevel3 = slug === 'level3support';
     </p>
   </div>
 
-  <!-- Bottom Footer Meta -->
-  <div class="pt-4 border-t border-border-light/60 dark:border-border-dark/60 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
-    <span class="text-ink-light-muted dark:text-ink-dark-muted truncate max-w-[220px]" title={role}>
-      {role}
-    </span>
+  <!-- Bottom Action Links -->
+  <div class="pt-2 flex items-center justify-between gap-4 text-xs font-mono">
+    <a
+      href={`/work/${slug}`}
+      class="text-accent-dark dark:text-accent font-medium hover:underline inline-flex items-center gap-1.5"
+    >
+      <span>Read case study</span>
+      <span>→</span>
+    </a>
 
-    <div class="flex items-center gap-4 shrink-0 ml-auto">
-      {isLevel3 && (
-        <a
-          href="https://level3supporttools.onrender.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-ink-light-secondary dark:text-ink-dark-secondary hover:text-accent-dark dark:hover:text-accent transition-colors inline-flex items-center gap-1"
-        >
-          <span>Launch app</span>
-          <span>↗</span>
-        </a>
-      )}
+    {isLevel3 && (
       <a
-        href={`/work/${slug}`}
-        class="text-accent-dark dark:text-accent font-medium hover:underline inline-flex items-center gap-1"
+        href="https://level3supporttools.onrender.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-ink-light-muted dark:text-ink-dark-muted hover:text-ink-light dark:hover:text-ink-dark transition-colors inline-flex items-center gap-1"
       >
-        <span>Case study</span>
-        <span>→</span>
+        <span>Launch app</span>
+        <span>↗</span>
       </a>
-    </div>
+    )}
   </div>
 </article>
