@@ -4,31 +4,40 @@ import { siteConfig } from '@/config/site';
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="w-full border-t border-border-light dark:border-border-dark mt-28 sm:mt-36 py-12 transition-colors">
-  <div class="max-w-6xl mx-auto px-6 sm:px-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 text-[0.82rem] text-ink-light-muted dark:text-ink-dark-muted font-mono">
+<footer class="w-full border-t-2 border-ink-light/80 dark:border-ink-dark/80 mt-28 sm:mt-36 py-12 bg-surface-light-muted/40 dark:bg-surface-dark-card/40 transition-colors">
+  <div class="max-w-6xl mx-auto px-6 sm:px-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 text-[0.82rem] text-ink-light-muted dark:text-ink-dark-muted font-mono">
     
     <div class="space-y-1.5">
       <div class="flex flex-wrap items-center gap-2">
-        <span class="inline-block w-1.5 h-1.5 rounded-full bg-accent"></span>
-        <span class="text-ink-light dark:text-ink-dark font-sans font-medium text-[0.92rem]">{siteConfig.name}</span>
+        <span class="inline-block w-2 h-2 rounded-full bg-signal"></span>
+        <span class="text-ink-light dark:text-ink-dark font-display uppercase tracking-wider font-bold text-base">{siteConfig.name}</span>
         {siteConfig.motto && (
           <>
-            <span class="opacity-30">·</span>
-            <span class="text-ink-light-secondary dark:text-ink-dark-secondary italic font-sans">{siteConfig.motto}</span>
+            <span class="opacity-30">//</span>
+            <span class="text-accent-dark dark:text-accent font-mono font-medium uppercase tracking-wider text-xs">{siteConfig.motto}</span>
           </>
         )}
         <span class="opacity-30">·</span>
         <span class="text-ink-light-muted dark:text-ink-dark-muted">© {currentYear}</span>
         <span class="opacity-30">·</span>
-        <span class="text-[0.75rem] text-ink-light-secondary dark:text-ink-dark-secondary">v{siteConfig.version}</span>
+        <span class="px-1.5 py-0.5 rounded bg-surface-light-card dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark text-[0.72rem] text-ink-light-secondary dark:text-ink-dark-secondary">v{siteConfig.version}</span>
       </div>
-      <p class="text-[0.78rem] text-ink-light-muted dark:text-ink-dark-muted">
-        {siteConfig.location} · {siteConfig.timezone} · {siteConfig.homelabMetadata.hosting}.
+      <p class="text-[0.76rem] text-ink-light-muted dark:text-ink-dark-muted">
+        {siteConfig.location} · {siteConfig.timezone} · {siteConfig.homelabMetadata.hosting} · Built for field &amp; grid infrastructure.
       </p>
     </div>
 
     <!-- Direct Links -->
-    <div class="flex flex-wrap items-center gap-5 text-[0.82rem]">
+    <div class="flex flex-wrap items-center gap-4 sm:gap-5 text-[0.8rem]">
+      <a
+        href="https://level3supporttools.onrender.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-accent-dark dark:text-accent font-semibold hover:underline transition-colors"
+      >
+        L3 ToolHub ↗
+      </a>
+      <span class="opacity-25">/</span>
       <a
         href={siteConfig.socials.email.href}
         class="hover:text-accent-dark dark:hover:text-accent transition-colors"
@@ -55,17 +64,17 @@ const currentYear = new Date().getFullYear();
       </a>
       <span class="opacity-25">/</span>
       <a
-        href="/rss.xml"
-        class="hover:text-accent-dark dark:hover:text-accent transition-colors"
-      >
-        RSS
-      </a>
-      <span class="opacity-25">/</span>
-      <a
         href="/services"
         class="hover:text-accent-dark dark:hover:text-accent transition-colors"
       >
         Services
+      </a>
+      <span class="opacity-25">/</span>
+      <a
+        href="/rss.xml"
+        class="hover:text-accent-dark dark:hover:text-accent transition-colors"
+      >
+        RSS
       </a>
     </div>
 

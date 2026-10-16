@@ -1,78 +1,38 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-
-const exampleQuestions = [
-  "What did you do at Sungrow?",
-  "What BESS experience do you have?",
-  "What projects have you commissioned?",
-  "What is currently running in the lab?",
-  "What kind of engineering do you work on?",
-  "What is the thesis behind aprovero.org?",
-];
+import Level3SupportSpotlight from '@/components/Level3SupportSpotlight.astro';
 ---
 
 <BaseLayout
-  title="Ask Andres (Preview) | Andres Provero"
-  description="Architecture preview for Ask Andres — a grounded retrieval interface for questions about my engineering career, projects, and lab."
+  title="Field Engineering ToolHub (Level3Support) | Andres Provero"
+  description="Interactive preview and launcher for Level3Support — 40+ offline-capable Solar PV, BESS, Grid, and SCADA engineering utilities built by Andres Provero."
 >
-  <main class="max-w-3xl mx-auto px-5 sm:px-8 py-10 sm:py-20 space-y-10">
+  <main class="max-w-6xl mx-auto px-5 sm:px-10 py-12 sm:py-20 space-y-12">
     
-    <header class="space-y-3 border-b border-border-light dark:border-border-dark pb-8">
-      <div class="flex items-center gap-2 font-mono text-xs text-accent-dark dark:text-accent tracking-wider uppercase font-medium">
-        <span class="inline-block w-2 h-2 rounded-full bg-accent"></span>
-        <span>FORWARD ARCHITECTURE PREVIEW</span>
+    <header class="space-y-4 border-b-2 border-ink-light/85 dark:border-ink-dark/85 pb-8">
+      <div class="flex items-center gap-2 font-mono text-xs text-accent-dark dark:text-accent tracking-wider uppercase font-semibold">
+        <span class="inline-block w-2 h-2 rounded-full bg-signal"></span>
+        <span>SYS-L3 // FIELD ENGINEERING TOOLHUB</span>
       </div>
-      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-ink-light dark:text-ink-dark">
-        Ask Andres
+      <h1 class="font-display text-4xl sm:text-5xl font-bold uppercase tracking-tight text-ink-light dark:text-ink-dark">
+        Don't Just Read About Field Engineering. Run the Tools.
       </h1>
-      <p class="text-base sm:text-lg text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed">
-        An upcoming grounded question-answering interface built directly over verified documentation, case studies, and engineering notes on this site.
+      <p class="text-base sm:text-lg text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed max-w-3xl">
+        Instead of a generic AI résumé chatbot, I maintain <strong>Level3Support</strong>—a live, 100% offline-capable engineering suite with 40+ specialized calculators, fault decoders, and workflows for utility-scale Solar PV, BESS, and medium-voltage commissioning.
       </p>
     </header>
 
-    <div class="space-y-8">
-      
-      <!-- Conceptual Description -->
-      <div class="space-y-4 text-ink-light-secondary dark:text-ink-dark-secondary text-[0.98rem] leading-relaxed">
-        <p>
-          Rather than relying on generic résumé keyword scrapers or commercial chat wrappers, this system is designed to provide direct, grounded answers derived exclusively from:
-        </p>
-        <ul class="list-disc pl-6 space-y-1.5 font-mono text-xs text-ink-light dark:text-ink-dark">
-          <li>15+ years of career history across utility-scale PV and BESS</li>
-          <li>Commissioning methodologies and field case studies</li>
-          <li>Hardware schematics and sanitized homelab architectures</li>
-          <li>Technical notes and engineering observations</li>
-        </ul>
-        <p class="text-sm text-ink-light-muted dark:text-ink-dark-muted">
-          <strong class="text-ink-light dark:text-ink-dark">Engineering Policy:</strong> There is no fake chatbot here. The underlying inference engine will only be connected once local, zero-hallucination citation pipelines are validated on homelab hardware.
-        </p>
-      </div>
+    <Level3SupportSpotlight />
 
-      <!-- Example Queries -->
-      <div class="space-y-3">
-        <div class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted uppercase tracking-wider">
-          Example queries supported by the underlying knowledge base:
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-          {exampleQuestions.map((q) => (
-            <div class="p-3 rounded border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card font-mono text-xs text-ink-light dark:text-ink-dark">
-              "{q}"
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <!-- Navigation links -->
-      <div class="pt-6 border-t border-border-light dark:border-border-dark flex items-center justify-between font-mono text-xs">
-        <a href="/work" class="text-accent-dark dark:text-accent hover:underline inline-flex items-center gap-1">
-          <span>Read case studies directly</span>
-          <span>→</span>
-        </a>
-        <a href="/" class="text-ink-light-muted hover:text-ink-light dark:text-ink-dark-muted dark:hover:text-ink-dark">
-          Homepage
-        </a>
-      </div>
-
+    <div class="pt-4 flex items-center justify-between font-mono text-xs sm:text-sm">
+      <a href="/" class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1.5">
+        <span>←</span>
+        <span>Back to homepage</span>
+      </a>
+      <a href="/work/level3support" class="text-accent-dark dark:text-accent hover:underline font-semibold inline-flex items-center gap-1.5">
+        <span>Read full Level3Support case study</span>
+        <span>→</span>
+      </a>
     </div>
 
   </main>

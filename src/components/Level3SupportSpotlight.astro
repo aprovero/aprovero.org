@@ -1,0 +1,323 @@
+---
+// Level3SupportSpotlight.astro
+// Flagship interactive showcase for Level3Support (https://level3supporttools.onrender.com)
+// Features direct deep-links into the live platform + an interactive 32-bit Hex Fault Register Decoder instrument.
+
+const moduleLinks = [
+  {
+    code: "MOD-01",
+    label: "Tool Library",
+    detail: "40+ PV, BESS, Cable & Arc-Flash Calculators",
+    href: "https://level3supporttools.onrender.com#tools",
+  },
+  {
+    code: "MOD-02",
+    label: "Field Workflows",
+    detail: "SAT Checklists & Pre-Energization Sequences",
+    href: "https://level3supporttools.onrender.com#workflows",
+  },
+  {
+    code: "MOD-03",
+    label: "Reference & Decoders",
+    detail: "Torque Tables, Modbus Maps & Relay Configs",
+    href: "https://level3supporttools.onrender.com#reference",
+  },
+  {
+    code: "MOD-04",
+    label: "Field-to-Desk Reports",
+    detail: "Offline .ZIP Package & PDF Deliverable Engine",
+    href: "https://level3supporttools.onrender.com#reports",
+  },
+];
+---
+
+<div class="relative rounded-lg border-2 border-ink-light/85 dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card overflow-hidden shadow-sm">
+  <!-- Top Instrument Nameplate Bar -->
+  <div class="px-5 sm:px-7 py-3 bg-surface-light-muted dark:bg-surface-dark-elevated border-b border-border-light dark:border-border-dark flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
+    <div class="flex items-center gap-2.5">
+      <span class="inline-block w-2 h-2 rounded-full bg-signal animate-pulse"></span>
+      <span class="font-semibold text-ink-light dark:text-ink-dark tracking-wider uppercase">
+        SYS-L3 // FLAGSHIP FIELD PLATFORM
+      </span>
+      <span class="hidden sm:inline text-ink-light-muted dark:text-ink-dark-muted">·</span>
+      <span class="hidden sm:inline text-accent-dark dark:text-accent font-medium">
+        100% Offline-Capable PWA
+      </span>
+    </div>
+    <div class="flex items-center gap-3 text-[0.72rem] text-ink-light-muted dark:text-ink-dark-muted">
+      <span>40+ UTILITIES</span>
+      <span>·</span>
+      <span>ZERO-LOGIN</span>
+      <span>·</span>
+      <a
+        href="https://level3supporttools.onrender.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-accent-dark dark:text-accent font-semibold hover:underline"
+      >
+        level3supporttools.onrender.com ↗
+      </a>
+    </div>
+  </div>
+
+  <!-- Main 2-Column Schematic Console -->
+  <div class="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] divide-y lg:divide-y-0 lg:divide-x divide-border-light dark:divide-border-dark">
+    
+    <!-- Left Column: Platform Overview & Deep-Link Module Matrix -->
+    <div class="p-6 sm:p-8 flex flex-col justify-between space-y-6">
+      <div class="space-y-4">
+        <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-accent/10 border border-accent-dark/30 dark:border-accent/30 font-mono text-[0.72rem] text-accent-dark dark:text-accent font-semibold uppercase tracking-wider">
+          <span>SOLO ENGINEERED · BUILT FROM FIELD RCA</span>
+        </div>
+
+        <h3 class="font-display text-2xl sm:text-4xl font-bold tracking-tight text-ink-light dark:text-ink-dark uppercase leading-[1.08]">
+          Level3Support: Turning Field Experience Into Repeatable Tools
+        </h3>
+
+        <p class="text-[0.98rem] sm:text-[1.02rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed">
+          Inside a 40°C inverter enclosure or a remote substation without cellular service, engineers shouldn't be flipping through 600-page PDFs or rebuilding spreadsheets from scratch. I built <strong>Level3Support</strong> to package real commissioning formulas, protection relay configurations, BESS health diagnostics, and portable offline reporting into a single browser-native suite.
+        </p>
+
+        <!-- 2x2 Deep-Link Module Matrix -->
+        <div class="pt-2">
+          <div class="font-mono text-[0.7rem] uppercase tracking-wider text-ink-light-muted dark:text-ink-dark-muted mb-2.5">
+            Direct Module Deep-Links (Live Application):
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            {moduleLinks.map((mod) => (
+              <a
+                href={mod.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group p-3 rounded border border-border-light dark:border-border-dark bg-surface-light/60 dark:bg-surface-dark/60 hover:border-accent-dark dark:hover:border-accent transition-all flex flex-col justify-between"
+              >
+                <div class="flex items-center justify-between font-mono text-[0.7rem] text-ink-light-muted dark:text-ink-dark-muted mb-1">
+                  <span class="text-accent-dark dark:text-accent font-semibold">{mod.code}</span>
+                  <span class="group-hover:translate-x-0.5 group-hover:text-accent-dark dark:group-hover:text-accent transition-all">Launch ↗</span>
+                </div>
+                <div class="font-display font-bold text-sm sm:text-base text-ink-light dark:text-ink-dark uppercase tracking-tight">
+                  {mod.label}
+                </div>
+                <div class="text-xs text-ink-light-muted dark:text-ink-dark-muted mt-0.5 leading-snug">
+                  {mod.detail}
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Primary Actions -->
+      <div class="pt-4 border-t border-border-light/80 dark:border-border-dark/80 flex flex-wrap items-center gap-3 sm:gap-4 font-mono text-xs sm:text-sm">
+        <a
+          href="https://level3supporttools.onrender.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="px-4 py-2.5 rounded bg-accent hover:bg-accent-hover text-surface-dark font-semibold transition-colors inline-flex items-center gap-2 shadow-sm"
+        >
+          <span>Launch Level3Support ToolHub</span>
+          <span>↗</span>
+        </a>
+        <a
+          href="/work/level3support"
+          class="px-4 py-2.5 rounded border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark-elevated hover:border-accent-dark dark:hover:border-accent text-ink-light dark:text-ink-dark font-medium transition-colors inline-flex items-center gap-1.5"
+        >
+          <span>Read Origin &amp; Architecture</span>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Right Column: Interactive Instrument — 32-Bit Hex Fault Register Decoder -->
+    <div class="p-6 sm:p-8 bg-surface-dark text-ink-dark flex flex-col justify-between space-y-5 font-mono">
+      <div class="space-y-4">
+        <!-- Instrument Header -->
+        <div class="flex items-center justify-between border-b border-border-dark pb-3">
+          <div>
+            <div class="text-[0.68rem] text-accent uppercase tracking-widest font-semibold">
+              INSTRUMENT PREVIEW // SEED UTILITY #01
+            </div>
+            <div class="font-display text-lg font-bold text-ink-dark uppercase tracking-wide mt-0.5">
+              Central Inverter Hex Fault Word Decoder
+            </div>
+          </div>
+          <span class="px-2 py-0.5 rounded text-[0.65rem] bg-signal/15 text-signal border border-signal/30">
+            INTERACTIVE
+          </span>
+        </div>
+
+        <p class="text-xs text-ink-dark-secondary font-sans leading-relaxed">
+          The utility that started Level3Support: paste or select a 32-bit hexadecimal alarm register from a central PCS/inverter HMI to isolate active fault bits without a manual.
+        </p>
+
+        <!-- Preset Fault Word Buttons & Input -->
+        <div class="space-y-2">
+          <div class="flex flex-wrap items-center justify-between gap-2 text-[0.7rem] text-ink-dark-muted">
+            <span>REGISTER INPUT (HEX):</span>
+            <div class="flex items-center gap-1.5">
+              <button
+                type="button"
+                class="hex-preset-btn px-2 py-0.5 rounded bg-surface-dark-elevated hover:bg-accent/20 text-accent border border-accent/40 text-[0.68rem] transition-colors"
+                data-hex="0x0028A004"
+              >
+                0x0028A004
+              </button>
+              <button
+                type="button"
+                class="hex-preset-btn px-2 py-0.5 rounded bg-surface-dark-elevated hover:bg-accent/20 text-ink-dark-secondary hover:text-accent border border-border-dark text-[0.68rem] transition-colors"
+                data-hex="0x00010410"
+              >
+                0x00010410
+              </button>
+              <button
+                type="button"
+                class="hex-preset-btn px-2 py-0.5 rounded bg-surface-dark-elevated hover:bg-accent/20 text-ink-dark-secondary hover:text-accent border border-border-dark text-[0.68rem] transition-colors"
+                data-hex="0x00800002"
+              >
+                0x00800002
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <input
+              id="l3-hex-input"
+              type="text"
+              value="0x0028A004"
+              maxlength="10"
+              aria-label="Hexadecimal fault register input"
+              class="w-full px-3 py-2 rounded bg-[#06080B] border border-border-dark focus:border-accent focus:outline-none text-accent font-mono text-sm font-semibold tracking-wider uppercase"
+            />
+          </div>
+        </div>
+
+        <!-- 32-Bit Binary Matrix Visualization -->
+        <div class="p-3 rounded bg-[#06080B] border border-border-dark space-y-2">
+          <div class="flex items-center justify-between text-[0.65rem] text-ink-dark-muted">
+            <span>32-BIT REGISTER MAP (MSB 31 → LSB 0)</span>
+            <span id="l3-active-count" class="text-accent font-semibold">4 ACTIVE BITS</span>
+          </div>
+          <div id="l3-bit-grid" class="grid grid-cols-8 sm:grid-cols-16 gap-1 text-center text-[0.68rem]">
+            <!-- Populated dynamically by inline script -->
+          </div>
+        </div>
+
+        <!-- Decoded Protection Trips Output -->
+        <div class="space-y-1.5">
+          <div class="text-[0.68rem] text-ink-dark-muted uppercase">
+            DECODED PROTECTION SUBSYSTEMS &amp; FIELD ACTION:
+          </div>
+          <div id="l3-fault-output" class="p-3 rounded bg-[#06080B] border border-border-dark space-y-2 text-xs min-h-[108px]">
+            <!-- Populated dynamically by inline script -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Instrument Footer Link -->
+      <div class="pt-3 border-t border-border-dark flex items-center justify-between text-[0.72rem] text-ink-dark-muted">
+        <span>Offline deterministic engine</span>
+        <a
+          href="https://level3supporttools.onrender.com#tools"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-accent hover:underline font-medium inline-flex items-center gap-1"
+        >
+          <span>Open full 40+ tool suite</span>
+          <span>↗</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    const FAULT_DICTIONARY = {
+      1: { code: "BIT 01", sys: "DC INSULATION", desc: "ISO-R < Threshold (Check string ground fault / moisture)" },
+      2: { code: "BIT 02", sys: "DC BUS PROTECTION", desc: "DC Link Over-Voltage Peak (Verify Voc & string sizing)" },
+      4: { code: "BIT 04", sys: "POWER STACK B", desc: "IGBT Phase-B Desaturation / Gate Driver Fault" },
+      10: { code: "BIT 10", sys: "THERMAL / HVAC", desc: "Stack Heatsink ΔT High (Inspect intake filters & fans)" },
+      13: { code: "BIT 13", sys: "GRID INTERFACE", desc: "LVRT / Under-Voltage Ride-Through Timeout (POI sag)" },
+      15: { code: "BIT 15", sys: "AC CONTACTOR", desc: "MV/LV Main Breaker Feedback Mismatch" },
+      16: { code: "BIT 16", sys: "AUX POWER", desc: "24V DC Control Bus Undervoltage / UPS Transfer" },
+      19: { code: "BIT 19", sys: "GRID SYNC", desc: "PLL Frequency Rate-of-Change (RoCoF) Trip" },
+      21: { code: "BIT 21", sys: "GRID INTERFACE", desc: "Zero-Sequence / Residual Current Spike (RCD)" },
+      23: { code: "BIT 23", sys: "GFDI RELAY", desc: "Ground Fault Detection Interrupter Latched" },
+    };
+
+    const hexInput = document.getElementById('l3-hex-input');
+    const bitGrid = document.getElementById('l3-bit-grid');
+    const faultOutput = document.getElementById('l3-fault-output');
+    const activeCount = document.getElementById('l3-active-count');
+    const presetBtns = document.querySelectorAll('.hex-preset-btn');
+
+    function renderDecoder(rawHex) {
+      if (!bitGrid || !faultOutput || !activeCount) return;
+      const cleaned = rawHex.trim().replace(/^0x/i, '').replace(/[^0-9a-fA-F]/g, '') || '0';
+      const val = parseInt(cleaned.slice(0, 8), 16) >>> 0;
+
+      const activeBits = [];
+      let gridHtml = '';
+
+      for (let bit = 31; bit >= 0; bit--) {
+        const isSet = ((val >>> bit) & 1) === 1;
+        if (isSet) activeBits.push(bit);
+        gridHtml += `<div class="py-1 rounded border ${
+          isSet
+            ? 'bg-accent text-surface-dark border-accent font-bold shadow-sm'
+            : 'bg-surface-dark-card text-ink-dark-muted border-border-dark/60 opacity-60'
+        }" title="Bit ${bit}: ${isSet ? 'ACTIVE (1)' : '0'}">${isSet ? '1' : '0'}</div>`;
+      }
+
+      bitGrid.innerHTML = gridHtml;
+      activeCount.textContent = `${activeBits.length} ACTIVE BIT${activeBits.length === 1 ? '' : 'S'}`;
+
+      if (activeBits.length === 0) {
+        faultOutput.innerHTML = `<div class="text-signal flex items-center gap-2 py-2"><span>●</span><span>0x00000000 — NO ACTIVE FAULT BITS (SYSTEM NOMINAL)</span></div>`;
+        return;
+      }
+
+      const decodedItems = activeBits.slice().reverse().map((bit) => {
+        const known = FAULT_DICTIONARY[bit];
+        if (known) {
+          return `<div class="flex items-start gap-2 border-l-2 border-accent pl-2.5 py-0.5">
+            <span class="text-accent font-semibold shrink-0">[${known.code}]</span>
+            <div class="text-ink-dark">
+              <span class="font-semibold text-ink-dark">${known.sys}:</span>
+              <span class="text-ink-dark-secondary font-sans"> ${known.desc}</span>
+            </div>
+          </div>`;
+        }
+        return `<div class="flex items-start gap-2 border-l-2 border-border-dark pl-2.5 py-0.5">
+          <span class="text-accent font-semibold shrink-0">[BIT ${String(bit).padStart(2, '0')}]</span>
+          <span class="text-ink-dark-secondary font-sans">OEM Vendor Register Flag #${bit} asserted — cross-check PCS Modbus map.</span>
+        </div>`;
+      });
+
+      faultOutput.innerHTML = decodedItems.join('');
+    }
+
+    if (hexInput) {
+      hexInput.addEventListener('input', (e) => {
+        renderDecoder(e.target.value);
+      });
+    }
+
+    presetBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const hex = btn.getAttribute('data-hex') || '0x0028A004';
+        if (hexInput) hexInput.value = hex;
+        presetBtns.forEach((b) => {
+          b.classList.remove('border-accent/40', 'text-accent');
+          b.classList.add('border-border-dark', 'text-ink-dark-secondary');
+        });
+        btn.classList.remove('border-border-dark', 'text-ink-dark-secondary');
+        btn.classList.add('border-accent/40', 'text-accent');
+        renderDecoder(hex);
+      });
+    });
+
+    renderDecoder('0x0028A004');
+  })();
+</script>

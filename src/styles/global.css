@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,8 +6,9 @@
 
 @layer base {
   :root {
-    --color-accent: #00D3A5;
-    --color-accent-hover: #00BA92;
+    --color-accent: #F59E0B;
+    --color-accent-hover: #D97706;
+    --color-signal: #10B981;
   }
 
   html {
@@ -31,9 +32,34 @@
     @apply bg-surface-dark text-ink-dark selection:bg-accent/25 selection:text-ink-dark;
   }
 
+  h1, h2, h3, .font-display {
+    font-family: 'IBM Plex Sans Condensed', 'Inter', system-ui, sans-serif;
+  }
+
   code, kbd, samp, pre {
     @apply font-mono;
   }
+}
+
+/* Subtle Schematic Blueprint Grid */
+.schematic-surface {
+  background-image: radial-gradient(rgba(180, 83, 9, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+html.dark .schematic-surface {
+  background-image: radial-gradient(rgba(245, 158, 11, 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Technical Section Header Bus Bar */
+.bus-header {
+  @apply relative border-t-2 border-ink-light/85 dark:border-ink-dark/85 pt-4 pb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-3;
+}
+
+.bus-header::before {
+  content: "";
+  @apply absolute -top-[2px] left-0 w-16 h-[2px] bg-accent-dark dark:bg-accent;
 }
 
 /* Restrained Editorial Typography */
@@ -46,11 +72,11 @@
 }
 
 .prose-editorial h2 {
-  @apply text-ink-light dark:text-ink-dark text-2xl sm:text-3xl font-bold tracking-tight mt-14 mb-5 pb-3 border-b border-border-light/80 dark:border-border-dark/80;
+  @apply font-display text-ink-light dark:text-ink-dark text-2xl sm:text-3xl font-bold tracking-tight mt-14 mb-5 pb-3 border-b border-border-light/80 dark:border-border-dark/80 uppercase;
 }
 
 .prose-editorial h3 {
-  @apply text-ink-light dark:text-ink-dark text-xl sm:text-2xl font-semibold tracking-tight mt-10 mb-4;
+  @apply font-display text-ink-light dark:text-ink-dark text-xl sm:text-2xl font-semibold tracking-tight mt-10 mb-4;
 }
 
 .prose-editorial ul {
@@ -66,7 +92,7 @@
 }
 
 .prose-editorial blockquote {
-  @apply my-8 border-l-2 border-accent pl-6 italic text-ink-light dark:text-ink-dark py-2 pr-4;
+  @apply my-8 border-l-2 border-accent pl-6 italic text-ink-light dark:text-ink-dark py-2 pr-4 bg-surface-light-card/50 dark:bg-surface-dark-card/40;
 }
 
 .prose-editorial strong {

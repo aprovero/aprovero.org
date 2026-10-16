@@ -1,123 +1,186 @@
 ---
-// CareerTimeline.astro - Restrained chronological narrative with company logos
+// CareerTimeline.astro - Operational Progression Matrix with technical nameplate headers
 ---
 
-<div class="space-y-12 sm:space-y-16">
+<div class="space-y-6">
   
-  <!-- Entry 1: Huawei Digital Power (Sept 2026–present) -->
-  <article class="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4 md:gap-10 items-start">
-    <!-- Left Column: Dates, Logo Header, Role Subtitle -->
-    <div class="space-y-1.5 font-mono text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted">
-      <span class="text-ink-light dark:text-ink-dark font-medium block">Sept 2026 — Present</span>
+  <!-- PHASE 04: Huawei Digital Power (Sept 2026–present) -->
+  <article class="rounded-lg border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card overflow-hidden transition-colors hover:border-accent-dark/50 dark:hover:border-accent/40">
+    <!-- Nameplate Top Bar -->
+    <div class="px-5 sm:px-7 py-3.5 bg-surface-light-muted/70 dark:bg-surface-dark-elevated/80 border-b border-border-light dark:border-border-dark flex flex-wrap items-center justify-between gap-4">
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="px-2 py-0.5 rounded bg-accent/15 border border-accent-dark/30 dark:border-accent/30 font-mono text-xs font-semibold text-accent-dark dark:text-accent">
+          PHASE 04 · ACTIVE
+        </span>
+        <span class="font-mono text-xs sm:text-sm font-semibold text-ink-light dark:text-ink-dark">
+          Sept 2026 — Present
+        </span>
+        <span class="opacity-30 font-mono hidden sm:inline">//</span>
+        <h3 class="font-display text-lg sm:text-xl font-bold uppercase tracking-tight text-ink-light dark:text-ink-dark">
+          Executive Solutions Sales Manager — Utility PV &amp; BESS
+        </h3>
+      </div>
 
-      <!-- Huawei Digital Power Logo (scaled & cropped to match LATNOVVA & Sungrow) -->
-      <div class="py-1">
+      <div class="flex items-center gap-3 shrink-0">
         <img 
           src="/logos/huawei-digital-power.svg" 
           alt="Huawei Digital Power" 
-          class="h-8 w-auto max-w-[170px] object-contain block dark:brightness-110" 
+          class="h-7 sm:h-8 w-auto max-w-[165px] object-contain block dark:brightness-110" 
         />
       </div>
-
-      <p class="text-xs text-ink-light-muted dark:text-ink-dark-muted">Exec. Solutions Sales Mgr</p>
     </div>
-    
-    <!-- Right Column: Narrative Description -->
-    <div class="space-y-3 text-ink-light-secondary dark:text-ink-dark-secondary text-[1.05rem] leading-[1.8] max-w-prose">
-      <p>
-        Executive Solutions Sales Manager Utility PV &amp; BESS at Huawei Digital Power. Leading technical sales, pre-sales architecture, and solution design for utility-scale solar PV and battery energy storage infrastructure—bridging power electronics, grid integration, and field engineering with commercial strategy across Mexico and LATAM.
+
+    <!-- Body & Technical Spec Footer -->
+    <div class="p-5 sm:p-7 space-y-4">
+      <p class="text-ink-light-secondary dark:text-ink-dark-secondary text-[1.02rem] leading-[1.8] max-w-4xl">
+        Leading technical sales, pre-sales architecture, and solution design for utility-scale solar PV and battery energy storage infrastructure at <strong>Huawei Digital Power</strong>—bridging power electronics, grid-forming/grid-following architectures, and field engineering reality with commercial strategy across Mexico and LATAM.
       </p>
+
+      <div class="pt-3 border-t border-border-light/60 dark:border-border-dark/60 flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
+        <div class="flex flex-wrap gap-2">
+          <span class="px-2 py-0.5 rounded bg-surface-light-muted dark:bg-surface-dark-muted text-ink-light-secondary dark:text-ink-dark-secondary">Utility-Scale PV &amp; BESS</span>
+          <span class="px-2 py-0.5 rounded bg-surface-light-muted dark:bg-surface-dark-muted text-ink-light-secondary dark:text-ink-dark-secondary">Pre-Sales Architecture</span>
+          <span class="px-2 py-0.5 rounded bg-surface-light-muted dark:bg-surface-dark-muted text-ink-light-secondary dark:text-ink-dark-secondary">Grid Integration</span>
+        </div>
+        <span class="text-ink-light-muted dark:text-ink-dark-muted">SCOPE: MEXICO &amp; LATAM</span>
+      </div>
     </div>
   </article>
 
-  <!-- Entry 2: LATNOVVA (Oct 2025–Aug 2026) -->
-  <article class="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4 md:gap-10 items-start">
-    <!-- Left Column: Dates, Logo Header, Role Subtitle -->
-    <div class="space-y-1.5 font-mono text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted">
-      <span class="text-ink-light dark:text-ink-dark font-medium block">Oct 2025 — Aug 2026</span>
+  <!-- PHASE 03: LATNOVVA (Oct 2025–Aug 2026) -->
+  <article class="rounded-lg border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card overflow-hidden transition-colors hover:border-accent-dark/50 dark:hover:border-accent/40">
+    <div class="px-5 sm:px-7 py-3.5 bg-surface-light-muted/70 dark:bg-surface-dark-elevated/80 border-b border-border-light dark:border-border-dark flex flex-wrap items-center justify-between gap-4">
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="px-2 py-0.5 rounded bg-surface-light-card dark:bg-surface-dark border border-border-light dark:border-border-dark font-mono text-xs font-medium text-ink-light-muted dark:text-ink-dark-muted">
+          PHASE 03
+        </span>
+        <span class="font-mono text-xs sm:text-sm font-semibold text-ink-light dark:text-ink-dark">
+          Oct 2025 — Aug 2026
+        </span>
+        <span class="opacity-30 font-mono hidden sm:inline">//</span>
+        <h3 class="font-display text-lg sm:text-xl font-bold uppercase tracking-tight text-ink-light dark:text-ink-dark">
+          Technical Operations &amp; Advisory
+        </h3>
+      </div>
 
-      <!-- LATNOVVA Logo replaces text header -->
-      <div class="py-1">
+      <div class="flex items-center gap-3 shrink-0">
         <img 
           src="/logos/latnovva.png" 
           alt="LATNOVVA" 
-          class="h-7 w-auto max-w-[150px] object-contain block dark:brightness-110" 
+          class="h-6 sm:h-7 w-auto max-w-[140px] object-contain block dark:brightness-110" 
         />
       </div>
-
-      <p class="text-xs text-ink-light-muted dark:text-ink-dark-muted">Technical Operations</p>
     </div>
-    
-    <!-- Right Column: Narrative Description -->
-    <div class="space-y-3 text-ink-light-secondary dark:text-ink-dark-secondary text-[1.05rem] leading-[1.8] max-w-prose">
-      <p>
-        Strategic technical advisory and field operations across utility-scale Solar PV and BESS. The work bridged engineering design, EPC execution, and long-term asset reliability—helping project owners and operators ensure complex electrical systems perform reliably under real operating conditions.
+
+    <div class="p-5 sm:p-7 space-y-4">
+      <p class="text-ink-light-secondary dark:text-ink-dark-secondary text-[1.02rem] leading-[1.8] max-w-4xl">
+        Strategic technical advisory and field operations across utility-scale Solar PV and BESS. Bridged engineering design, EPC execution, and long-term asset reliability—while designing and deploying custom digital field-operations workflows for attendance validation and multi-site crew dispatch.
       </p>
+
+      <div class="pt-3 border-t border-border-light/60 dark:border-border-dark/60 flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
+        <div class="flex flex-wrap gap-2">
+          <span class="px-2 py-0.5 rounded bg-surface-light-muted dark:bg-surface-dark-muted text-ink-light-secondary dark:text-ink-dark-secondary">Technical Operations</span>
+          <span class="px-2 py-0.5 rounded bg-surface-light-muted dark:bg-surface-dark-muted text-ink-light-secondary dark:text-ink-dark-secondary">EPC &amp; Owner Advisory</span>
+          <span class="px-2 py-0.5 rounded bg-surface-light-muted dark:bg-surface-dark-muted text-ink-light-secondary dark:text-ink-dark-secondary">Operational Tooling</span>
+        </div>
+        <a href="/work/latnovva-digital-tools" class="text-accent-dark dark:text-accent hover:underline font-medium">
+          View LATNOVVA Case Study →
+        </a>
+      </div>
     </div>
   </article>
 
-  <!-- Entry 3: Sungrow Power (2020–2025) -->
-  <article class="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4 md:gap-10 items-start">
-    <!-- Left Column: Dates, Logo Header, Role Subtitle -->
-    <div class="space-y-1.5 font-mono text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted">
-      <span class="text-ink-light dark:text-ink-dark font-medium block">2020 — 2025</span>
+  <!-- PHASE 02: Sungrow Power (2020–2025) -->
+  <article class="rounded-lg border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card overflow-hidden transition-colors hover:border-accent-dark/50 dark:hover:border-accent/40">
+    <div class="px-5 sm:px-7 py-3.5 bg-surface-light-muted/70 dark:bg-surface-dark-elevated/80 border-b border-border-light dark:border-border-dark flex flex-wrap items-center justify-between gap-4">
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="px-2 py-0.5 rounded bg-surface-light-card dark:bg-surface-dark border border-border-light dark:border-border-dark font-mono text-xs font-medium text-ink-light-muted dark:text-ink-dark-muted">
+          PHASE 02
+        </span>
+        <span class="font-mono text-xs sm:text-sm font-semibold text-ink-light dark:text-ink-dark">
+          2020 — 2025
+        </span>
+        <span class="opacity-30 font-mono hidden sm:inline">//</span>
+        <h3 class="font-display text-lg sm:text-xl font-bold uppercase tracking-tight text-ink-light dark:text-ink-dark">
+          Field Commissioning → Regional Service Lead → LATAM Center of Expertise (CoE)
+        </h3>
+      </div>
 
-      <!-- Sungrow Logo replaces text header -->
-      <div class="py-1">
+      <div class="flex items-center gap-3 shrink-0">
         <img 
           src="/logos/sungrow.png" 
           alt="Sungrow Power" 
-          class="h-7 w-auto max-w-[150px] object-contain block" 
+          class="h-6 sm:h-7 w-auto max-w-[140px] object-contain block" 
         />
       </div>
-
-      <p class="text-xs text-ink-light-muted dark:text-ink-dark-muted">Field Engineering to CoE</p>
     </div>
-    
-    <!-- Right Column: Narrative Description -->
-    <div class="space-y-3 text-ink-light-secondary dark:text-ink-dark-secondary text-[1.05rem] leading-[1.8] max-w-prose">
-      <p>
-        A five-year progression from hands-on field commissioning to regional engineering leadership. I started in the field commissioning central inverters and battery storage across Latin America, personally delivering site acceptance testing for over 800 MW of PV and early BESS installations.
-      </p>
-      <p>
-        That foundation evolved into leading the regional Field Service organization across North LATAM, supporting a fleet of more than 2.1 GW of operating solar assets and approximately 60 MWh of BESS. Later, I established the LATAM Center of Expertise (CoE), centralizing tier-3 investigations directly with HQ R&amp;D and building technical certification programs for engineers across the region.
-      </p>
+
+    <div class="p-5 sm:p-7 space-y-4">
+      <div class="space-y-3 text-ink-light-secondary dark:text-ink-dark-secondary text-[1.02rem] leading-[1.8] max-w-4xl">
+        <p>
+          A five-year progression from hands-on substation commissioning to regional engineering governance. Started in the field commissioning central inverters and battery storage across Latin America, personally delivering Site Acceptance Testing (SAT) for <strong>800+ MW of utility PV</strong> and early commercial/utility BESS installations.
+        </p>
+        <p>
+          Evolved into leading the regional Field Service organization across North LATAM supporting an operating fleet of <strong>2.1+ GW of solar assets</strong> and <strong>~60 MWh of BESS</strong>. Later founded and led the <strong>LATAM Center of Expertise (CoE)</strong>, centralizing Tier-3 root-cause investigations directly with HQ R&amp;D and building regional technical certification programs.
+        </p>
+      </div>
+
+      <div class="pt-3 border-t border-border-light/60 dark:border-border-dark/60 flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
+        <div class="flex flex-wrap gap-2">
+          <span class="px-2 py-0.5 rounded bg-accent/10 border border-accent-dark/25 dark:border-accent/25 text-accent-dark dark:text-accent font-medium">800+ MW Commissioned</span>
+          <span class="px-2 py-0.5 rounded bg-accent/10 border border-accent-dark/25 dark:border-accent/25 text-accent-dark dark:text-accent font-medium">2.1+ GW Fleet Supported</span>
+          <span class="px-2 py-0.5 rounded bg-surface-light-muted dark:bg-surface-dark-muted text-ink-light-secondary dark:text-ink-dark-secondary">Tier-3 RCA &amp; CoE</span>
+          <span class="px-2 py-0.5 rounded bg-surface-light-muted dark:bg-surface-dark-muted text-ink-light-secondary dark:text-ink-dark-secondary">Central PCS &amp; MV Stations</span>
+        </div>
+        <span class="text-ink-light-muted dark:text-ink-dark-muted">SCOPE: NORTH LATAM &amp; REGIONAL CoE</span>
+      </div>
     </div>
   </article>
 
-  <!-- Entry 4: Field Foundation (2008–2020) -->
-  <article class="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-4 md:gap-10 items-start">
-    <!-- Left Column: Dates, Title, Subtitle, 3+2 Stacked Logo Pool -->
-    <div class="space-y-1.5 font-mono text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted">
-      <span class="text-ink-light dark:text-ink-dark font-medium block">2008 — 2020</span>
-      <h3 class="font-sans font-semibold text-ink-light dark:text-ink-dark text-base pt-0.5">Field Foundation</h3>
-      <p class="text-xs text-ink-light-muted dark:text-ink-dark-muted">Oil &amp; Gas, Asset Mgmt &amp; Electronics</p>
+  <!-- PHASE 01: Field Foundation (2008–2020) -->
+  <article class="rounded-lg border border-border-light dark:border-border-dark bg-surface-light-card dark:bg-surface-dark-card overflow-hidden transition-colors hover:border-accent-dark/50 dark:hover:border-accent/40">
+    <div class="px-5 sm:px-7 py-3.5 bg-surface-light-muted/70 dark:bg-surface-dark-elevated/80 border-b border-border-light dark:border-border-dark flex flex-wrap items-center justify-between gap-4">
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="px-2 py-0.5 rounded bg-surface-light-card dark:bg-surface-dark border border-border-light dark:border-border-dark font-mono text-xs font-medium text-ink-light-muted dark:text-ink-dark-muted">
+          PHASE 01
+        </span>
+        <span class="font-mono text-xs sm:text-sm font-semibold text-ink-light dark:text-ink-dark">
+          2008 — 2020
+        </span>
+        <span class="opacity-30 font-mono hidden sm:inline">//</span>
+        <h3 class="font-display text-lg sm:text-xl font-bold uppercase tracking-tight text-ink-light dark:text-ink-dark">
+          Field Foundation: Solar Asset Mgmt, Oil &amp; Gas Wireline, Telecom &amp; Control Systems
+        </h3>
+      </div>
 
-      <!-- 3 and 2 Stacked Logo Pool -->
-      <div class="pt-2.5 space-y-2.5">
-        <!-- Row 1: Vector Renewables, SLB, YPF -->
-        <div class="flex items-center gap-3">
-          <img src="/logos/vector.png" alt="Vector Renewables" class="w-7 h-7 object-contain rounded shrink-0" title="Vector Renewables" />
-          <img src="/logos/slb.svg" alt="SLB" class="h-5 w-auto max-w-[50px] object-contain shrink-0 dark:invert" title="SLB (Schlumberger)" />
-          <img src="/logos/ypf.png" alt="YPF S.A." class="h-5 w-auto max-w-[45px] object-contain shrink-0" title="YPF S.A." />
-        </div>
-
-        <!-- Row 2: América Móvil, Corpodomotica -->
-        <div class="flex items-center gap-3">
-          <img src="/logos/america-movil.svg" alt="América Móvil" class="h-5.5 w-auto max-w-[70px] object-contain shrink-0 dark:brightness-200" title="América Móvil" />
-          <img src="/logos/corpodomotica.svg" alt="Corpodomotica" class="h-5 w-auto max-w-[80px] object-contain shrink-0" title="Corpodomotica" />
-        </div>
+      <!-- Compact Multi-Employer Strip -->
+      <div class="flex flex-wrap items-center gap-3 shrink-0">
+        <img src="/logos/vector.png" alt="Vector Renewables" class="w-6 h-6 object-contain rounded" title="Vector Renewables" />
+        <img src="/logos/slb.svg" alt="SLB" class="h-4 w-auto max-w-[46px] object-contain dark:invert" title="SLB (Schlumberger)" />
+        <img src="/logos/ypf.png" alt="YPF S.A." class="h-4 w-auto max-w-[42px] object-contain" title="YPF S.A." />
+        <img src="/logos/america-movil.svg" alt="América Móvil" class="h-4 w-auto max-w-[60px] object-contain dark:brightness-200" title="América Móvil" />
+        <img src="/logos/corpodomotica.svg" alt="Corpodomotica" class="h-4 w-auto max-w-[68px] object-contain" title="Corpodomotica" />
       </div>
     </div>
-    
-    <!-- Right Column: Narrative Description -->
-    <div class="space-y-3 text-ink-light-secondary dark:text-ink-dark-secondary text-[1.05rem] leading-[1.8] max-w-prose">
-      <p>
-        Before focusing full-time on utility renewables, I managed a 400+ MW solar asset portfolio at Vector Renewables, monitoring SCADA performance and plant availability.
-      </p>
-      <p>
-        My earlier background spans wireline operations in oil and gas in Argentina and Venezuela (YPF S.A., Schlumberger), telecom infrastructure (América Móvil), and embedded control systems design (Corpodomotica). Working in high-consequence field environments early on built the operational discipline I rely on today: measure directly, respect thermal and electrical boundaries, and design for maintainability.
-      </p>
+
+    <div class="p-5 sm:p-7 space-y-4">
+      <div class="space-y-3 text-ink-light-secondary dark:text-ink-dark-secondary text-[1.02rem] leading-[1.8] max-w-4xl">
+        <p>
+          Before focusing full-time on utility renewables OEM engineering, managed a <strong>400+ MW solar asset portfolio at Vector Renewables</strong>, overseeing SCADA performance, PPA compliance, and plant availability.
+        </p>
+        <p>
+          Earlier field foundation spans cased-hole/open-hole wireline operations in oil &amp; gas across Argentina and Venezuela (<strong>YPF S.A.</strong>, <strong>Schlumberger / SLB</strong>), critical telecom infrastructure (<strong>América Móvil</strong>), and embedded control systems design (<strong>Corpodomotica</strong>). Working in high-consequence field environments built the core discipline: measure directly, respect thermal and electrical boundaries, and design for maintainability.
+        </p>
+      </div>
+
+      <div class="pt-3 border-t border-border-light/60 dark:border-border-dark/60 flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
+        <div class="flex flex-wrap gap-2">
+          <span class="px-2 py-0.5 rounded bg-surface-light-muted dark:bg-surface-dark-muted text-ink-light-secondary dark:text-ink-dark-secondary">400+ MW SCADA &amp; Asset Mgmt</span>
+          <span class="px-2 py-0.5 rounded bg-surface-light-muted dark:bg-surface-dark-muted text-ink-light-secondary dark:text-ink-dark-secondary">Wireline Field Operations</span>
+          <span class="px-2 py-0.5 rounded bg-surface-light-muted dark:bg-surface-dark-muted text-ink-light-secondary dark:text-ink-dark-secondary">Embedded Electronics</span>
+        </div>
+        <span class="text-ink-light-muted dark:text-ink-dark-muted">SCOPE: ARGENTINA · VENEZUELA · MEXICO</span>
+      </div>
     </div>
   </article>
 
