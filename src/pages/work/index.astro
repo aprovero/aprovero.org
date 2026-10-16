@@ -1,56 +1,146 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ProjectRow from '@/components/ProjectRow.astro';
+import CareerTimeline from '@/components/CareerTimeline.astro';
 import { getCollection } from 'astro:content';
 
 const allWork = await getCollection('work');
 const sortedWork = allWork.sort((a, b) => a.data.order - b.data.order);
+
+const plantProjects = sortedWork.filter(
+  (p) => p.slug !== 'level3support' && p.slug !== 'latnovva-digital-tools'
+);
+const softwareProjects = sortedWork.filter(
+  (p) => p.slug === 'level3support' || p.slug === 'latnovva-digital-tools'
+);
 ---
 
 <BaseLayout
-  title="Selected Work | Andres Provero"
-  description="Engineering case studies across utility-scale Solar PV, BESS, power conversion systems, and commissioning in Latin America."
+  title="Work & Career | Andres Provero"
+  description="Engineering case studies across utility-scale Solar PV, BESS, operational tooling, and 15+ years of career history in Latin America."
 >
-  <main class="max-w-6xl mx-auto px-6 sm:px-10 py-12 sm:py-20 space-y-12">
+  <main class="max-w-6xl mx-auto px-6 sm:px-10 py-12 sm:py-20 space-y-20">
     
     <!-- Page Header -->
     <header class="space-y-5 border-b border-border-light dark:border-border-dark pb-10">
       <div class="font-mono text-xs sm:text-sm text-accent-dark dark:text-accent tracking-wider uppercase font-medium">
-        ENGINEERING CASE STUDIES
+        PORTFOLIO &amp; TRACK RECORD
       </div>
       <h1 class="font-display text-3xl sm:text-5xl font-semibold tracking-tight text-ink-light dark:text-ink-dark">
-        Selected Engineering Work
+        Selected Work &amp; Career History
       </h1>
       <p class="text-lg sm:text-xl text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed max-w-3xl">
-        A selection of utility-scale energy infrastructure projects and field tools where I led or executed commissioning, inverter parameterization, site acceptance testing (SAT), and technical operations.
+        Utility-scale energy infrastructure projects, operational software tools, and 15+ years of progression from field operations to executive solutions architecture.
       </p>
 
-      <p class="text-xs sm:text-sm text-ink-light-muted dark:text-ink-dark-muted font-mono leading-relaxed max-w-3xl pt-1">
-        <strong class="text-ink-light-secondary dark:text-ink-dark-secondary font-medium">Confidentiality note:</strong> Specific equipment settings, internal manufacturer escalations, single-line details, and commercial thresholds are intentionally omitted to safeguard client and OEM proprietary data.
-      </p>
+      <div class="pt-1 flex flex-wrap items-center gap-6 font-mono text-xs sm:text-sm">
+        <a href="#plants" class="text-ink-light dark:text-ink-dark hover:text-accent-dark dark:hover:text-accent font-medium">
+          01. Utility Plants &amp; BESS ↓
+        </a>
+        <a href="#systems" class="text-ink-light dark:text-ink-dark hover:text-accent-dark dark:hover:text-accent font-medium">
+          02. Operational Tooling ↓
+        </a>
+        <a href="#career" class="text-ink-light dark:text-ink-dark hover:text-accent-dark dark:hover:text-accent font-medium">
+          03. Career Track Record ↓
+        </a>
+      </div>
     </header>
 
-    <!-- Case Studies Architectural Hairline List -->
-    <div class="divide-y divide-border-light dark:divide-border-dark border-b border-border-light dark:border-border-dark">
-      {
-        sortedWork.map((project) => (
-          <ProjectRow
-            title={project.data.title}
-            subtitle={project.data.subtitle}
-            location={project.data.location}
-            capacity={project.data.capacity}
-            systemType={project.data.systemType}
-            year={project.data.year}
-            role={project.data.role}
-            summary={project.data.summary}
-            slug={project.slug}
-          />
-        ))
-      }
-    </div>
+    <!-- SECTION 1: ENERGIZED INFRASTRUCTURE (2x2 GRID) -->
+    <section id="plants" class="space-y-5" aria-labelledby="plants-heading">
+      <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+        <div>
+          <h2 id="plants-heading" class="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-ink-light dark:text-ink-dark">
+            01. Utility Plants &amp; Grid Infrastructure
+          </h2>
+          <p class="text-sm text-ink-light-muted dark:text-ink-dark-muted mt-1">
+            Solar PV, battery storage, power conversion, and high/medium-voltage commissioning.
+          </p>
+        </div>
+        <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+          600+ MW Represented
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-border-light dark:bg-border-dark border border-border-light dark:border-border-dark">
+        {
+          plantProjects.map((project) => (
+            <ProjectRow
+              title={project.data.title}
+              subtitle={project.data.subtitle}
+              location={project.data.location}
+              capacity={project.data.capacity}
+              systemType={project.data.systemType}
+              year={project.data.year}
+              role={project.data.role}
+              summary={project.data.summary}
+              slug={project.slug}
+            />
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- SECTION 2: OPERATIONAL SOFTWARE & FIELD TOOLS (2-COL GRID) -->
+    <section id="systems" class="space-y-5" aria-labelledby="systems-heading">
+      <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+        <div>
+          <h2 id="systems-heading" class="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-ink-light dark:text-ink-dark">
+            02. Operational Software &amp; Field Tooling
+          </h2>
+          <p class="text-sm text-ink-light-muted dark:text-ink-dark-muted mt-1">
+            Software platforms built directly from field commissioning and multi-site operations.
+          </p>
+        </div>
+        <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+          Production Systems
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-border-light dark:bg-border-dark border border-border-light dark:border-border-dark">
+        {
+          softwareProjects.map((project) => (
+            <ProjectRow
+              title={project.data.title}
+              subtitle={project.data.subtitle}
+              location={project.data.location}
+              capacity={project.data.capacity}
+              systemType={project.data.systemType}
+              year={project.data.year}
+              role={project.data.role}
+              summary={project.data.summary}
+              slug={project.slug}
+            />
+          ))
+        }
+      </div>
+
+      <p class="text-xs text-ink-light-muted dark:text-ink-dark-muted font-mono leading-relaxed max-w-3xl pt-1">
+        <strong class="text-ink-light-secondary dark:text-ink-dark-secondary font-medium">Confidentiality note:</strong> Specific customer telemetry, proprietary equipment settings, internal manufacturer escalations, and commercial thresholds are intentionally omitted.
+      </p>
+    </section>
+
+    <!-- SECTION 3: CAREER TRACK RECORD (2x2 GRID) -->
+    <section id="career" class="space-y-5" aria-labelledby="career-heading">
+      <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+        <div>
+          <h2 id="career-heading" class="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-ink-light dark:text-ink-dark">
+            03. Career Track Record
+          </h2>
+          <p class="text-sm text-ink-light-muted dark:text-ink-dark-muted mt-1">
+            15+ years across utility renewables, technical operations, oil &amp; gas wireline, and control systems.
+          </p>
+        </div>
+        <span class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+          2008 — Present
+        </span>
+      </div>
+
+      <CareerTimeline />
+    </section>
 
     <!-- Back to top / home link -->
-    <div class="pt-4 font-mono text-xs sm:text-sm">
+    <div class="pt-2 font-mono text-xs sm:text-sm">
       <a href="/" class="text-ink-light-muted hover:text-accent-dark dark:text-ink-dark-muted dark:hover:text-accent inline-flex items-center gap-1.5">
         <span>←</span>
         <span>Back to homepage</span>
