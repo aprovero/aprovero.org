@@ -1,0 +1,239 @@
+---
+// PortraitDoodle.astro — Interactive Easter Egg
+// Hovering over (or tapping) the portrait reveals hand-drawn marker doodles:
+// a construction hardhat with devil horns, an exaggerated villain mustache, and a pointy devil goatee.
+---
+
+<div class="relative group/portrait cursor-pointer select-none overflow-hidden border border-border-light dark:border-border-dark bg-surface-dark-card" id="portrait-easter-egg">
+  <!-- Base Professional Portrait -->
+  <img
+    src="/brand/portrait.jpg"
+    alt="Andres Provero"
+    width="290"
+    height="441"
+    class="w-full h-auto object-cover block transition-transform duration-300 group-hover/portrait:scale-[1.01]"
+  />
+
+  <!-- Hand-Drawn Marker Doodle Overlay (Appears on Hover / Tap) -->
+  <svg
+    viewBox="0 0 674 1024"
+    class="absolute inset-0 w-full h-full pointer-events-none opacity-0 group-hover/portrait:opacity-100 transition-opacity duration-150 ease-out z-10"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <!-- Filter for subtle rough marker paper bleed -->
+    <defs>
+      <filter id="marker-rough" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+
+    <g filter="url(#marker-rough)">
+      <!-- ======================================================= -->
+      <!-- 1. DEVIL HORNS (Poking out from behind / on the hardhat) -->
+      <!-- ======================================================= -->
+      <!-- Left Devil Horn -->
+      <path
+        d="M 215 130 C 180 85 135 50 105 10 C 145 45 190 90 250 145 Z"
+        fill="#EF4444"
+        stroke="#7F1D1D"
+        stroke-width="5"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+      />
+      <!-- Left Horn Shadow / Highlight Scribbles -->
+      <path d="M 125 35 Q 165 75 210 120" stroke="#B91C1C" stroke-width="4" stroke-linecap="round"/>
+      <path d="M 145 30 Q 185 70 220 105" stroke="#F87171" stroke-width="2.5" stroke-linecap="round"/>
+
+      <!-- Right Devil Horn -->
+      <path
+        d="M 445 125 C 485 75 530 40 565 0 C 530 45 490 85 415 140 Z"
+        fill="#EF4444"
+        stroke="#7F1D1D"
+        stroke-width="5"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+      />
+      <!-- Right Horn Shadow / Highlight Scribbles -->
+      <path d="M 545 25 Q 505 65 455 110" stroke="#B91C1C" stroke-width="4" stroke-linecap="round"/>
+      <path d="M 525 20 Q 485 60 445 95" stroke="#F87171" stroke-width="2.5" stroke-linecap="round"/>
+
+
+      <!-- ======================================================= -->
+      <!-- 2. HAND-DRAWN CONSTRUCTION HARDHAT (Yellow Marker)      -->
+      <!-- ======================================================= -->
+      <!-- Hardhat Main Dome Fill -->
+      <path
+        d="M 125 285 C 120 170 190 45 355 40 C 510 35 580 155 575 270 C 520 280 430 255 355 255 C 275 255 185 280 125 285 Z"
+        fill="#FBBF24"
+        fill-opacity="0.95"
+      />
+
+      <!-- Hardhat Marker Texture / Crosshatch Shading -->
+      <path d="M 160 250 Q 230 110 355 100 Q 470 110 540 240" stroke="#F59E0B" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+      <path d="M 180 230 Q 250 130 355 125 Q 450 130 515 220" stroke="#F59E0B" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+      <path d="M 210 200 Q 270 150 355 145 Q 430 150 480 195" stroke="#F59E0B" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+
+      <!-- Hardhat Center Ridge / Rib (Classic safety helmet ridge) -->
+      <path
+        d="M 345 42 Q 346 145 344 252"
+        stroke="#D97706"
+        stroke-width="7"
+        stroke-linecap="round"
+      />
+      <path
+        d="M 360 42 Q 361 145 363 252"
+        stroke="#78350F"
+        stroke-width="4"
+        stroke-linecap="round"
+      />
+
+      <!-- Hardhat Dome Outline (Black Marker) -->
+      <path
+        d="M 125 285 C 120 170 190 45 355 40 C 510 35 580 155 575 270"
+        stroke="#18181B"
+        stroke-width="9"
+        stroke-linecap="round"
+      />
+
+      <!-- Hardhat Front Brim (Curved lip over forehead) -->
+      <path
+        d="M 95 305 Q 350 240 600 285 C 605 302 590 315 570 312 Q 350 270 115 328 C 98 325 90 312 95 305 Z"
+        fill="#F59E0B"
+        stroke="#18181B"
+        stroke-width="8"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+      />
+
+      <!-- Front Brim Highlight and Shadow Lines -->
+      <path d="M 115 315 Q 350 258 580 300" stroke="#FEF08A" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M 130 322 Q 350 268 560 308" stroke="#B45309" stroke-width="3" stroke-linecap="round"/>
+
+      <!-- Marker Badge on Helmet: "JEFE" / "DEVIL" / Lightning bolt -->
+      <rect x="315" y="175" width="75" height="50" rx="4" fill="#FFFFFF" stroke="#18181B" stroke-width="4" transform="rotate(-2 352 200)"/>
+      <path d="M 348 183 L 334 203 L 354 203 L 340 221" stroke="#DC2626" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <text x="358" y="206" font-family="monospace" font-size="11" font-weight="bold" fill="#18181B">SAT</text>
+
+
+      <!-- ======================================================= -->
+      <!-- 3. DEVIL EYEBROWS (Scribbled Angled Sharpie Brows)      -->
+      <!-- ======================================================= -->
+      <!-- Left Eyebrow (Arching down villainously toward nose) -->
+      <path
+        d="M 195 315 Q 265 275 345 340"
+        stroke="#18181B"
+        stroke-width="8"
+        stroke-linecap="round"
+      />
+      <path d="M 215 305 L 230 320 M 245 295 L 260 315 M 280 292 L 295 318 M 315 305 L 328 332" stroke="#18181B" stroke-width="4" stroke-linecap="round"/>
+
+      <!-- Right Eyebrow (Arching down villainously toward nose) -->
+      <path
+        d="M 395 340 Q 470 270 545 305"
+        stroke="#18181B"
+        stroke-width="8"
+        stroke-linecap="round"
+      />
+      <path d="M 410 332 L 425 305 M 445 318 L 460 292 M 480 312 L 495 295 M 515 318 L 530 305" stroke="#18181B" stroke-width="4" stroke-linecap="round"/>
+
+
+      <!-- ======================================================= -->
+      <!-- 4. FORCED DEVIL MUSTACHE (Sharpie Villain Handlebars)   -->
+      <!-- ======================================================= -->
+      <!-- Main Left Mustache Wing (Swoops across lip and curls HIGH up cheek) -->
+      <path
+        d="M 365 528 C 320 528 260 540 215 520 C 180 500 155 455 140 395 C 150 435 185 475 240 485 C 290 495 335 520 365 528 Z"
+        fill="#18181B"
+        stroke="#18181B"
+        stroke-width="5"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+      />
+      <!-- Extra sharp curl tip on left mustache -->
+      <path
+        d="M 140 395 C 135 380 148 375 155 385 C 160 395 152 410 142 418"
+        stroke="#18181B"
+        stroke-width="4.5"
+        stroke-linecap="round"
+        fill="none"
+      />
+
+      <!-- Main Right Mustache Wing (Swoops across lip and curls HIGH up cheek) -->
+      <path
+        d="M 375 528 C 420 528 480 540 525 520 C 560 500 585 455 600 395 C 590 435 555 475 500 485 C 450 495 405 520 375 528 Z"
+        fill="#18181B"
+        stroke="#18181B"
+        stroke-width="5"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+      />
+      <!-- Extra sharp curl tip on right mustache -->
+      <path
+        d="M 600 395 C 605 380 592 375 585 385 C 580 395 588 410 598 418"
+        stroke="#18181B"
+        stroke-width="4.5"
+        stroke-linecap="round"
+        fill="none"
+      />
+
+      <!-- Scribble hairs on mustache for authentic felt-pen look -->
+      <path d="M 230 515 C 210 495 180 475 160 430" stroke="#27272A" stroke-width="4" stroke-linecap="round"/>
+      <path d="M 510 515 C 530 495 560 475 580 430" stroke="#27272A" stroke-width="4" stroke-linecap="round"/>
+
+
+      <!-- ======================================================= -->
+      <!-- 5. POINTY DEVIL GOATEE / BEARD (Sharp Marker Extension) -->
+      <!-- ======================================================= -->
+      <!-- Goatee body starting under the lip and extending past the chin into an evil sharp tip -->
+      <path
+        d="M 325 670 C 335 730 320 810 330 870 C 335 905 342 945 352 975 C 362 945 375 905 385 870 C 400 810 395 730 405 670 Z"
+        fill="#18181B"
+        stroke="#18181B"
+        stroke-width="6"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+      />
+      <!-- Goatee pointed spiral/flick at bottom -->
+      <path
+        d="M 352 975 Q 355 1005 340 1020 Q 330 1010 345 985"
+        stroke="#18181B"
+        stroke-width="5"
+        stroke-linecap="round"
+        fill="#18181B"
+      />
+
+      <!-- Spiky side beard marker strokes -->
+      <path d="M 270 730 L 235 765 M 285 760 L 250 805 M 305 795 L 275 845 M 325 830 L 300 885" stroke="#18181B" stroke-width="5.5" stroke-linecap="round"/>
+      <path d="M 450 730 L 485 765 M 435 760 L 470 805 M 415 795 L 445 845 M 395 830 L 420 885" stroke="#18181B" stroke-width="5.5" stroke-linecap="round"/>
+
+
+      <!-- ======================================================= -->
+      <!-- 6. LITTLE DEVIL DETAILS & MARKER SCRIBBLING             -->
+      <!-- ======================================================= -->
+      <!-- A little marker doodle star on cheek -->
+      <path d="M 195 600 L 205 615 L 220 617 L 208 627 L 212 642 L 198 633 L 185 642 L 188 627 L 178 617 L 192 615 Z" fill="#EF4444" stroke="#B91C1C" stroke-width="2"/>
+
+      <!-- Cheek smirk line -->
+      <path d="M 230 580 Q 215 570 210 550" stroke="#18181B" stroke-width="4" stroke-linecap="round"/>
+      <path d="M 510 580 Q 525 570 530 550" stroke="#18181B" stroke-width="4" stroke-linecap="round"/>
+    </g>
+  </svg>
+
+  <!-- Small subtle indicator dot in corner that whispers there's an easter egg -->
+  <div class="absolute bottom-2 right-2 w-1.5 h-1.5 rounded-full bg-accent/40 group-hover/portrait:bg-accent transition-colors duration-200 pointer-events-none" title="?"></div>
+</div>
+
+<script>
+  // Mobile touch support: tapping toggles the doodle on touchscreens
+  const el = document.getElementById('portrait-easter-egg');
+  if (el) {
+    el.addEventListener('click', () => {
+      const svg = el.querySelector('svg');
+      if (svg) {
+        svg.classList.toggle('!opacity-100');
+      }
+    });
+  }
+</script>
