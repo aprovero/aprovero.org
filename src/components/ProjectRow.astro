@@ -1,7 +1,7 @@
 ---
 interface Props {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   location: string;
   capacity: string;
   systemType: string;
@@ -28,150 +28,12 @@ const isLatnovva = slug === 'latnovva-digital-tools';
       </span>
     </div>
 
-    <!-- Bespoke Visual / Engineering Schematic Strip per Project -->
-    <a
-      href={`/work/${slug}`}
-      class="block border border-border-light dark:border-border-dark bg-surface-light-card/60 dark:bg-surface-dark-card/70 bg-technical-grid overflow-hidden relative group-hover:border-accent/50 transition-colors"
-      aria-label={`View ${title} case study`}
-    >
-      {slug === 'los-cuervos' && (
-        <div class="p-4 sm:p-5">
-          <div class="flex items-center justify-between font-mono text-[0.68rem] text-ink-light-muted dark:text-ink-dark-muted mb-2">
-            <span>SLD // LVRT &amp; PPC SCADA TELEMETRY LOOP</span>
-            <span class="text-accent-dark dark:text-accent">234 MW · CENACE GRID CODE</span>
-          </div>
-          <svg viewBox="0 0 460 96" class="w-full h-auto text-ink-light dark:text-ink-dark" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Grid-Code Voltage Ride-Through Curve (Left) -->
-            <rect x="6" y="10" width="165" height="76" rx="2" class="stroke-border-light dark:stroke-border-dark fill-surface-light/80 dark:fill-surface-dark/80" stroke-width="1"/>
-            <text x="14" y="24" class="fill-ink-light-muted dark:fill-ink-dark-muted font-mono" font-size="8">LVRT / HVRT PROFILE (V/Vn)</text>
-            <!-- Reference dashed line -->
-            <line x1="14" y1="44" x2="162" y2="44" stroke="currentColor" stroke-opacity="0.2" stroke-dasharray="3 3" stroke-width="1"/>
-            <!-- Ride-through envelope path -->
-            <path d="M 14 44 L 42 44 L 48 72 L 82 72 L 108 44 L 162 44" stroke="#E59838" stroke-width="1.75" fill="none"/>
-            <path d="M 14 44 L 42 44 L 48 72 L 82 72 L 108 44 L 162 44 L 162 80 L 14 80 Z" fill="#E59838" fill-opacity="0.08"/>
-            <circle cx="48" cy="72" r="2.5" fill="#E59838"/>
-            <circle cx="82" cy="72" r="2.5" fill="#E59838"/>
-            <text x="52" y="67" fill="#E59838" class="font-mono" font-size="7.5">0.15s Fault Ride</text>
-
-            <!-- Bidirectional Control Bus -->
-            <line x1="171" y1="48" x2="205" y2="48" stroke="#E59838" stroke-width="1.5" stroke-dasharray="2 2"/>
-            <circle cx="188" cy="48" r="2" fill="#E59838"/>
-
-            <!-- PPC Controller Block (Center) -->
-            <rect x="205" y="16" width="108" height="64" rx="2" class="stroke-border-light dark:stroke-border-dark fill-surface-light/90 dark:fill-surface-dark/90" stroke-width="1"/>
-            <text x="215" y="32" fill="#E59838" class="font-mono" font-size="8" font-weight="600">PPC CONTROLLER</text>
-            <text x="215" y="46" fill="currentColor" fill-opacity="0.85" class="font-mono" font-size="8.5">Active P / Q Loop</text>
-            <text x="215" y="60" fill="currentColor" fill-opacity="0.55" class="font-mono" font-size="7.5">Modbus / IEC 61850</text>
-            <text x="215" y="72" fill="#E59838" class="font-mono" font-size="7.5">● SYNC VERIFIED</text>
-
-            <!-- Connection to POI Bus -->
-            <line x1="313" y1="48" x2="345" y2="48" stroke="currentColor" stroke-opacity="0.45" stroke-width="1.5"/>
-
-            <!-- 230kV POI Bus (Right) -->
-            <rect x="345" y="16" width="108" height="64" rx="2" class="stroke-border-light dark:stroke-border-dark fill-surface-light/90 dark:fill-surface-dark/90" stroke-width="1"/>
-            <text x="355" y="32" class="fill-ink-light-muted dark:fill-ink-dark-muted font-mono" font-size="8">POI SUBSTATION</text>
-            <text x="355" y="47" fill="currentColor" class="font-mono" font-size="9.5" font-weight="600">234 MWp AC</text>
-            <text x="355" y="61" fill="currentColor" fill-opacity="0.6" class="font-mono" font-size="7.5">PR &amp; Uptime SAT</text>
-            <rect x="355" y="67" width="44" height="6" rx="1" fill="#E59838" fill-opacity="0.3"/>
-            <rect x="355" y="67" width="40" height="6" rx="1" fill="#E59838"/>
-          </svg>
-        </div>
-      )}
-
-      {slug === 'moon-palace' && (
-        <div class="p-4 sm:p-5">
-          <div class="flex items-center justify-between font-mono text-[0.68rem] text-ink-light-muted dark:text-ink-dark-muted mb-2">
-            <span>SLD // 4-QUADRANT PCS ⇄ BMS SAFETY ARCHITECTURE</span>
-            <span class="text-accent-dark dark:text-accent">12.5 MW / 24 MWh BESS</span>
-          </div>
-          <svg viewBox="0 0 460 96" class="w-full h-auto text-ink-light dark:text-ink-dark" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- LFP Battery Racks (Left) -->
-            <rect x="6" y="12" width="130" height="72" rx="2" class="stroke-border-light dark:stroke-border-dark fill-surface-light/90 dark:fill-surface-dark/90" stroke-width="1"/>
-            <text x="16" y="27" fill="#E59838" class="font-mono" font-size="8" font-weight="600">DC STORAGE BLOCK</text>
-            <!-- Battery Cell Bars -->
-            <rect x="16" y="35" width="18" height="26" rx="1" stroke="#E59838" stroke-width="1.2" fill="#E59838" fill-opacity="0.2"/>
-            <rect x="39" y="35" width="18" height="26" rx="1" stroke="#E59838" stroke-width="1.2" fill="#E59838" fill-opacity="0.2"/>
-            <rect x="62" y="35" width="18" height="26" rx="1" stroke="#E59838" stroke-width="1.2" fill="#E59838" fill-opacity="0.2"/>
-            <rect x="85" y="35" width="18" height="26" rx="1" stroke="#E59838" stroke-width="1.2" fill="#E59838" fill-opacity="0.2"/>
-            <text x="16" y="75" fill="currentColor" fill-opacity="0.7" class="font-mono" font-size="8">24 MWh · 1500 Vdc Bus</text>
-
-            <!-- DC Contactor + Bus -->
-            <line x1="136" y1="48" x2="176" y2="48" stroke="#E59838" stroke-width="1.75"/>
-            <circle cx="156" cy="48" r="3" class="fill-surface-dark" stroke="#E59838" stroke-width="1.5"/>
-
-            <!-- Bidirectional PCS Block (Center) -->
-            <rect x="176" y="12" width="124" height="72" rx="2" class="stroke-border-light dark:stroke-border-dark fill-surface-light/90 dark:fill-surface-dark/90" stroke-width="1"/>
-            <line x1="176" y1="84" x2="300" y2="12" stroke="currentColor" stroke-opacity="0.2" stroke-width="1"/>
-            <text x="186" y="28" fill="currentColor" class="font-mono" font-size="8.5" font-weight="600">PCS 12.5 MW</text>
-            <text x="186" y="41" fill="#E59838" class="font-mono" font-size="7.5">⇄ 4-Quadrant P/Q</text>
-            <text x="232" y="74" fill="currentColor" fill-opacity="0.65" class="font-mono" font-size="8">DC ⇄ AC</text>
-
-            <!-- BMS & Fire Interlock Loop -->
-            <line x1="300" y1="48" x2="334" y2="48" stroke="currentColor" stroke-opacity="0.45" stroke-width="1.5"/>
-
-            <!-- Safety & BMS Governance (Right) -->
-            <rect x="334" y="12" width="120" height="72" rx="2" class="stroke-border-light dark:stroke-border-dark fill-surface-light/90 dark:fill-surface-dark/90" stroke-width="1"/>
-            <text x="344" y="28" fill="#E59838" class="font-mono" font-size="8" font-weight="600">SAFETY INTERLOCKS</text>
-            <text x="344" y="44" fill="currentColor" fill-opacity="0.85" class="font-mono" font-size="8">● BMS Frame Check</text>
-            <text x="344" y="58" fill="currentColor" fill-opacity="0.85" class="font-mono" font-size="8">● E-Stop / Fire Loop</text>
-            <text x="344" y="72" fill="currentColor" fill-opacity="0.6" class="font-mono" font-size="7.5">NFPA 70E · LOTO SAT</text>
-          </svg>
-        </div>
-      )}
-
-      {slug === 'la-pimienta' && (
-        <div class="p-4 sm:p-5">
-          <div class="flex items-center justify-between font-mono text-[0.68rem] text-ink-light-muted dark:text-ink-dark-muted mb-2">
-            <span>SLD // CENTRAL INVERTER SKID → 34.5 kV → 230 kV POI</span>
-            <span class="text-accent-dark dark:text-accent">358 MW PV · SAT ACCEPTED</span>
-          </div>
-          <svg viewBox="0 0 460 96" class="w-full h-auto text-ink-light dark:text-ink-dark" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="6" y="14" width="115" height="68" rx="2" class="stroke-border-light dark:stroke-border-dark fill-surface-light/90 dark:fill-surface-dark/90" stroke-width="1"/>
-            <text x="16" y="31" fill="#E59838" class="font-mono" font-size="8" font-weight="600">PV ARRAY FIELD</text>
-            <text x="16" y="47" fill="currentColor" class="font-mono" font-size="9">1500 Vdc Bus</text>
-            <text x="16" y="64" fill="currentColor" fill-opacity="0.6" class="font-mono" font-size="7.5">R_iso &amp; Cold Ring-Out</text>
-            <line x1="121" y1="48" x2="158" y2="48" stroke="#E59838" stroke-width="1.75"/>
-            <rect x="158" y="14" width="125" height="68" rx="2" class="stroke-border-light dark:stroke-border-dark fill-surface-light/90 dark:fill-surface-dark/90" stroke-width="1"/>
-            <text x="168" y="31" fill="#E59838" class="font-mono" font-size="8" font-weight="600">CENTRAL PCS SKIDS</text>
-            <text x="168" y="47" fill="currentColor" class="font-mono" font-size="9">DC/AC + 34.5 kV</text>
-            <text x="168" y="64" fill="currentColor" fill-opacity="0.6" class="font-mono" font-size="7.5">Protection &amp; Grid Code</text>
-            <line x1="283" y1="48" x2="322" y2="48" stroke="#E59838" stroke-width="1.75"/>
-            <circle cx="298" cy="48" r="6" class="stroke-accent" stroke-width="1.4"/>
-            <circle cx="307" cy="48" r="6" class="stroke-accent" stroke-width="1.4"/>
-            <rect x="322" y="14" width="132" height="68" rx="2" class="stroke-border-light dark:stroke-border-dark fill-surface-light/90 dark:fill-surface-dark/90" stroke-width="1"/>
-            <text x="332" y="31" class="fill-ink-light-muted dark:fill-ink-dark-muted font-mono" font-size="8">HV TRANSMISSION</text>
-            <text x="332" y="48" fill="currentColor" class="font-mono" font-size="10" font-weight="600">358 MW Commercial</text>
-            <text x="332" y="64" fill="#E59838" class="font-mono" font-size="7.5">● SAT HANDOVER COMPLETE</text>
-          </svg>
-        </div>
-      )}
-
-      {slug === 'tastiota' && (
-        <div class="p-4 sm:p-5">
-          <div class="flex items-center justify-between font-mono text-[0.68rem] text-ink-light-muted dark:text-ink-dark-muted mb-2">
-            <span>SLD // DESERT/COASTAL INSULATION &amp; ENERGIZATION PROTOCOL</span>
-            <span class="text-accent-dark dark:text-accent">100 MW PV · SONORA</span>
-          </div>
-          <svg viewBox="0 0 460 96" class="w-full h-auto text-ink-light dark:text-ink-dark" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="6" y="14" width="135" height="68" rx="2" class="stroke-border-light dark:stroke-border-dark fill-surface-light/90 dark:fill-surface-dark/90" stroke-width="1"/>
-            <text x="16" y="31" fill="#E59838" class="font-mono" font-size="8" font-weight="600">01 // COLD CHECKS</text>
-            <text x="16" y="47" fill="currentColor" class="font-mono" font-size="8.5">R_iso Megger Verification</text>
-            <text x="16" y="63" fill="currentColor" fill-opacity="0.6" class="font-mono" font-size="7.5">Torque &amp; Busbar Audit</text>
-            <line x1="141" y1="48" x2="165" y2="48" stroke="#E59838" stroke-width="1.5"/>
-            <rect x="165" y="14" width="135" height="68" rx="2" class="stroke-border-light dark:stroke-border-dark fill-surface-light/90 dark:fill-surface-dark/90" stroke-width="1"/>
-            <text x="175" y="31" fill="#E59838" class="font-mono" font-size="8" font-weight="600">02 // HOT COMMISSIONING</text>
-            <text x="175" y="47" fill="currentColor" class="font-mono" font-size="8.5">Central Inverter Sync</text>
-            <text x="175" y="63" fill="currentColor" fill-opacity="0.6" class="font-mono" font-size="7.5">45°C+ Thermal Stability</text>
-            <line x1="300" y1="48" x2="324" y2="48" stroke="#E59838" stroke-width="1.5"/>
-            <rect x="324" y="14" width="130" height="68" rx="2" class="stroke-border-light dark:stroke-border-dark fill-surface-light/90 dark:fill-surface-dark/90" stroke-width="1"/>
-            <text x="334" y="31" fill="#E59838" class="font-mono" font-size="8" font-weight="600">03 // GRID ACCEPTANCE</text>
-            <text x="334" y="47" fill="currentColor" class="font-mono" font-size="9" font-weight="600">100 MW SAT</text>
-            <text x="334" y="63" fill="currentColor" fill-opacity="0.6" class="font-mono" font-size="7.5">O&amp;M Crew Handover</text>
-          </svg>
-        </div>
-      )}
-
-      {isLatnovva && (
+    {isLatnovva && (
+      <a
+        href={`/work/${slug}`}
+        class="block border border-border-light dark:border-border-dark overflow-hidden relative group-hover:border-accent/50 transition-colors"
+        aria-label={`View ${title} case study`}
+      >
         <div class="grid grid-cols-2 gap-px bg-border-light dark:bg-border-dark">
           <div class="relative overflow-hidden bg-surface-dark h-36">
             <img
@@ -188,27 +50,8 @@ const isLatnovva = slug === 'latnovva-digital-tools';
             />
           </div>
         </div>
-      )}
-
-      {isLevel3 && (
-        <div class="p-4 sm:p-5 font-mono text-xs space-y-2.5">
-          <div class="flex items-center justify-between text-[0.68rem] text-ink-light-muted dark:text-ink-dark-muted">
-            <span>TOOLHUB // 32-BIT HEX INVERTER FAULT DECODER</span>
-            <span class="text-accent-dark dark:text-accent">OFFLINE PWA</span>
-          </div>
-          <div class="p-3 rounded bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark space-y-2">
-            <div class="flex items-center justify-between text-[0.74rem]">
-              <span class="text-ink-light-muted dark:text-ink-dark-muted">REGISTER INPUT</span>
-              <span class="text-accent-dark dark:text-accent font-semibold">0x0028A004</span>
-            </div>
-            <div class="grid grid-cols-2 gap-2 text-[0.7rem] pt-1 border-t border-border-light/60 dark:border-border-dark/60">
-              <div class="text-ink-light dark:text-ink-dark">● BIT 02: DC Overvoltage</div>
-              <div class="text-ink-light dark:text-ink-dark">● BIT 13: Grid Under-Freq</div>
-            </div>
-          </div>
-        </div>
-      )}
-    </a>
+      </a>
+    )}
 
     <!-- Title & Location Meta -->
     <div class="space-y-1.5">

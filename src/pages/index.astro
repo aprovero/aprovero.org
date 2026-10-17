@@ -20,10 +20,21 @@ const recentNotes = allNotes
   .slice(0, 4);
 
 const scaleMetrics = [
-  { value: "2.1+ GW", label: "Operating solar fleet supported" },
-  { value: "800+ MW", label: "Personally commissioned (SAT)" },
-  { value: "60+ MWh", label: "Battery energy storage (BESS)" },
-  { value: "15+ Years", label: "Field operations to executive" },
+  {
+    value: "800+ MW / 60 MWh",
+    subtitle: "Solar PV · Battery Storage (BESS)",
+    label: "Personally commissioned (SAT) from cold checks through commercial acceptance across LATAM",
+  },
+  {
+    value: "2.1+ GW",
+    subtitle: "Utility Solar Fleet",
+    label: "Commissioned & maintained: built, energized, and operated under regional leadership",
+  },
+  {
+    value: "15+ Years",
+    subtitle: "Field Operations to Executive",
+    label: "Bridging power electronics, technical operations, and commercial strategy",
+  },
 ];
 
 const coreDomains = [
@@ -41,7 +52,7 @@ const coreDomains = [
     meta: "Sungrow Power · LATNOVVA · Vector · SLB",
     logo: "/logos/sungrow.png",
     logoAlt: "Sungrow Power",
-    body: "Progressed from hands-on substation commissioning (800+ MW SAT) to leading regional service across 2.1+ GW of solar and 60 MWh of BESS, establishing the LATAM Center of Expertise (CoE) for Tier-3 R&D escalations.",
+    body: "Progressed from hands-on field commissioning (800+ MW SAT) to leading regional service across 2.1+ GW of solar and 60 MWh of BESS, establishing the LATAM Center of Expertise (CoE) for Tier-3 R&D escalations.",
   },
   {
     index: "03",
@@ -49,6 +60,33 @@ const coreDomains = [
     meta: "Level3Support · Self-Hosted Homelab",
     body: "Turning field bottlenecks into repeatable digital tools: creator of Level3Support (40+ offline-first engineering utilities) and operator of a 24/7 Linux, Docker, and n8n homelab built on repurposed hardware.",
   },
+];
+
+const laPimientaScopes = [
+  {
+    code: "01",
+    label: "Pre-Energization Verification",
+    detail: "Cold walk-downs, mechanical and electrical inspection, insulation verification, and control circuit ring-out.",
+  },
+  {
+    code: "02",
+    label: "Inverter Parameterization",
+    detail: "Protection settings, utility grid-code parameterization, and validation of unit availability and operating efficiency.",
+  },
+  {
+    code: "03",
+    label: "Site Acceptance Testing (SAT)",
+    detail: "Functional testing, emergency shutdown loop verification, active/reactive power responses, and commercial readiness handovers.",
+  },
+];
+
+const level3Modules = [
+  { code: "01", name: "Fault Code Interpreter", domain: "16/32-Bit Hex Inverter Diagnostics" },
+  { code: "02", name: "UMCG Telemetry Analyzer", domain: "Thermal & Electrical Curve Plotting" },
+  { code: "03", name: "Cable & Voltage Drop", domain: "MV/LV Ampacity & Thermal Derating" },
+  { code: "04", name: "Arc Flash Boundary", domain: "NFPA 70E Incident Energy (cal/cm²)" },
+  { code: "05", name: "Fuse Thermal Derating", domain: "High-Speed Semiconductor Protection" },
+  { code: "06", name: "BESS Health Analyzer", domain: "Cell Spread & SOH Degradation" },
 ];
 
 const labServices = [
@@ -66,7 +104,7 @@ const labServices = [
 <BaseLayout>
   <main class="max-w-6xl mx-auto px-6 sm:px-10 py-10 sm:py-14 space-y-20 sm:space-y-24">
 
-    <!-- BLOCK 1: UNIFIED ARCHITECTURAL SPLIT HERO & DOMAIN DOSSIER -->
+    <!-- BLOCK 1: UNIFIED 3-COLUMN ARCHITECTURAL DOSSIER (HERO, KPIS & CORE DOMAINS) -->
     <section class="space-y-4" aria-labelledby="hero-heading">
       <div class="border border-border-light dark:border-border-dark bg-border-light dark:bg-border-dark space-y-px">
 
@@ -88,11 +126,11 @@ const labServices = [
           </div>
         </div>
 
-        <!-- Main Asymmetric Architectural Split Hero Row -->
-        <div class="grid grid-cols-1 lg:grid-cols-[1fr_310px] gap-px bg-border-light dark:bg-border-dark">
+        <!-- Row 1: Unified 3-Column Split (2 cols Statement + 1 col Portrait) -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-px bg-border-light dark:bg-border-dark">
           
-          <!-- Left Cell: Primary Editorial Statement -->
-          <div class="bg-surface-light dark:bg-surface-dark p-7 sm:p-10 lg:p-12 flex flex-col justify-between gap-8">
+          <!-- Left 2 Columns: Primary Editorial Statement -->
+          <div class="lg:col-span-2 bg-surface-light dark:bg-surface-dark p-7 sm:p-10 lg:p-12 flex flex-col justify-between gap-8">
             <div class="space-y-6">
               <div class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted uppercase tracking-widest">
                 00 // Executive Dossier
@@ -141,26 +179,26 @@ const labServices = [
             </div>
           </div>
 
-          <!-- Right Cell: Integrated Portrait & Spec Readout -->
-          <div class="bg-surface-light-card/40 dark:bg-surface-dark-card/40 flex flex-col justify-between">
-            <div class="p-6 sm:p-7 pb-4 flex justify-center lg:block">
+          <!-- Right 1 Column: Portrait & Spec Readout (Aligns 100% with Column 3 below) -->
+          <div class="lg:col-span-1 bg-surface-light-card/40 dark:bg-surface-dark-card/40 flex flex-col justify-between">
+            <div class="p-6 sm:p-7 pb-4 flex justify-center">
               <img
                 src="/brand/portrait.jpg"
                 alt="Andres Provero"
                 width="290"
                 height="441"
-                class="w-full max-w-[240px] lg:max-w-none h-auto border border-border-light dark:border-border-dark object-cover"
+                class="w-full max-w-[260px] h-auto border border-border-light dark:border-border-dark object-cover"
               />
             </div>
 
             <div class="px-6 sm:px-7 pb-6 pt-2 space-y-2.5 font-mono text-xs">
               <div class="flex items-baseline justify-between gap-2">
                 <span class="text-ink-light-muted dark:text-ink-dark-muted">DISCIPLINE</span>
-                <span class="text-ink-light dark:text-ink-dark text-right">PV · BESS · Substations</span>
+                <span class="text-ink-light dark:text-ink-dark text-right">Electronics · PV · BESS · Systems</span>
               </div>
               <div class="flex items-baseline justify-between gap-2">
                 <span class="text-ink-light-muted dark:text-ink-dark-muted">TRACK</span>
-                <span class="text-ink-light dark:text-ink-dark text-right">Field SAT → CoE → Sales</span>
+                <span class="text-ink-light dark:text-ink-dark text-right">Field SAT → Regional CoE → Sales</span>
               </div>
               <div class="flex items-baseline justify-between gap-2">
                 <span class="text-ink-light-muted dark:text-ink-dark-muted">BASE</span>
@@ -171,22 +209,27 @@ const labServices = [
 
         </div>
 
-        <!-- Integrated 4-Cell Tabular Scale Strip -->
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-border-light dark:bg-border-dark">
+        <!-- Row 2: 3-Cell Scale Strip (Locked to 3-Column Grid) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-border-light dark:bg-border-dark">
           {scaleMetrics.map((m) => (
-            <div class="bg-surface-light dark:bg-surface-dark px-6 py-5 sm:px-8 sm:py-6 space-y-1">
-              <div class="font-display text-3xl sm:text-[2.15rem] font-semibold tracking-tight text-ink-light dark:text-ink-dark leading-none">
-                {m.value}
+            <div class="bg-surface-light dark:bg-surface-dark px-6 py-5 sm:px-8 sm:py-6 space-y-1.5 flex flex-col justify-between">
+              <div>
+                <div class="font-display text-2xl sm:text-[1.85rem] font-semibold tracking-tight text-ink-light dark:text-ink-dark leading-tight">
+                  {m.value}
+                </div>
+                <div class="font-mono text-xs text-accent-dark dark:text-accent font-medium mt-0.5">
+                  {m.subtitle}
+                </div>
               </div>
-              <div class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted pt-1">
+              <div class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted pt-2 border-t border-border-light/60 dark:border-border-dark/60 leading-relaxed">
                 {m.label}
               </div>
             </div>
           ))}
         </div>
 
-        <!-- Integrated 3-Column Core Operating Domains -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-px bg-border-light dark:bg-border-dark">
+        <!-- Row 3: 3-Column Core Operating Domains (Locked to 3-Column Grid) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-border-light dark:bg-border-dark">
           {coreDomains.map((domain) => (
             <div class="bg-surface-light dark:bg-surface-dark p-7 sm:p-8 flex flex-col justify-between gap-6">
               <div class="space-y-3.5">
@@ -230,7 +273,7 @@ const labServices = [
       </div>
     </section>
 
-    <!-- BLOCK 2: SELECTED HIGHLIGHTS (ASYMMETRIC VISUAL & SCHEMATIC SHOWCASE) -->
+    <!-- BLOCK 2: SELECTED HIGHLIGHTS (AUTHENTIC SHOWCASE) -->
     <section id="work" class="space-y-6" aria-labelledby="work-heading">
       <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
         <div>
@@ -252,8 +295,8 @@ const labServices = [
       <!-- Asymmetric Interlocking Showcase Frame -->
       <div class="border border-border-light dark:border-border-dark bg-border-light dark:bg-border-dark space-y-px">
 
-        <!-- TIER 1: Full-Width Asymmetric Flagship Utility Plant + SLD Schematic (La Pimienta 358 MW PV) -->
-        <article class="grid grid-cols-1 lg:grid-cols-[1.05fr_1.2fr] gap-px bg-border-light dark:bg-border-dark group">
+        <!-- TIER 1: Full-Width Flagship Utility Plant (La Pimienta 358 MW PV) -->
+        <article class="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-px bg-border-light dark:bg-border-dark group">
           <!-- Left Primary Narrative Cell -->
           <div class="bg-surface-light dark:bg-surface-dark p-7 sm:p-9 lg:p-10 flex flex-col justify-between gap-6">
             <div class="space-y-4">
@@ -295,80 +338,47 @@ const labServices = [
                 <span>→</span>
               </a>
               <span class="text-ink-light-muted dark:text-ink-dark-muted hidden sm:inline">
-                SAT &amp; Grid-Code Acceptance
+                Central Inverters · National Grid SAT
               </span>
             </div>
           </div>
 
-          <!-- Right Bespoke Single-Line Power Block Schematic (SVG) -->
-          <div class="bg-surface-light-card/55 dark:bg-surface-dark-card/75 bg-technical-grid p-6 sm:p-8 flex flex-col justify-between gap-5">
-            <div class="flex items-center justify-between font-mono text-[0.72rem] text-ink-light-muted dark:text-ink-dark-muted uppercase tracking-wider">
-              <span>SINGLE-LINE TOPOLOGY // POWER BLOCK TO HV POI</span>
-              <span class="text-accent-dark dark:text-accent font-medium">● 358 MW ENERGIZED</span>
+          <!-- Right Engineering Scope & Acceptance Cell -->
+          <div class="bg-surface-light-card/40 dark:bg-surface-dark-card/60 p-7 sm:p-9 flex flex-col justify-between gap-5">
+            <div class="font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted uppercase tracking-wider">
+              Field Execution &amp; Acceptance Scope
             </div>
 
-            <!-- Precision Vector Single-Line Diagram -->
-            <div class="border border-border-light dark:border-border-dark bg-surface-light/90 dark:bg-surface-dark/90 p-4 sm:p-5">
-              <svg viewBox="0 0 540 132" class="w-full h-auto text-ink-light dark:text-ink-dark" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Stage 1: 1500V DC Combiner / PV Field -->
-                <rect x="6" y="16" width="106" height="74" rx="2" class="stroke-border-light dark:stroke-border-dark fill-surface-light-card dark:fill-surface-dark-card" stroke-width="1.2"/>
-                <text x="15" y="33" fill="#E59838" class="font-mono" font-size="8.5" font-weight="600">01 // DC FIELD</text>
-                <text x="15" y="50" fill="currentColor" class="font-mono" font-size="10" font-weight="600">1500 Vdc</text>
-                <text x="15" y="65" fill="currentColor" fill-opacity="0.65" class="font-mono" font-size="7.5">R_iso Megger Check</text>
-                <text x="15" y="78" fill="currentColor" fill-opacity="0.65" class="font-mono" font-size="7.5">Cold Walk-Down</text>
-
-                <!-- DC Bus Line + Switch Symbol -->
-                <line x1="112" y1="53" x2="148" y2="53" stroke="#E59838" stroke-width="1.75"/>
-                <circle cx="130" cy="53" r="3" class="fill-surface-dark" stroke="#E59838" stroke-width="1.5"/>
-
-                <!-- Stage 2: Central Inverter PCS Skid -->
-                <rect x="148" y="16" width="122" height="74" rx="2" class="stroke-border-light dark:stroke-border-dark fill-surface-light-card dark:fill-surface-dark-card" stroke-width="1.2"/>
-                <line x1="236" y1="24" x2="262" y2="46" stroke="currentColor" stroke-opacity="0.25" stroke-width="1"/>
-                <text x="158" y="33" fill="#E59838" class="font-mono" font-size="8.5" font-weight="600">02 // CENTRAL PCS</text>
-                <text x="158" y="50" fill="currentColor" class="font-mono" font-size="10" font-weight="600">DC / AC Skid</text>
-                <text x="158" y="65" fill="currentColor" fill-opacity="0.65" class="font-mono" font-size="7.5">LVRT / HVRT Curve</text>
-                <text x="158" y="78" fill="currentColor" fill-opacity="0.65" class="font-mono" font-size="7.5">P/Q Loop Tuning</text>
-
-                <!-- Step-Up Transformer Symbol (Dual Intersecting Circles) -->
-                <line x1="270" y1="53" x2="294" y2="53" stroke="#E59838" stroke-width="1.75"/>
-                <circle cx="303" cy="53" r="9" stroke="#E59838" stroke-width="1.6" fill="none"/>
-                <circle cx="315" cy="53" r="9" stroke="#E59838" stroke-width="1.6" fill="none"/>
-                <text x="287" y="76" fill="#E59838" class="font-mono" font-size="7.5">0.8 / 34.5 kV</text>
-                <line x1="324" y1="53" x2="348" y2="53" stroke="#E59838" stroke-width="1.75"/>
-
-                <!-- Stage 3: MV Collector & HV Substation POI -->
-                <rect x="348" y="16" width="184" height="74" rx="2" class="stroke-border-light dark:stroke-border-dark fill-surface-light-card dark:fill-surface-dark-card" stroke-width="1.2"/>
-                <text x="358" y="33" fill="#E59838" class="font-mono" font-size="8.5" font-weight="600">03 // SUBSTATION POI (SAT)</text>
-                <text x="358" y="50" fill="currentColor" class="font-mono" font-size="10.5" font-weight="600">34.5 kV / 230 kV Grid</text>
-                <text x="358" y="65" fill="currentColor" fill-opacity="0.7" class="font-mono" font-size="7.5">● Relay &amp; Trip Interlock Ring-Out</text>
-                <text x="358" y="78" fill="#E59838" class="font-mono" font-size="7.5">● Commercial Operations Handover</text>
-
-                <!-- Bottom Telemetry / Protection Feedback Bus -->
-                <path d="M 59 90 L 59 114 L 440 114 L 440 90" stroke="currentColor" stroke-opacity="0.3" stroke-width="1" stroke-dasharray="3 3" fill="none"/>
-                <rect x="175" y="104" width="190" height="18" rx="2" class="fill-surface-light dark:fill-surface-dark stroke-border-light dark:stroke-border-dark" stroke-width="1"/>
-                <text x="187" y="116" fill="currentColor" fill-opacity="0.75" class="font-mono" font-size="7.5">SCADA · E-STOP LOOP · ANTI-CONDENSATION</text>
-              </svg>
+            <div class="space-y-4">
+              {laPimientaScopes.map((s) => (
+                <div class="space-y-1">
+                  <div class="flex items-baseline gap-2.5">
+                    <span class="font-mono text-xs text-accent-dark dark:text-accent font-medium">{s.code}</span>
+                    <span class="font-display text-base sm:text-lg font-semibold text-ink-light dark:text-ink-dark">
+                      {s.label}
+                    </span>
+                  </div>
+                  <p class="text-xs sm:text-[0.84rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-relaxed pl-6">
+                    {s.detail}
+                  </p>
+                </div>
+              ))}
             </div>
 
-            <!-- Bottom Key Metrics Strip -->
-            <div class="grid grid-cols-3 gap-2 font-mono text-[0.72rem]">
-              <div class="px-3 py-2 bg-surface-light dark:bg-surface-dark border border-border-light/80 dark:border-border-dark/80">
-                <span class="text-ink-light-muted dark:text-ink-dark-muted block">CAPACITY</span>
-                <span class="text-ink-light dark:text-ink-dark font-semibold">358 MW Utility PV</span>
+            <div class="grid grid-cols-2 gap-2 pt-2 border-t border-border-light/60 dark:border-border-dark/60 font-mono text-xs">
+              <div>
+                <span class="text-ink-light-muted dark:text-ink-dark-muted block text-[0.7rem]">CAPACITY</span>
+                <span class="text-ink-light dark:text-ink-dark font-medium">358 MW Utility PV</span>
               </div>
-              <div class="px-3 py-2 bg-surface-light dark:bg-surface-dark border border-border-light/80 dark:border-border-dark/80">
-                <span class="text-ink-light-muted dark:text-ink-dark-muted block">SCOPE</span>
-                <span class="text-ink-light dark:text-ink-dark font-semibold">Cold → Hot SAT</span>
-              </div>
-              <div class="px-3 py-2 bg-surface-light dark:bg-surface-dark border border-border-light/80 dark:border-border-dark/80">
-                <span class="text-ink-light-muted dark:text-ink-dark-muted block">INTERCONNECTION</span>
-                <span class="text-ink-light dark:text-ink-dark font-semibold">National HV Grid</span>
+              <div>
+                <span class="text-ink-light-muted dark:text-ink-dark-muted block text-[0.7rem]">ACCEPTANCE</span>
+                <span class="text-ink-light dark:text-ink-dark font-medium">Commercial SAT</span>
               </div>
             </div>
           </div>
         </article>
 
-        <!-- TIER 2: 50/50 Utility Solar & Battery Storage Pair (Los Cuervos + Moon Palace with SVG Schematics) -->
+        <!-- TIER 2: 50/50 Utility Solar & Battery Storage Pair (Los Cuervos + Moon Palace) -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-border-light dark:bg-border-dark">
           <ProjectRow
             title={losCuervos.data.title}
@@ -394,7 +404,7 @@ const labServices = [
           />
         </div>
 
-        <!-- TIER 3A: Full-Width Asymmetric Field Operations Platform Showcase with Real App Visuals (LATNOVVA) -->
+        <!-- TIER 3A: Full-Width Field Operations Platform Showcase (LATNOVVA) -->
         <article class="grid grid-cols-1 lg:grid-cols-[1.05fr_1.2fr] gap-px bg-border-light dark:bg-border-dark group">
           <!-- Left Narrative Cell -->
           <div class="bg-surface-light dark:bg-surface-dark p-7 sm:p-9 lg:p-10 flex flex-col justify-between gap-6">
@@ -449,7 +459,7 @@ const labServices = [
           </div>
 
           <!-- Right Real Dual-Interface Application Preview -->
-          <div class="bg-surface-light-card/55 dark:bg-surface-dark-card/75 bg-technical-grid p-6 sm:p-8 flex flex-col justify-between gap-4">
+          <div class="bg-surface-light-card/40 dark:bg-surface-dark-card/60 p-6 sm:p-8 flex flex-col justify-between gap-4">
             <div class="flex items-center justify-between font-mono text-[0.72rem] text-ink-light-muted dark:text-ink-dark-muted uppercase tracking-wider">
               <span>PRODUCTION INTERFACE // NATIONAL FOOTPRINT &amp; GEOFENCE MATRIX</span>
               <span class="text-accent-dark dark:text-accent">14 STATES LIVE</span>
@@ -493,7 +503,7 @@ const labServices = [
           </div>
         </article>
 
-        <!-- TIER 3B: Full-Width Asymmetric Operational Tooling Showcase (Level3Support) -->
+        <!-- TIER 3B: Full-Width Operational Tooling Showcase (Level3Support) -->
         <article class="grid grid-cols-1 lg:grid-cols-[1.05fr_1.2fr] gap-px bg-border-light dark:bg-border-dark group">
           <!-- Left Narrative & Action Cell -->
           <div class="bg-surface-light dark:bg-surface-dark p-7 sm:p-9 lg:p-10 flex flex-col justify-between gap-6">
@@ -547,65 +557,32 @@ const labServices = [
             </div>
           </div>
 
-          <!-- Right Visual Diagnostic & Calculation Readout Console -->
-          <div class="bg-surface-light-card/55 dark:bg-surface-dark-card/75 bg-technical-grid p-6 sm:p-8 flex flex-col justify-between gap-4">
+          <!-- Right Representative Modules Matrix -->
+          <div class="bg-surface-light-card/40 dark:bg-surface-dark-card/60 p-6 sm:p-8 flex flex-col justify-between gap-4">
             <div class="flex items-center justify-between font-mono text-[0.72rem] text-ink-light-muted dark:text-ink-dark-muted uppercase tracking-wider">
-              <span>DIAGNOSTIC CONSOLE // OFFLINE SERVICE WORKER + INDEXEDDB</span>
-              <span class="text-accent-dark dark:text-accent">ZERO-ACCOUNT PWA</span>
+              <span>Representative Calculation &amp; Sizing Engines</span>
+              <span class="text-accent-dark dark:text-accent">40+ TOOLS</span>
             </div>
 
-            <!-- Visual Module 1: 32-Bit Hex Inverter Fault Register Bitfield Readout -->
-            <div class="border border-border-light dark:border-border-dark bg-surface-light/95 dark:bg-surface-dark/95 p-4 space-y-3 font-mono text-xs">
-              <div class="flex items-center justify-between border-b border-border-light/70 dark:border-border-dark/70 pb-2">
-                <span class="text-[0.72rem] text-ink-light-muted dark:text-ink-dark-muted">MODULE 01 // 32-BIT HEX ALARM DECODER</span>
-                <span class="text-accent-dark dark:text-accent font-semibold">REG: 0x0028A004</span>
-              </div>
-
-              <!-- Visual 16-segment bitfield strip -->
-              <div class="grid grid-cols-[repeat(16,minmax(0,1fr))] gap-1 text-[0.62rem] text-center">
-                {[0,0,1,0, 1,0,0,0, 1,0,1,0, 0,0,0,1].map((bit) => (
-                  <div class={`py-1 rounded-sm border ${bit ? 'border-accent bg-accent/20 text-accent font-bold' : 'border-border-light dark:border-border-dark text-ink-light-muted/50 dark:text-ink-dark-muted/40'}`}>
-                    {bit}
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {level3Modules.map((mod) => (
+                <div class="p-3 bg-surface-light dark:bg-surface-dark border border-border-light/80 dark:border-border-dark/80 space-y-0.5">
+                  <div class="flex items-center gap-2">
+                    <span class="font-mono text-[0.7rem] text-accent-dark dark:text-accent">{mod.code}</span>
+                    <span class="font-display text-sm sm:text-base font-semibold text-ink-light dark:text-ink-dark">
+                      {mod.name}
+                    </span>
                   </div>
-                ))}
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[0.7rem] pt-0.5">
-                <div class="px-2.5 py-1.5 bg-surface-light-card dark:bg-surface-dark-card border border-border-light dark:border-border-dark">
-                  <span class="text-accent-dark dark:text-accent block font-semibold">BIT 02 ACTIVE</span>
-                  <span class="text-ink-light-secondary dark:text-ink-dark-secondary">DC Bus Overvoltage</span>
+                  <div class="font-mono text-[0.72rem] text-ink-light-muted dark:text-ink-dark-muted pl-5">
+                    {mod.domain}
+                  </div>
                 </div>
-                <div class="px-2.5 py-1.5 bg-surface-light-card dark:bg-surface-dark-card border border-border-light dark:border-border-dark">
-                  <span class="text-accent-dark dark:text-accent block font-semibold">BIT 13 ACTIVE</span>
-                  <span class="text-ink-light-secondary dark:text-ink-dark-secondary">LVRT Under-Freq</span>
-                </div>
-                <div class="px-2.5 py-1.5 bg-surface-light-card dark:bg-surface-dark-card border border-border-light dark:border-border-dark">
-                  <span class="text-accent-dark dark:text-accent block font-semibold">BIT 19 ACTIVE</span>
-                  <span class="text-ink-light-secondary dark:text-ink-dark-secondary">IGBT Desat Protection</span>
-                </div>
-              </div>
+              ))}
             </div>
 
-            <!-- Visual Bottom Row: NFPA 70E Arc Flash + BESS SOH Modules -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 font-mono text-[0.72rem]">
-              <div class="p-3 bg-surface-light/95 dark:bg-surface-dark/95 border border-border-light dark:border-border-dark flex items-center justify-between">
-                <div>
-                  <span class="text-ink-light-muted dark:text-ink-dark-muted block text-[0.66rem]">04 // NFPA 70E ARC FLASH</span>
-                  <span class="text-ink-light dark:text-ink-dark font-semibold">14.2 cal/cm² · AFB 1.85m</span>
-                </div>
-                <span class="px-2 py-0.5 rounded bg-accent/15 text-accent-dark dark:text-accent border border-accent/30 text-[0.66rem]">
-                  PPE CAT 3
-                </span>
-              </div>
-              <div class="p-3 bg-surface-light/95 dark:bg-surface-dark/95 border border-border-light dark:border-border-dark flex items-center justify-between">
-                <div>
-                  <span class="text-ink-light-muted dark:text-ink-dark-muted block text-[0.66rem]">06 // BESS CELL SPREAD</span>
-                  <span class="text-ink-light dark:text-ink-dark font-semibold">ΔV 18 mV · SOH 96.4%</span>
-                </div>
-                <span class="px-2 py-0.5 rounded bg-surface-light-card dark:bg-surface-dark-card border border-border-light dark:border-border-dark text-ink-light-secondary dark:text-ink-dark-secondary text-[0.66rem]">
-                  40+ TOOLS
-                </span>
-              </div>
+            <div class="pt-2 border-t border-border-light/60 dark:border-border-dark/60 flex items-center justify-between font-mono text-xs text-ink-light-muted dark:text-ink-dark-muted">
+              <span>100% Offline-Capable Service Worker</span>
+              <span>Zero-Account Local Storage</span>
             </div>
           </div>
         </article>
@@ -639,7 +616,7 @@ const labServices = [
             </div>
 
             <!-- Visual Node Card: Hardware Photo + Active Docker Container Icon Strip -->
-            <div class="border border-border-light dark:border-border-dark bg-surface-light-card/50 dark:bg-surface-dark-card/60 bg-technical-grid p-4 space-y-4">
+            <div class="border border-border-light dark:border-border-dark bg-surface-light-card/50 dark:bg-surface-dark-card/60 p-4 space-y-4">
               <div class="grid grid-cols-1 sm:grid-cols-[135px_1fr] gap-4 items-center">
                 <a href="/lab" class="block overflow-hidden border border-border-light dark:border-border-dark bg-surface-dark">
                   <img
