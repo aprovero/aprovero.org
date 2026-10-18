@@ -143,6 +143,34 @@ const labServices = [
                 {siteConfig.thesis}
               </h1>
 
+              <!-- Mobile-Only Portrait Card: Positioned above summary on mobile screens (< lg) -->
+              <div class="lg:hidden my-4 border border-border-light dark:border-border-dark bg-surface-light-card/40 dark:bg-surface-dark-card/40">
+                <div class="p-6 pb-4 flex justify-center">
+                  <img
+                    src="/brand/portrait.jpg"
+                    alt="Andres Provero"
+                    width="290"
+                    height="441"
+                    class="w-full max-w-[260px] h-auto border border-border-light dark:border-border-dark object-cover"
+                  />
+                </div>
+
+                <div class="px-6 pb-6 pt-2 space-y-2.5 font-mono text-xs">
+                  <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-2">
+                    <span class="text-ink-light-muted dark:text-ink-dark-muted shrink-0">DISCIPLINE</span>
+                    <span class="text-ink-light dark:text-ink-dark sm:text-right">Electronics · PV · BESS · Systems</span>
+                  </div>
+                  <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-2">
+                    <span class="text-ink-light-muted dark:text-ink-dark-muted shrink-0">TRACK RECORD</span>
+                    <span class="text-ink-light dark:text-ink-dark sm:text-right">Field SAT → Regional CoE → Technical Sales</span>
+                  </div>
+                  <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-2">
+                    <span class="text-ink-light-muted dark:text-ink-dark-muted shrink-0">BASE</span>
+                    <span class="text-ink-light dark:text-ink-dark sm:text-right">Mexico City (LATAM)</span>
+                  </div>
+                </div>
+              </div>
+
               <p class="text-lg sm:text-[1.2rem] text-ink-light-secondary dark:text-ink-dark-secondary leading-[1.68] max-w-2xl font-normal">
                 {siteConfig.intro}
               </p>
@@ -179,8 +207,8 @@ const labServices = [
             </div>
           </div>
 
-          <!-- Right 1 Column: Portrait & Spec Readout (Aligns 100% with Column 3 below) -->
-          <div class="lg:col-span-1 bg-surface-light-card/40 dark:bg-surface-dark-card/40 flex flex-col justify-between">
+          <!-- Right 1 Column: Portrait & Spec Readout (Desktop only: hidden lg:flex) -->
+          <div class="hidden lg:flex lg:col-span-1 bg-surface-light-card/40 dark:bg-surface-dark-card/40 flex-col justify-between">
             <div class="p-6 sm:p-7 pb-4 flex justify-center">
               <img
                 src="/brand/portrait.jpg"
@@ -193,15 +221,15 @@ const labServices = [
 
             <div class="px-6 sm:px-7 pb-6 pt-2 space-y-2.5 font-mono text-xs">
               <div class="flex items-baseline justify-between gap-2">
-                <span class="text-ink-light-muted dark:text-ink-dark-muted">DISCIPLINE</span>
+                <span class="text-ink-light-muted dark:text-ink-dark-muted shrink-0">DISCIPLINE</span>
                 <span class="text-ink-light dark:text-ink-dark text-right">Electronics · PV · BESS · Systems</span>
               </div>
               <div class="flex items-baseline justify-between gap-2">
-                <span class="text-ink-light-muted dark:text-ink-dark-muted">TRACK</span>
-                <span class="text-ink-light dark:text-ink-dark text-right">Field SAT → Regional CoE → Sales</span>
+                <span class="text-ink-light-muted dark:text-ink-dark-muted shrink-0">TRACK RECORD</span>
+                <span class="text-ink-light dark:text-ink-dark text-right">Field SAT → Regional CoE → Technical Sales</span>
               </div>
               <div class="flex items-baseline justify-between gap-2">
-                <span class="text-ink-light-muted dark:text-ink-dark-muted">BASE</span>
+                <span class="text-ink-light-muted dark:text-ink-dark-muted shrink-0">BASE</span>
                 <span class="text-ink-light dark:text-ink-dark text-right">Mexico City (LATAM)</span>
               </div>
             </div>
